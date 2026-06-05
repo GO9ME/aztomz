@@ -437,7 +437,8 @@ window.HANGEUT_DATA = {
           "요즘 MZ 신조어(나무위키)",
           "https://namu.wiki/w/%EC%9A%94%EC%A6%98%20MZ%EC%84%B8%EB%8C%80%EC%97%90%EC%84%9C%20%EC%83%88%EB%A1%AD%EA%B2%8C%20%EB%96%A0%EC%98%A4%EB%A5%B4%EA%B3%A0%20%EC%9E%88%EB%8B%A4%EB%8A%94%20%EC%8B%A0%EC%A1%B0%EC%96%B4"
         ]
-      ]
+      ],
+      "pureKorean": "참말이라니! (또는 \"이게 참말이야?\")"
     },
     {
       "id": "illit-itsme",
@@ -522,6 +523,84 @@ window.HANGEUT_DATA = {
         [
           "2026 봄여름 트렌드(W코리아)",
           "https://www.wkorea.com/2026/03/19/2026-spring-summer"
+        ]
+      ]
+    },
+    {
+      "id": "ai-fashion-portrait",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "analyzedAt": "2026-06-05",
+      "title": "AI 화보 변환 프롬프트",
+      "buzz": "화제성 급상승",
+      "stage": "상승 → 피크",
+      "stageMsg": "GPT-Image 2.0 출시로 재점화",
+      "label": "지금 해볼 만함",
+      "labelCls": "good",
+      "prompt": "이 사진을 고급 패션 스튜디오 화보처럼 바꿔줘. 피부 톤이 잘 살아나게, 배경도 인물과 어울리게 바꿔줘.",
+      "excerpt": "내 셀카를 잡지 화보로. 2026년 5월 GPT-Image 2.0 출시 후 가장 많이 쓰인 프롬프트.",
+      "pull": "AI 프사 시대 — 셀카 한 장이면 화보가 된다.",
+      "verdict": "ChatGPT(GPT-Image)에 사진과 함께 위 프롬프트를 넣으면 패션 화보 톤으로 바꿔줘요. 2026년 5월 GPT-Image 2.0 출시 후 'AI 프사'가 다시 유행하며 가장 많이 쓰인 프롬프트입니다. 배경·피부톤까지 자동 보정돼 프로필 사진용으로 인기.",
+      "recs": [
+        [
+          "프사·프로필용",
+          "◎",
+          1
+        ],
+        [
+          "과한 보정(원본과 차이)",
+          "△",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "AI 이미지 2.0 첫주 난리(ZDNet)",
+          "https://zdnet.co.kr/view/?no=20260501150635"
+        ],
+        [
+          "챗GPT 이미지 가이드(골든래빗)",
+          "https://goldenrabbit.co.kr/articles/63idyYuXsD7021ko87yv"
+        ]
+      ]
+    },
+    {
+      "id": "ai-ghibli-style",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "analyzedAt": "2026-06-05",
+      "title": "지브리풍 변환 프롬프트",
+      "buzz": "화제성 안정화",
+      "stage": "안정화 → 밈화",
+      "stageMsg": "한참 유행, 이제 기본기",
+      "label": "이제는 기본템",
+      "labelCls": "mid",
+      "prompt": "이 사진을 스튜디오 지브리 '센과 치히로' 같은 화풍으로 바꿔줘. hand-painted watercolor background, soft cel shading, 따뜻한 자연광과 감정선을 살려서.",
+      "excerpt": "사진을 지브리 애니 화풍으로. 작품 톤 + 수채화/셀셰이딩 키워드가 핵심.",
+      "pull": "원하는 지브리 '작품'을 콕 집고, 수채화·셀셰이딩을 명시하는 게 비결.",
+      "verdict": "지브리풍은 2025년부터 크게 유행해 이제 'AI 이미지의 기본기'예요. 잘 나오게 하려면 ① 원하는 작품(마녀배달부 키키=따뜻한 일상, 센과 치히로=신비, 토토로=자연)을 콕 집고 ② 'hand-painted watercolor background, soft cel shading' 키워드를 꼭 넣고 ③ 자연광·감정선을 묘사하세요. 한참 됐으니 '요즘 신상'이라 말하긴 늦었어요.",
+      "recs": [
+        [
+          "화풍 변환 입문",
+          "◎",
+          1
+        ],
+        [
+          "'요즘 신상'이라 소개",
+          "✕",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "챗GPT 지브리 유행(나무위키)",
+          "https://namu.wiki/w/ChatGPT%20%EC%A7%80%EB%B8%8C%EB%A6%AC%ED%92%8D%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%83%9D%EC%84%B1%20%EC%9C%A0%ED%96%89"
+        ],
+        [
+          "지브리 프롬프트(폭스씨지)",
+          "https://foxcg.com/chatgpt-ghibli-prompt"
         ]
       ]
     }

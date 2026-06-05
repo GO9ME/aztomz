@@ -80,6 +80,8 @@
       </div>
       ${scoresBlock()}
       ${t.pull?`<blockquote class="pull">${H.esc(t.pull)}</blockquote>`:''}
+      ${t.prompt?`<div class="prompt-box"><span class="pb-label">📋 프롬프트 — 복사해서 ChatGPT·미드저니에 붙여넣기</span>${H.esc(t.prompt)}</div>`:''}
+      ${t.pureKorean?`<div class="pure-kr">🌸 <b>예쁜 우리말로 바꾼다면</b> · ${H.esc(t.pureKorean)}</div>`:''}
       <p class="verdict">${H.esc(t.verdict)}</p>
       <div class="sec-head"><span class="no">·</span><h2>이런 분께</h2></div>
       <ul class="recs">${t.recs.map(r=>`<li><span>${H.esc(r[0])}</span><span class="v ${r[2]?'ok':''}">${H.esc(r[1])}</span></li>`).join('')}</ul>
