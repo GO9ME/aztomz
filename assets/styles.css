@@ -13,14 +13,18 @@
   --amber:#c98a2b;
   --serif:Georgia,"Times New Roman",serif;
   --sans:"Apple SD Gothic Neo","Pretendard Variable",Pretendard,"Noto Sans KR","Malgun Gothic",-apple-system,BlinkMacSystemFont,sans-serif;
-  --maxw:760px; --r:7px;
+  --maxw:1080px; --readw:760px; --r:7px;
+  /* 라이트 전용 디자인 — 다크모드 폰/인앱 웹뷰의 강제 색반전(시커멓게 나오는 현상) 차단 */
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
   line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em}
 a{color:inherit}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,28px)}
+/* 본문 읽기 폭 — 긴 글(분석/마이페이지)은 가독성을 위해 좁게 유지 */
+.wrap.reading{max-width:var(--readw)}
 .muted{color:var(--ink-2)}
 .serif{font-family:var(--serif)}
 
