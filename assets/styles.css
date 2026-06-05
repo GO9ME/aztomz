@@ -48,9 +48,10 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .mast .me-link{display:flex;align-items:center;gap:7px}
 .avatar{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--on-ink);
   display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:800}
-/* .mast nav a 가 color를 덮지 않도록 특정성 ↑ (가입 버튼 텍스트 가시성) */
-.mast nav a.btn-mini{font-size:13.5px;font-weight:800;border:1.5px solid var(--ink);background:var(--ink);
-  color:var(--on-ink);padding:6px 12px;border-radius:var(--r);text-decoration:none}
+/* 가입 CTA: .mast nav a가 color를 덮지 않도록 특정성↑. 강조색(주황)+흰 글씨로 라이트/다크 모두 또렷 */
+.mast nav a.btn-mini{font-size:13.5px;font-weight:800;border:1.5px solid var(--accent);background:var(--accent);
+  color:#fff;padding:6px 12px;border-radius:var(--r);text-decoration:none}
+.mast nav a.btn-mini:hover{color:#fff;opacity:.92}
 @media(max-width:520px){
   .mast nav{gap:12px;font-size:13.5px}
   .issue{display:none}
@@ -76,9 +77,11 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .cover .c-buzz{position:absolute;top:13px;right:16px;font-size:13px;font-weight:700;opacity:.8}
 .cover .c-title{font-size:26px;font-weight:900;line-height:1.12;letter-spacing:-0.03em;
   text-shadow:0 1px 12px rgba(0,0,0,.25)}
-.cover .c-stamp{position:absolute;bottom:14px;right:14px;font-size:13px;font-weight:900;
-  border:1.5px solid rgba(255,255,255,.85);border-radius:5px;padding:4px 8px;
-  transform:rotate(-4deg);letter-spacing:-0.01em}
+/* 라벨 배지: 우하단 절대배치(제목과 겹침) → 제목 '위'로 흐름 배치해 겹침 제거 */
+.cover .c-stamp{align-self:flex-start;order:-1;margin-bottom:8px;max-width:100%;
+  font-size:12.5px;font-weight:900;letter-spacing:-0.01em;
+  border:1.5px solid rgba(255,255,255,.8);border-radius:5px;padding:3px 8px;
+  background:rgba(0,0,0,.2);transform:rotate(-3deg);transform-origin:left center}
 .cover.tall{min-height:230px}
 .cover.tall .c-title{font-size:34px}
 /* category color fields */
@@ -122,7 +125,9 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:18px;padding:8px 0 14px}
 .chip-card{text-decoration:none;color:inherit}
 /* 커버는 고정 높이 대신 4:3 비율 — 카드 폭에 비례해 일정한 리듬 유지 */
-.chip-card .cover{aspect-ratio:4/3;min-height:0}
+.chip-card .cover{aspect-ratio:4/3;min-height:0;padding:13px}
+.chip-card .cover .c-title{font-size:18px;line-height:1.18}
+.chip-card .cover .c-stamp{font-size:11.5px;margin-bottom:6px}
 .chip-card .cc-meta{margin-top:9px}
 .chip-card .cc-stage{font-size:13px;font-weight:800;color:var(--accent)}
 .chip-card .cc-title{font-size:15.5px;font-weight:800;letter-spacing:-0.02em;margin-top:1px}
