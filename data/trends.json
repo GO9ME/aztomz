@@ -87,8 +87,8 @@
       ],
       "src": [
         [
-          "누데이크 성수점(다이닝코드)",
-          "https://www.diningcode.com/profile.php?rid=XRWejrYStegn"
+          "성수 누데이크 카페 후기(밍기뷰)",
+          "https://pedmingki.tistory.com/20"
         ],
         [
           "버거케이크 후기(브런치)",
@@ -136,8 +136,8 @@
           "https://dategom.com/%EC%84%B1%EC%88%98-%ED%80%B8%EC%95%84%EB%A7%9D-%EB%94%94%EC%A0%80%ED%8A%B8-%EC%B9%B4%ED%8E%98-%EB%A9%9C%EB%A1%9C%EC%9B%8C-%EB%A7%9B%EC%A7%91-%EB%8D%B0%EC%9D%B4%ED%8A%B8/"
         ],
         [
-          "멜로워(다이닝코드)",
-          "https://www.diningcode.com/profile.php?rid=BNxGH2I7Zn4l"
+          "멜로워 성수 카페 후기(트립닷컴)",
+          "https://kr.trip.com/moments/detail/seoul-234-9948746"
         ]
       ]
     },
@@ -386,12 +386,12 @@
       ],
       "src": [
         [
-          "다산 이스트베이글(인스타그램)",
-          "https://www.instagram.com/prpixy6/"
+          "줄 서는 다산 이스트베이글 빵 나오는 시간(유니코드)",
+          "https://www.keyzard.cc/unichord_/nb/224261273052"
         ],
         [
-          "다산신도시 맛집 후기",
-          "https://www.instagram.com/tytheforxagugu/"
+          "이스트베이글 in 다산 소개(코니플레이스)",
+          "https://conyplace.com/%EC%9D%B4%EC%8A%A4%ED%8A%B8%EB%B2%A0%EC%9D%B4%EA%B8%80-in-%EB%8B%A4%EC%82%B0-%EB%8B%A4%EC%82%B0%EB%8F%99%EC%9D%98-%EB%B2%A0%EC%9D%B4%EA%B8%80-%EC%A0%84%EB%AC%B8%EC%A0%90/"
         ]
       ]
     },
@@ -436,7 +436,8 @@
           "요즘 MZ 신조어(나무위키)",
           "https://namu.wiki/w/%EC%9A%94%EC%A6%98%20MZ%EC%84%B8%EB%8C%80%EC%97%90%EC%84%9C%20%EC%83%88%EB%A1%AD%EA%B2%8C%20%EB%96%A0%EC%98%A4%EB%A5%B4%EA%B3%A0%20%EC%9E%88%EB%8B%A4%EB%8A%94%20%EC%8B%A0%EC%A1%B0%EC%96%B4"
         ]
-      ]
+      ],
+      "pureKorean": "참말이라니! (또는 \"이게 참말이야?\")"
     },
     {
       "id": "illit-itsme",
@@ -516,11 +517,133 @@
       "src": [
         [
           "2026 봄/여름 패션 트렌드(보그)",
-          "https://www.vogue.co.kr/2026/03/12/2026-spring-summer-fashion-trend"
+          "https://www.vogue.co.kr/2026/03/12/%EC%BB%AC%EB%9F%AC%EB%B6%80%ED%84%B0-%EC%8A%A4%ED%83%80%EC%9D%BC%EB%A7%81-%ED%8C%81%EA%B9%8C%EC%A7%80-2026-%EB%B4%84-%EC%97%AC%EB%A6%84-%ED%95%B5%EC%8B%AC-%ED%8C%A8%EC%85%98-%ED%8A%B8/"
         ],
         [
-          "2026 봄여름 트렌드(W코리아)",
-          "https://www.wkorea.com/2026/03/19/2026-spring-summer"
+          "2026 봄여름 뭘 입지(W코리아)",
+          "https://www.wkorea.com/2026/03/19/2026%EB%85%84-%EB%B4%84-%EC%97%AC%EB%A6%84-%EB%AD%98-%EC%9E%85%EC%96%B4%EC%95%BC-%ED%95%A0%EC%A7%80-%EA%B3%A0%EB%AF%BC%EC%9D%B4%EB%9D%BC%EB%A9%B4"
+        ]
+      ]
+    },
+    {
+      "id": "ai-fashion-portrait",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "analyzedAt": "2026-06-05",
+      "title": "AI 화보 변환 프롬프트",
+      "buzz": "화제성 급상승",
+      "stage": "상승 → 피크",
+      "stageMsg": "GPT-Image 2.0 출시로 재점화",
+      "label": "지금 해볼 만함",
+      "labelCls": "good",
+      "prompt": "이 사진을 고급 패션 스튜디오 화보처럼 바꿔줘. 피부 톤이 잘 살아나게, 배경도 인물과 어울리게 바꿔줘.",
+      "excerpt": "내 셀카를 잡지 화보로. 2026년 5월 GPT-Image 2.0 출시 후 가장 많이 쓰인 프롬프트.",
+      "pull": "AI 프사 시대 — 셀카 한 장이면 화보가 된다.",
+      "verdict": "ChatGPT(GPT-Image)에 사진과 함께 위 프롬프트를 넣으면 패션 화보 톤으로 바꿔줘요. 2026년 5월 GPT-Image 2.0 출시 후 'AI 프사'가 다시 유행하며 가장 많이 쓰인 프롬프트입니다. 배경·피부톤까지 자동 보정돼 프로필 사진용으로 인기.",
+      "recs": [
+        [
+          "프사·프로필용",
+          "◎",
+          1
+        ],
+        [
+          "과한 보정(원본과 차이)",
+          "△",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "AI 이미지 2.0 첫주 난리(ZDNet)",
+          "https://zdnet.co.kr/view/?no=20260501150635"
+        ],
+        [
+          "챗GPT 이미지 가이드(골든래빗)",
+          "https://goldenrabbit.co.kr/articles/63idyYuXsD7021ko87yv"
+        ]
+      ]
+    },
+    {
+      "id": "ai-ghibli-style",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "analyzedAt": "2026-06-05",
+      "title": "지브리풍 변환 프롬프트",
+      "buzz": "화제성 하락",
+      "stage": "하락 (한물감)",
+      "stageMsg": "2025년 대유행, 이제 끝물",
+      "label": "이미 한물간 유행",
+      "labelCls": "warn",
+      "prompt": "이 사진을 스튜디오 지브리 '센과 치히로' 같은 화풍으로 바꿔줘. hand-painted watercolor background, soft cel shading, 따뜻한 자연광과 감정선을 살려서.",
+      "excerpt": "사진을 지브리 애니 화풍으로. 작품 톤 + 수채화/셀셰이딩 키워드가 핵심.",
+      "pull": "원하는 지브리 '작품'을 콕 집고, 수채화·셀셰이딩을 명시하는 게 비결.",
+      "verdict": "지브리풍은 2025년부터 크게 유행해 이제 'AI 이미지의 기본기'예요. 잘 나오게 하려면 ① 원하는 작품(마녀배달부 키키=따뜻한 일상, 센과 치히로=신비, 토토로=자연)을 콕 집고 ② 'hand-painted watercolor background, soft cel shading' 키워드를 꼭 넣고 ③ 자연광·감정선을 묘사하세요. 한참 됐으니 '요즘 신상'이라 말하긴 늦었어요.",
+      "recs": [
+        [
+          "화풍 변환 입문",
+          "◎",
+          1
+        ],
+        [
+          "'요즘 신상'이라 소개",
+          "✕",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "챗GPT 지브리 유행(나무위키)",
+          "https://namu.wiki/w/ChatGPT%20%EC%A7%80%EB%B8%8C%EB%A6%AC%ED%92%8D%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%83%9D%EC%84%B1%20%EC%9C%A0%ED%96%89"
+        ],
+        [
+          "지브리 프롬프트(폭스씨지)",
+          "https://foxcg.com/chatgpt-ghibli-prompt"
+        ]
+      ]
+    },
+    {
+      "id": "ai-scribble-prompt",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "analyzedAt": "2026-06-05",
+      "title": "하찮은 그림 프롬프트 (낙서풍)",
+      "buzz": "화제성 매우 높음",
+      "stage": "피크",
+      "stageMsg": "지금 SNS 점령 중 · 챗GPT 공식 템플릿 탑재",
+      "label": "지금이 적기",
+      "labelCls": "good",
+      "prompt": "세상에서 제일 하찮게 그려줘. 초등학생이 그림일기에 마우스로 급하게 슥슥 그린 것처럼, 삐뚤빼뚤한 낙서체에 어설픈 구도로. 잘 그리려고 하지 말고 일부러 못 그린 듯이, 손맛 나게.",
+      "excerpt": "잘 그린 AI 그림 말고 일부러 '하찮게'. 국내 디렉터 '가든러쉬'발 낙서풍이 챗GPT 공식 템플릿(scribble)에 정식 탑재될 만큼 화제.",
+      "pull": "AI가 너무 잘 그리니까, 이젠 '일부러 못 그린' 게 힙하다.",
+      "verdict": "삐뚤빼뚤 낙서체·마우스로 대충 그린 듯한 그림이 \"AI 티 안 나서 좋다\"며 SNS를 점령했어요. 한국인 이용자(가든러쉬)가 만든 프롬프트가 챗GPT 공식 '낙서풍(scribble)' 템플릿으로 정식 탑재됐을 정도. 고도화된 AI 시대에 인간적·불완전한 미학을 찾는 현상이라 지금이 딱 피크예요. 지브리풍 '잘 그리기'와 정반대 결.",
+      "recs": [
+        [
+          "일부러 못 그린 짤",
+          "◎",
+          1
+        ],
+        [
+          "프사·손편지 감성",
+          "◎",
+          1
+        ],
+        [
+          "정교한 결과물 기대",
+          "✕",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "SNS 점령한 하찮은 그림(뉴스피릿)",
+          "https://www.newsspirit.kr/news/articleView.html?idxno=30543"
+        ],
+        [
+          "하찮은 프롬프트 공식 템플릿화(헤럴드경제)",
+          "https://biz.heraldcorp.com/article/10731605"
         ]
       ]
     }

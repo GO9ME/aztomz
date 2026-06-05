@@ -3,30 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
 <title>한끗 — 트렌드 분석</title>
 <meta name="description" content="광고 의심도·실제 후기 신뢰도·만족도 분석. 추정치이며 확정 판정이 아닙니다." />
 <link rel="stylesheet" href="assets/styles.css" />
 <style>
-  .crumb{font-size:12.5px;color:var(--ink-2);margin:18px 0 14px}
+  .crumb{font-size:13.5px;color:var(--ink-2);margin:18px 0 14px}
   .crumb a{color:var(--accent);text-decoration:none;font-weight:700}
   .d-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
   .d-title{font-size:30px;font-weight:900;letter-spacing:-0.035em;margin:10px 0 6px;line-height:1.15}
   .d-actions{display:flex;gap:9px;margin:14px 0 6px}
   .stage-box{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--r);
     padding:13px 15px;margin:16px 0}
-  .stage-box .sb-k{font-size:12px;color:var(--ink-2);font-weight:700}
+  .stage-box .sb-k{font-size:13.5px;color:var(--ink-2);font-weight:700}
   .stage-box .sb-v{font-size:18px;font-weight:900;margin-top:2px}
   .related{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0}
   .related a{text-decoration:none;color:inherit}
   .related .cover{min-height:96px}
-  .related .r-t{font-size:13.5px;font-weight:800;margin-top:6px}
+  .related .r-t{font-size:14.5px;font-weight:800;margin-top:6px}
   @media(max-width:520px){.related{grid-template-columns:1fr}}
   .rv-form{border:1px solid var(--line);border-radius:12px;padding:16px 16px 18px;margin:14px 0;background:var(--paper-2)}
 </style>
 </head>
 <body>
   <div data-mast></div>
-  <div class="wrap"><div id="main"></div></div>
+  <div class="wrap reading"><div id="main"></div></div>
 
 <script src="data/trends.js"></script>
 <script src="assets/app.js"></script>
@@ -50,7 +51,7 @@
       <div class="stage-box">
         <div class="sb-k">유행 단계</div>
         <div class="sb-v">${H.esc(t.stage)}</div>
-        <div class="muted" style="font-size:13px;margin-top:4px">${H.esc(t.stageMsg)}</div>
+        <div class="muted" style="font-size:14px;margin-top:4px">${H.esc(t.stageMsg)}</div>
       </div>`;
     return `<div class="scores">
       <div class="score ad"><div class="s-label">광고 의심도</div>
@@ -60,7 +61,7 @@
         <div class="s-num">${t.trust}</div><div class="s-band">${H.bandTxt(t.trust)} · 높을수록 믿을 만함</div>
         <div class="track"><i style="width:${t.trust}%"></i></div></div>
     </div>
-    <div style="font-size:13.5px;margin:2px 0 4px">만족도 <span class="sat-badge sat-${t.sat}">${({pos:'긍정',neg:'부정',mix:'혼재'})[t.sat]}</span> <span class="muted">${H.esc(t.satTxt)}</span></div>`;
+    <div style="font-size:14.5px;margin:2px 0 4px">만족도 <span class="sat-badge sat-${t.sat}">${({pos:'긍정',neg:'부정',mix:'혼재'})[t.sat]}</span> <span class="muted">${H.esc(t.satTxt)}</span></div>`;
   }
 
   function render(){
@@ -80,6 +81,8 @@
       </div>
       ${scoresBlock()}
       ${t.pull?`<blockquote class="pull">${H.esc(t.pull)}</blockquote>`:''}
+      ${t.prompt?`<div class="prompt-box"><span class="pb-label">📋 프롬프트 — 복사해서 ChatGPT·미드저니에 붙여넣기</span>${H.esc(t.prompt)}</div>`:''}
+      ${t.pureKorean?`<div class="pure-kr">🌸 <b>예쁜 우리말로 바꾼다면</b> · ${H.esc(t.pureKorean)}</div>`:''}
       <p class="verdict">${H.esc(t.verdict)}</p>
       <div class="sec-head"><span class="no">·</span><h2>이런 분께</h2></div>
       <ul class="recs">${t.recs.map(r=>`<li><span>${H.esc(r[0])}</span><span class="v ${r[2]?'ok':''}">${H.esc(r[1])}</span></li>`).join('')}</ul>
@@ -128,12 +131,12 @@
     const u = H.user();
     if(!u){
       box.innerHTML = `<div class="rv-form" style="text-align:center">
-        <p class="muted" style="margin:0 0 12px;font-size:14px">로그인하면 후기를 남길 수 있어요.</p>
+        <p class="muted" style="margin:0 0 12px;font-size:15px">로그인하면 후기를 남길 수 있어요.</p>
         <a class="btn primary" href="login.html?next=${encodeURIComponent(location.href)}">로그인하고 후기 쓰기</a></div>`;
       return;
     }
     box.innerHTML = `<div class="rv-form">
-      <div style="font-weight:800;font-size:14px;margin-bottom:8px">${H.esc(u.name)}님의 후기</div>
+      <div style="font-weight:800;font-size:15px;margin-bottom:8px">${H.esc(u.name)}님의 후기</div>
       <div class="star-input" id="starIn">${[1,2,3,4,5].map(n=>`<span data-n="${n}">★</span>`).join('')}</div>
       <div class="field" style="margin-top:10px"><textarea id="rvText" rows="3" placeholder="맛·가격·웨이팅·재방문 의사 등 실제 경험을 적어주세요 (5자 이상)"></textarea></div>
       <div class="form-err" id="rvErr"></div>

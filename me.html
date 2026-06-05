@@ -3,34 +3,35 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
 <title>내 한끗 — 한끗</title>
 <link rel="stylesheet" href="assets/styles.css" />
 <style>
   .me-hd{display:flex;align-items:center;gap:14px;margin:30px 0 6px}
-  .me-hd .big-av{width:52px;height:52px;border-radius:50%;background:var(--ink);color:#fff;
+  .me-hd .big-av{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--on-ink);
     display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900}
   .me-hd h1{font-size:24px;font-weight:900;margin:0;letter-spacing:-0.03em}
-  .me-hd .em{font-size:12.5px;color:var(--ink-2)}
-  .me-hd .logout{margin-left:auto;font-size:12.5px;font-weight:800;color:var(--ink-2);
+  .me-hd .em{font-size:13.5px;color:var(--ink-2)}
+  .me-hd .logout{margin-left:auto;font-size:13.5px;font-weight:800;color:var(--ink-2);
     background:none;border:1.5px solid var(--line);border-radius:var(--r);padding:8px 12px;cursor:pointer}
   .savedrow{display:grid;grid-template-columns:64px 1fr auto;gap:13px;align-items:center;
     padding:12px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
   .savedrow:hover{background:var(--paper-2)}
   .savedrow .cover{min-height:48px;height:48px;padding:0;border-radius:5px}
-  .savedrow .cover .c-title{font-size:11px;padding:4px 6px;text-shadow:none}
+  .savedrow .cover .c-title{font-size:13px;padding:4px 6px;text-shadow:none}
   .savedrow .cover .c-kicker,.savedrow .cover .c-buzz,.savedrow .cover .c-stamp{display:none}
   .savedrow .s-t{font-size:15.5px;font-weight:800;letter-spacing:-0.02em}
-  .savedrow .s-l{font-size:12px;color:var(--ink-2)}
-  .savedrow .unsave{font-size:12px;color:var(--faint);background:none;border:none;cursor:pointer}
+  .savedrow .s-l{font-size:13.5px;color:var(--ink-2)}
+  .savedrow .unsave{font-size:13.5px;color:var(--faint);background:none;border:none;cursor:pointer}
   .myrv{border-top:1px solid var(--line);padding:13px 0}
   .myrv a{font-weight:800;text-decoration:none;color:var(--ink)}
-  .myrv .meta{font-size:11.5px;color:var(--faint);margin-left:8px}
-  .myrv .txt{font-size:13.5px;color:#2c2a24;margin-top:4px}
+  .myrv .meta{font-size:13px;color:var(--faint);margin-left:8px}
+  .myrv .txt{font-size:14.5px;color:var(--body);margin-top:4px}
 </style>
 </head>
 <body>
   <div data-mast></div>
-  <div class="wrap"><div id="main"></div></div>
+  <div class="wrap reading"><div id="main"></div></div>
 
 <script src="data/trends.js"></script>
 <script src="assets/app.js"></script>
