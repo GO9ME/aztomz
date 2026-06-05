@@ -120,3 +120,4 @@ git push origin main              # → Vercel 자동 재배포
 - **OS:** Windows 11 / **셸:** PowerShell (Bash 도구도 사용 가능)
 - **배포:** GitHub `GO9ME/aztomz` → Vercel 정적 배포, push 자동 재배포
 - **Hermes(고구미봇):** 트렌드 수집·분석·검증을 돌리는 AI 에이전트(별도 `E:\workspace\side_project\hermes`). 스킬 12개 · 검증 게이트 2종(최신성·출처) · cron(주간 트렌드 갱신 + 펄스 요일 로테이션). 사이트 반영은 **사람 승인 후**. → **[작동 방식 문서](docs/hermes.md)**
+- **Hermes 수동 시작:** `tools/start-hermes.bat` **더블클릭** — 게이트웨이가 떠 있으면 알려주고, 꺼져 있으면 켜서 cron이 자동으로 돌게 한다(로그인 시 자동 시작도 등록돼 있어 평소엔 불필요). 같은 파일이 `hermes\start-hermes.bat`에도 복사돼 있다.
