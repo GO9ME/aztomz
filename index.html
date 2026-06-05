@@ -37,7 +37,9 @@
     <nav class="index" id="indexList" aria-label="광고 분석 랭킹"></nav>
 
     <div class="sec-head" id="trend"><span class="no">02</span><h2>요즘 트렌드</h2><span class="note">지금 따라 해도 되나?</span></div>
+    <div class="cat-filter" id="catFilter" role="tablist" aria-label="카테고리 필터"></div>
     <div class="strip" id="stripList"></div>
+    <div class="strip-empty" id="stripEmpty" hidden>이 카테고리엔 아직 트렌드가 없어요.</div>
 
     <section class="empty" style="margin-top:34px">
       <div class="e-mark">?</div>
@@ -101,9 +103,9 @@
       </span>
     </a>`).join('');
 
-  // trend strip = 트렌드들
+  // trend strip = 트렌드들 (카테고리별 필터)
   const trends = H.TRENDS.filter(t=>t.type==='트렌드');
-  H.q('#stripList').innerHTML = trends.map(t=>`
+  const cardHTML = (t)=>`
     <a class="chip-card" href="${href(t.id)}">
       ${H.coverHTML(t)}
       <div class="cc-meta">
@@ -113,7 +115,27 @@
         ${t.prompt?`<div style="font-size:13px;color:var(--accent);font-weight:800;margin-top:3px">📋 프롬프트 포함</div>`:''}
         <div style="margin-top:5px">${H.freshChip(t.analyzedAt)}</div>
       </div>
-    </a>`).join('');
+    </a>`;
+
+  const cats = ['전체', ...new Set(trends.map(t=>t.cat))];
+  let activeCat = '전체';
+
+  function renderStrip(){
+    const list = activeCat==='전체' ? trends : trends.filter(t=>t.cat===activeCat);
+    H.q('#stripList').innerHTML = list.map(cardHTML).join('');
+    H.q('#stripEmpty').hidden = list.length>0;
+  }
+  function renderFilter(){
+    H.q('#catFilter').innerHTML = cats.map(c=>{
+      const n = c==='전체' ? trends.length : trends.filter(t=>t.cat===c).length;
+      return `<button class="cat-chip${c===activeCat?' on':''}" role="tab" aria-selected="${c===activeCat}" data-cat="${H.esc(c)}">${H.esc(c)} <span class="cc-n">${n}</span></button>`;
+    }).join('');
+    H.qa('#catFilter .cat-chip').forEach(b=> b.onclick=()=>{
+      if(activeCat===b.dataset.cat) return;
+      activeCat = b.dataset.cat; renderFilter(); renderStrip();
+    });
+  }
+  renderFilter(); renderStrip();
 </script>
 </body>
 </html>

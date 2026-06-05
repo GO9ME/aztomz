@@ -123,6 +123,16 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .chip-card .cc-stage{font-size:13px;font-weight:800;color:var(--accent)}
 .chip-card .cc-title{font-size:15.5px;font-weight:800;letter-spacing:-0.02em;margin-top:1px}
 
+/* ---------- category filter (요즘 트렌드) ---------- */
+.cat-filter{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 2px}
+.cat-chip{font-family:var(--sans);font-size:13.5px;font-weight:800;cursor:pointer;
+  border:1.5px solid var(--line);background:var(--card);color:var(--ink-2);
+  border-radius:99px;padding:7px 14px;transition:background .12s,border-color .12s,color .12s}
+.cat-chip:hover{border-color:var(--ink);color:var(--ink)}
+.cat-chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat-chip .cc-n{font-family:var(--serif);opacity:.65;margin-left:3px}
+.strip-empty{color:var(--ink-2);font-size:14.5px;padding:24px 4px}
+
 /* ---------- scores (detail) ---------- */
 .scores{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
 .score{border:1px solid var(--line);border-radius:var(--r);padding:14px 15px;background:var(--card)}
