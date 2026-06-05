@@ -39,6 +39,15 @@
   .gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
   .gallery a:hover img{transform:scale(1.04)}
   @media(max-width:520px){ .gallery{grid-template-columns:1fr 1fr;gap:8px} .embed-frame.vertical{max-width:100%} }
+  /* 블로그형 본문(article): 짧은 문단·소제목·강조로 가독성 있게 */
+  .article{margin:24px 0;max-width:720px}
+  .article .art-h{font-size:19px;font-weight:900;letter-spacing:-0.025em;margin:24px 0 8px;line-height:1.3}
+  .article .art-p{font-size:16px;line-height:1.8;color:var(--body);margin:0 0 15px;text-wrap:pretty;word-break:keep-all}
+  .article .art-q{margin:18px 0;padding:11px 16px;border-left:3px solid var(--accent);
+    background:var(--paper-2);border-radius:0 var(--r) var(--r) 0;font-weight:800;color:var(--ink);
+    line-height:1.6;word-break:keep-all}
+  .article .art-ul{margin:8px 0 16px;padding-left:18px}
+  .article .art-ul li{font-size:15.5px;line-height:1.75;margin:5px 0;color:var(--body);word-break:keep-all}
 </style>
 </head>
 <body>
@@ -114,6 +123,19 @@
     </div>`;
   }
 
+  // 블로그형 본문(article): [["h","소제목"],["p","문단"],["q","강조"],["ul",["..",".."]]]
+  function articleBlock(){
+    const a = t.article; if(!a || !a.length) return '';
+    const body = a.map(b=>{
+      const type=b[0], c=b[1];
+      if(type==='h') return `<h3 class="art-h">${H.esc(c)}</h3>`;
+      if(type==='q') return `<blockquote class="art-q">${H.esc(c)}</blockquote>`;
+      if(type==='ul') return `<ul class="art-ul">${(c||[]).map(li=>`<li>${H.esc(li)}</li>`).join('')}</ul>`;
+      return `<p class="art-p">${H.esc(c)}</p>`;
+    }).join('');
+    return `<div class="article"><div class="media-h">📝 자세히 읽기</div>${body}</div>`;
+  }
+
   function render(){
     const saved = H.isSaved(t.id);
     const related = H.TRENDS.filter(x=>x.id!==t.id).slice(0,2);
@@ -136,6 +158,7 @@
       ${t.prompt?`<div class="prompt-box"><span class="pb-label">📋 프롬프트 — 복사해서 ChatGPT·미드저니에 붙여넣기</span>${H.esc(t.prompt)}</div>`:''}
       ${t.pureKorean?`<div class="pure-kr">🌸 <b>예쁜 우리말로 바꾼다면</b> · ${H.esc(t.pureKorean)}</div>`:''}
       <p class="verdict">${H.esc(t.verdict)}</p>
+      ${articleBlock()}
       <div class="sec-head"><span class="no">·</span><h2>이런 분께</h2></div>
       <ul class="recs">${t.recs.map(r=>`<li><span>${H.esc(r[0])}</span><span class="v ${r[2]?'ok':''}">${H.esc(r[1])}</span></li>`).join('')}</ul>
       <details class="src"><summary>참고 출처 ${t.src.length}개</summary>
