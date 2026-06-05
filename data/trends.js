@@ -572,11 +572,11 @@ window.HANGEUT_DATA = {
       "coverCat": "cat-ai",
       "analyzedAt": "2026-06-05",
       "title": "지브리풍 변환 프롬프트",
-      "buzz": "화제성 안정화",
-      "stage": "안정화 → 밈화",
-      "stageMsg": "한참 유행, 이제 기본기",
-      "label": "이제는 기본템",
-      "labelCls": "mid",
+      "buzz": "화제성 하락",
+      "stage": "하락 (한물감)",
+      "stageMsg": "2025년 대유행, 이제 끝물",
+      "label": "이미 한물간 유행",
+      "labelCls": "warn",
       "prompt": "이 사진을 스튜디오 지브리 '센과 치히로' 같은 화풍으로 바꿔줘. hand-painted watercolor background, soft cel shading, 따뜻한 자연광과 감정선을 살려서.",
       "excerpt": "사진을 지브리 애니 화풍으로. 작품 톤 + 수채화/셀셰이딩 키워드가 핵심.",
       "pull": "원하는 지브리 '작품'을 콕 집고, 수채화·셀셰이딩을 명시하는 게 비결.",
@@ -601,6 +601,50 @@ window.HANGEUT_DATA = {
         [
           "지브리 프롬프트(폭스씨지)",
           "https://foxcg.com/chatgpt-ghibli-prompt"
+        ]
+      ]
+    },
+    {
+      "id": "ai-scribble-prompt",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "analyzedAt": "2026-06-05",
+      "title": "하찮은 그림 프롬프트 (낙서풍)",
+      "buzz": "화제성 매우 높음",
+      "stage": "피크",
+      "stageMsg": "지금 SNS 점령 중 · 챗GPT 공식 템플릿 탑재",
+      "label": "지금이 적기",
+      "labelCls": "good",
+      "prompt": "세상에서 제일 하찮게 그려줘. 초등학생이 그림일기에 마우스로 급하게 슥슥 그린 것처럼, 삐뚤빼뚤한 낙서체에 어설픈 구도로. 잘 그리려고 하지 말고 일부러 못 그린 듯이, 손맛 나게.",
+      "excerpt": "잘 그린 AI 그림 말고 일부러 '하찮게'. 국내 디렉터 '가든러쉬'발 낙서풍이 챗GPT 공식 템플릿(scribble)에 정식 탑재될 만큼 화제.",
+      "pull": "AI가 너무 잘 그리니까, 이젠 '일부러 못 그린' 게 힙하다.",
+      "verdict": "삐뚤빼뚤 낙서체·마우스로 대충 그린 듯한 그림이 \"AI 티 안 나서 좋다\"며 SNS를 점령했어요. 한국인 이용자(가든러쉬)가 만든 프롬프트가 챗GPT 공식 '낙서풍(scribble)' 템플릿으로 정식 탑재됐을 정도. 고도화된 AI 시대에 인간적·불완전한 미학을 찾는 현상이라 지금이 딱 피크예요. 지브리풍 '잘 그리기'와 정반대 결.",
+      "recs": [
+        [
+          "일부러 못 그린 짤",
+          "◎",
+          1
+        ],
+        [
+          "프사·손편지 감성",
+          "◎",
+          1
+        ],
+        [
+          "정교한 결과물 기대",
+          "✕",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "SNS 점령한 하찮은 그림(뉴스피릿)",
+          "https://www.newsspirit.kr/news/articleView.html?idxno=30543"
+        ],
+        [
+          "하찮은 프롬프트 공식 템플릿화(헤럴드경제)",
+          "https://biz.heraldcorp.com/article/10731605"
         ]
       ]
     }
