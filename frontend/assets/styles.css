@@ -102,6 +102,18 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .cat-music{background-color:#6b2d44}
 .cat-fashion{background-color:#4a3a66}
 .cat-ai{background-color:#1f3b4d}
+/* 펄스 분야 커버색 */
+.pcat-tech{background-color:#1f3b4d}
+.pcat-beauty{background-color:#6b2d44}
+.pcat-health{background-color:#2f5d4a}
+.pcat-food{background-color:#5a3327}
+.pcat-finance{background-color:#3f4a2a}
+.pcat-edu{background-color:#2b3a55}
+.pcat-fashion{background-color:#4a3a66}
+.pcat-enter{background-color:#5a2d52}
+.pcat-life{background-color:#3a3530}
+.pcat-hiking{background-color:#284536}
+.pcat-travel{background-color:#235059}
 
 /* ---------- featured ---------- */
 .featured{display:grid;grid-template-columns:1.05fr 1fr;gap:22px;margin:26px 0 8px;align-items:stretch}
@@ -324,17 +336,22 @@ i{font-style:normal}
 .tp-search:focus{border-color:var(--ink)}
 
 /* 트렌드 카드 */
-#tpDaily,#tpList{display:flex;flex-direction:column;gap:14px}
+/* 커버 카드 그리드 — '요즘 트렌드' 커버 카드와 동일한 패밀리 */
+#tpDaily,#tpList{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:16px;align-items:start}
 #tpDaily{margin:8px 0 10px}
 .tp-card{border:1px solid var(--line);border-radius:var(--r);background:var(--card);
-  padding:19px 22px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
-.tp-card:hover{border-color:var(--ink-2);box-shadow:0 2px 14px rgba(0,0,0,.05)}
+  overflow:hidden;cursor:pointer;transition:border-color .12s,box-shadow .12s}
+.tp-card:hover{border-color:var(--ink-2);box-shadow:0 3px 16px rgba(0,0,0,.07)}
 .tp-card.open{border-color:var(--ink)}
-/* #ad 랭킹 카드와 동일한 리듬: [순위] [내용] [미니 막대] 3열 그리드 */
-.tp-card-head{display:grid;grid-template-columns:30px 1fr auto;gap:15px;align-items:start}
-.tp-rank{font-family:var(--serif);font-style:normal;font-size:21px;color:var(--accent);text-align:center;line-height:1.18}
-.tp-card-main{min-width:0}
-.tp-mini{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:118px}
+/* 분야색 커버 배너(상단) */
+.tp-cover{min-height:118px;padding:14px;border-radius:0}
+.tp-cover .c-kicker,.tp-cover .c-buzz{font-size:12px}
+.tp-cover .c-buzz{font-weight:800;color:#fff;opacity:.92}
+.tp-cover .c-title{font-size:20px;line-height:1.16}
+.tp-cover .c-stamp{font-size:11.5px;margin-bottom:6px}
+.tp-body{padding:13px 16px 16px}
+.tp-body .tp-meta{margin-bottom:10px}
+.tp-body .tp-spark{margin-left:auto}
 .tp-row1{display:flex;align-items:center;gap:10px;margin-bottom:9px;flex-wrap:wrap}
 .tp-kw{font-size:17.5px;font-weight:800;letter-spacing:-0.02em;margin:0}
 .tp-meta{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:11px}

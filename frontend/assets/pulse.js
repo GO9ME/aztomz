@@ -11,6 +11,8 @@
   const CATS = ['전체', '테크', 'K뷰티', '헬스', '푸드', '금융', '교육', '패션', '엔터', '라이프', '등산', '관광'];
   // 플랫폼 글리프(기능 표식 — 타이포 커버의 '이모지 금지' 규칙과 무관)
   const PI = { Google: '🔍', YouTube: '▶️', Instagram: '📷', TikTok: '🎵', X: '𝕏' };
+  // 분야 → 커버 색(슬러그). styles.css의 .pcat-* 와 매칭
+  const PCAT = { '테크': 'tech', 'K뷰티': 'beauty', '헬스': 'health', '푸드': 'food', '금융': 'finance', '교육': 'edu', '패션': 'fashion', '엔터': 'enter', '라이프': 'life', '등산': 'hiking', '관광': 'travel' };
   const LS_KEY = 'hangeut.pulseIdeas';
   const IDEA_CAP = 80;
 
@@ -54,36 +56,31 @@
   H.pulse.card = function (t, opts) {
     opts = opts || {};
     const tt = tierOf(t.total);
-    const badge = opts.today
-      ? `<span class="tp-badge today">이번 주</span>`
-      : `<span class="tp-badge ${tt.tier}">${tt.mark}${tt.label}</span>`;
-    const rank = opts.today ? '·' : (opts.rank != null ? String(opts.rank).padStart(2, '0') : '');
-    const normGr = Math.min(100, Math.round((Number(t.gr) || 0) / 5));
+    const stamp = opts.today ? '이번 주' : `${tt.mark}${tt.label}`;
+    const pcat = PCAT[t.cat] || 'life';
     return `<article class="tp-card" data-id="${H.esc(t.id)}">
-      <div class="tp-card-head">
-        <span class="tp-rank">${rank}</span>
-        <div class="tp-card-main">
-          <div class="tp-row1"><h3 class="tp-kw">${H.esc(t.kw)}</h3>${badge}</div>
-          <div class="tp-meta">
-            <span class="tp-cat">${H.esc(t.cat)}</span>
-            <span class="tp-pl">${platformsHTML(t.pl)}</span>
-            ${opts.today && t.date ? H.freshChip(t.date) : ''}
-          </div>
-          <p class="tp-why">${H.esc(t.why)}</p>
-        </div>
-        <span class="mini tp-mini">
-          <span class="mrow">성장 <b>+${H.esc(t.gr)}%</b> <span class="mbar"><i style="width:${normGr}%;background:var(--green)"></i></span></span>
-          <span class="tp-spark ${tt.tier}">${spark(t.sp)}</span>
-        </span>
+      <div class="cover tp-cover pcat-${pcat}">
+        <span class="c-kicker">${H.esc(t.cat)}</span>
+        <span class="c-buzz">▲ +${H.esc(t.gr)}%</span>
+        <span class="c-stamp">${H.esc(stamp)}</span>
+        <span class="c-title">${H.esc(t.kw)}</span>
       </div>
-      ${t.angle ? `<div class="tp-angle">💡 <b>핵심 각도</b> · ${H.esc(t.angle)}</div>` : ''}
-      <div class="tp-more">▾ 빠른 창업 아이디어 3개 보기</div>
-      <div class="tp-ideas" hidden>
-        <div class="tp-ideas-h">빠른 창업 아이디어 3</div>
-        <ol class="tp-idea-list">${quickIdeasOf(t).map((s) => `<li>${H.esc(s)}</li>`).join('')}</ol>
-        <div class="tp-ideas-foot">
-          <button class="tp-quick" data-quick="${H.esc(t.id)}">📥 저장</button>
-          <button class="tp-future" data-future disabled title="라이브 AI는 추후 제공됩니다">AI 상세 창업 아이템 (준비 중)</button>
+      <div class="tp-body">
+        <div class="tp-meta">
+          <span class="tp-pl">${platformsHTML(t.pl)}</span>
+          ${opts.today && t.date ? H.freshChip(t.date) : ''}
+          <span class="tp-spark ${tt.tier}">${spark(t.sp, 66, 20)}</span>
+        </div>
+        <p class="tp-why">${H.esc(t.why)}</p>
+        ${t.angle ? `<div class="tp-angle">💡 <b>핵심 각도</b> · ${H.esc(t.angle)}</div>` : ''}
+        <div class="tp-more">▾ 빠른 창업 아이디어 3개 보기</div>
+        <div class="tp-ideas" hidden>
+          <div class="tp-ideas-h">빠른 창업 아이디어 3</div>
+          <ol class="tp-idea-list">${quickIdeasOf(t).map((s) => `<li>${H.esc(s)}</li>`).join('')}</ol>
+          <div class="tp-ideas-foot">
+            <button class="tp-quick" data-quick="${H.esc(t.id)}">📥 저장</button>
+            <button class="tp-future" data-future disabled title="라이브 AI는 추후 제공됩니다">AI 상세 창업 아이템 (준비 중)</button>
+          </div>
         </div>
       </div>
     </article>`;
