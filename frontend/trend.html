@@ -87,15 +87,19 @@
         <div class="sb-v">${H.esc(t.stage)}</div>
         <div class="muted" style="font-size:14px;margin-top:4px">${H.esc(t.stageMsg)}</div>
       </div>`;
+    const R = t.reasons || {};
     return `<div class="scores">
       <div class="score ad"><div class="s-label">광고 의심도</div>
         <div class="s-num">${t.ad}</div><div class="s-band">${H.bandTxt(t.ad)} · 높을수록 광고 가능성</div>
-        <div class="track"><i style="width:${t.ad}%"></i></div></div>
+        <div class="track"><i style="width:${t.ad}%"></i></div>
+        ${R.ad?`<div class="s-why"><b>왜 이 점수?</b> ${H.esc(R.ad)}</div>`:''}</div>
       <div class="score trust"><div class="s-label">실제 후기 신뢰도</div>
         <div class="s-num">${t.trust}</div><div class="s-band">${H.bandTxt(t.trust)} · 높을수록 믿을 만함</div>
-        <div class="track"><i style="width:${t.trust}%"></i></div></div>
+        <div class="track"><i style="width:${t.trust}%"></i></div>
+        ${R.trust?`<div class="s-why"><b>왜 이 점수?</b> ${H.esc(R.trust)}</div>`:''}</div>
     </div>
-    <div style="font-size:14.5px;margin:2px 0 4px">만족도 <span class="sat-badge sat-${t.sat}">${({pos:'긍정',neg:'부정',mix:'혼재'})[t.sat]}</span> <span class="muted">${H.esc(t.satTxt)}</span></div>`;
+    <div style="font-size:14.5px;margin:2px 0 4px">만족도 <span class="sat-badge sat-${t.sat}">${({pos:'긍정',neg:'부정',mix:'혼재'})[t.sat]}</span> <span class="muted">${H.esc(t.satTxt)}</span></div>
+    ${R.sat?`<div class="sat-why"><b>근거</b> ${H.esc(R.sat)}</div>`:''}`;
   }
 
   // 영상 임베드(유튜브/틱톡) — 데이터에 t.video 있을 때만

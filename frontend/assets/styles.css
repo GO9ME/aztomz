@@ -173,6 +173,12 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .score .track i{display:block;height:100%;border-radius:99px}
 .score.ad .s-num{color:var(--accent)} .score.ad .track i{background:var(--accent)}
 .score.trust .s-num{color:var(--green)} .score.trust .track i{background:var(--green)}
+/* 점수 근거(왜 이 점수인지) */
+.score .s-why{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin-top:11px;padding-top:9px;
+  border-top:1px dashed var(--line);word-break:keep-all}
+.score .s-why b{color:var(--ink);font-weight:800}
+.sat-why{font-size:13px;color:var(--ink-2);line-height:1.55;margin:2px 0 8px;word-break:keep-all}
+.sat-why b{color:var(--ink);font-weight:800}
 @media(max-width:520px){.scores{grid-template-columns:1fr}}
 
 /* ---------- labels / badges ---------- */

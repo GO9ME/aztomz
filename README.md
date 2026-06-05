@@ -110,6 +110,7 @@ git push origin main              # → Vercel 자동 재배포
 - `verdict` (string) — 장문 분석
 - `src` (array) — 출처 [제목, URL] 쌍
 - `recs` (array) — 추천 목록 [항목, 평가, 점수]
+- `reasons` (object) — **점수별 근거** `{ad, trust, sat}` (각 점수를 그렇게 본 이유, 상세페이지에 "왜 이 점수?"로 노출)
 - **선택:** `pureKorean` (신조어) / `prompt` (AI 명령어, 길고 디테일하게) / `stage` (트렌드) / `article` (블로그형 본문 블록) / `video` (유튜브·틱톡 임베드) / `images` (대표 이미지)
 
 ---
