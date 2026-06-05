@@ -4,7 +4,7 @@
 SNS 인기 장소(카페·식당·명소)를 광고도·신뢰도·경험 가치로 분석. 가서 사진 찍을 맛이 있는지 판단.
 
 ## 진입·화면
-- **파일:** trend.html?id=<핫플id>
+- **파일:** frontend/trend.html?id=<핫플id>
 - **타입:** type=='신뢰분석', cat==[핫플 카테고리]
 - **표시:** 카버 + 제목·카테고리·점수·판정 뱃지
 
@@ -23,9 +23,9 @@ SNS 인기 장소(카페·식당·명소)를 광고도·신뢰도·경험 가치
 구현됨. 누데이크 성수(카페) 등 1건 이상 존재. 점수·추천 리스트 렌더링 동작 확인.
 
 ## 관련 코드
-- `trend.html` : 상세 페이지 (L49~64, scores 블록)
-- `assets/app.js` : H.coverHTML() (카버 렌더링), H.bandTxt() (점수 설명, L29)
-- `data/trends.json` : type=='신뢰분석' & cat 핫플 항목들
+- `frontend/trend.html` : 상세 페이지 (L49~64, scores 블록)
+- `frontend/assets/app.js` : H.coverHTML() (카버 렌더링), H.bandTxt() (점수 설명, L29)
+- `backend/data/trends.json` : type=='신뢰분석' & cat 핫플 항목들
 
 ## 비고
 - **체험 가치 중심:** "힙스팟 사진", "공간 감상", "분위기" 추천도 높음 (누데이크 사례)

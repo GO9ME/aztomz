@@ -4,7 +4,7 @@
 바이럴 디저트·음식을 광고의심도·신뢰도로 분석. SNS 기대치 vs 실제 후기 괴리 노출.
 
 ## 진입·화면
-- **파일:** trend.html?id=<디저트id>
+- **파일:** frontend/trend.html?id=<디저트id>
 - **타입:** type=='신뢰분석', cat=='디저트' (또는 유사)
 - **표시:** 카버(cat-dessert 스타일) + 화제성·점수·만족도·한끗 판정 뱃지
 
@@ -24,9 +24,9 @@
 구현됨. 두바이 초콜릿(편의점판)·우베 타르트·도넛 계열 항목 3건 이상 존재. 광고/신뢰도 분석·점수 시각화 동작 확인.
 
 ## 관련 코드
-- `trend.html` : 상세 페이지 (L49~64, scoresBlock() 함수에서 광고도/신뢰도 바 렌더링)
-- `assets/app.js` : H.bandTxt() (점수→텍스트 변환, L29), H.coverHTML() (L102~109)
-- `data/trends.json` : type=='신뢰분석' & cat=='디저트' 항목들
+- `frontend/trend.html` : 상세 페이지 (L49~64, scoresBlock() 함수에서 광고도/신뢰도 바 렌더링)
+- `frontend/assets/app.js` : H.bandTxt() (점수→텍스트 변환, L29), H.coverHTML() (L102~109)
+- `backend/data/trends.json` : type=='신뢰분석' & cat=='디저트' 항목들
 
 ## 비고
 - **바이럴 vs 신뢰도 분리:** 화제성(buzz) 높아도 신뢰도(trust)는 별개. 점수 이원화 표시

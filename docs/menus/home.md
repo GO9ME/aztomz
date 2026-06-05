@@ -4,7 +4,7 @@
 오늘 분석 된 트렌드를 1화면에 요약 제공. 광고의심도·신뢰도·카테고리별 트렌드 스트립으로 사용자 탐색 유도.
 
 ## 진입·화면
-- **파일:** `index.html`
+- **파일:** `frontend/index.html`
 - **섹션 1: Lead** — 서비스 소개 헤드라인 + 신선도 ("분석 N건 · 마지막 갱신 YYYY.MM.DD")
 - **섹션 2: Featured** — 첫 신뢰분석 항목 (타입=='신뢰분석'의 첫 건) → 큰 카드 + 점수 배지
 - **섹션 3: "광고일까 진짜일까"** — 신뢰분석들의 랭킹 인덱스 (순위·광고도·신뢰도 바차트)
@@ -19,9 +19,9 @@
 구현됨. 마스트헤드 + 리드 + 피처드 + 광고 인덱스 + 트렌드 스트립 + 카테고리 필터 전부 동작 확인 (2026-06-05).
 
 ## 관련 코드
-- `index.html` : 마크업 + 스타일 (L1~141)
-- `assets/app.js` : H.TRENDS, H.coverHTML(), H.freshChip(), H.feedFreshness() (L12~46, L102~109, L118~149)
-- `data/trends.json` : 데이터 원본
+- `frontend/index.html` : 마크업 + 스타일 (L1~141)
+- `frontend/assets/app.js` : H.TRENDS, H.coverHTML(), H.freshChip(), H.feedFreshness() (L12~46, L102~109, L118~149)
+- `backend/data/trends.json` : 데이터 원본
 
 ## 비고
 - 광고 인덱스: 신뢰분석 타입만 표시 (트렌드는 제외)
