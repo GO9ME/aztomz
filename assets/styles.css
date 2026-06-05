@@ -98,10 +98,11 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 @media(max-width:620px){.featured{grid-template-columns:1fr;gap:14px}}
 
 /* ---------- ranked index (광고일까 진짜일까) ---------- */
-/* 와이드 화면: 랭킹을 2단 그리드로 채워 휑한 여백 제거(좁은 화면은 1단으로 자동) */
-.index{margin:6px 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));column-gap:32px}
+/* 와이드 화면: 멀티컬럼으로 채움 — 세로 우선 읽기(01·02·03 ↓ 왼쪽 → 04·05·06 ↓ 오른쪽). 좁은 화면은 1단 자동 */
+.index{margin:6px 0;column-width:430px;column-gap:36px}
 .idx-row{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;
-  padding:15px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+  padding:15px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;
+  break-inside:avoid}
 .idx-row:hover{background:var(--paper-2)}
 .idx-row .rank{font-family:var(--serif);font-style:normal;font-size:22px;color:var(--accent);text-align:center}
 .idx-row .t .it-cat{font-size:13px;letter-spacing:.04em;color:var(--faint);font-weight:700}
@@ -114,10 +115,11 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 
 /* ---------- trend strip (요즘 트렌드) ---------- */
 /* 가로스크롤 대신 줄바꿈 그리드 — 화면 폭에 맞춰 자동으로 다음 줄로 */
-.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;padding:8px 0 14px}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:18px;padding:8px 0 14px}
 .chip-card{text-decoration:none;color:inherit}
-.chip-card .cover{min-height:120px}
-.chip-card .cc-meta{margin-top:7px}
+/* 커버는 고정 높이 대신 4:3 비율 — 카드 폭에 비례해 일정한 리듬 유지 */
+.chip-card .cover{aspect-ratio:4/3;min-height:0}
+.chip-card .cc-meta{margin-top:9px}
 .chip-card .cc-stage{font-size:13px;font-weight:800;color:var(--accent)}
 .chip-card .cc-title{font-size:15.5px;font-weight:800;letter-spacing:-0.02em;margin-top:1px}
 
