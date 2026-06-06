@@ -25,6 +25,7 @@
    ============================================================ */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { validateTrends } from './validate-trends.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -156,6 +157,11 @@ if (DRY) { console.log('\n[DRY] 파일·git 변경 없이 종료.'); process.exi
 // ── trends.json 갱신 + refresh
 trends.push(...published);
 const out = Array.isArray(data) ? trends : (data.trends = trends, data);
+// ── 스키마 게이트: cat 7분류 이탈·id 중복·analyzedAt 형식오류 등 깨진 데이터는 빌드/배포 전 중단
+const _v = validateTrends(Array.isArray(out) ? out : out.trends);
+if (!_v.ok) { console.error('\n⛔ 스키마 검증 실패 — 빌드·배포 중단:\n' + _v.errors.map((e) => '  · ' + e).join('\n')); process.exit(1); }
+if (_v.warnings.length) console.warn(`⚠ 스키마 경고 ${_v.warnings.length}건(배포는 계속)`);
+console.log('✓ 스키마 검증 통과');
 writeFileSync(trendsPath, JSON.stringify(out, null, 2) + '\n', 'utf-8');
 execFileSync('node', [refreshPath], { cwd: repoRoot, stdio: 'inherit' });
 

@@ -107,7 +107,7 @@ window.HANGEUT_DATA = {
     {
       "id": "nudake",
       "type": "신뢰분석",
-      "cat": "성수 카페",
+      "cat": "카페·핫플",
       "coverCat": "cat-cafe",
       "analyzedAt": "2026-06-05",
       "title": "누데이크 성수",
@@ -172,7 +172,7 @@ window.HANGEUT_DATA = {
     {
       "id": "betong",
       "type": "신뢰분석",
-      "cat": "성수 베이커리",
+      "cat": "카페·핫플",
       "coverCat": "cat-bakery",
       "analyzedAt": "2026-06-04",
       "title": "멜로워 성수 (현 \"베통\")",
@@ -452,7 +452,7 @@ window.HANGEUT_DATA = {
     {
       "id": "pickbake",
       "type": "신뢰분석",
-      "cat": "성수 베이커리",
+      "cat": "카페·핫플",
       "coverCat": "cat-bakery",
       "analyzedAt": "2026-06-05",
       "title": "픽베이크 성수 (에그타르트)",
@@ -610,7 +610,7 @@ window.HANGEUT_DATA = {
     {
       "id": "east-bagel-dasan",
       "type": "신뢰분석",
-      "cat": "카페·베이커리",
+      "cat": "카페·핫플",
       "coverCat": "cat-bakery",
       "analyzedAt": "2026-06-05",
       "title": "이스트베이글 (다산)",
