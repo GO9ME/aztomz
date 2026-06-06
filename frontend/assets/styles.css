@@ -230,6 +230,9 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
   border:1px solid var(--line);border-radius:99px;padding:3px 11px;text-decoration:none;
   transition:border-color .12s,color .12s}
 .tag-chip:hover{border-color:var(--ink);color:var(--ink)}
+.tag-chip.date{color:#176b40;background:var(--green-soft);border-color:#bfe0cd;font-family:var(--serif);font-style:normal}
+.date-nav{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:14px 0 2px}
+.date-nav-label{font-size:13px;font-weight:800;color:var(--ink-2)}
 .stale-banner{background:var(--accent-soft);border:1px solid #f0b9a8;border-radius:var(--r);
   padding:10px 13px;font-size:13.5px;color:#bd3415;font-weight:700;margin:12px 0}
 

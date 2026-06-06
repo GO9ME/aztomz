@@ -103,7 +103,8 @@ git push origin main              # → Vercel 자동 재배포
 - `type` (string) — "신뢰분석" | "트렌드"
 - `cat` (string) — 카테고리 (디저트·성수 카페·AI 프롬프트 등)
 - `title` (string) — 트렌드명
-- `analyzedAt` (YYYY-MM-DD) — 분석 날짜
+- `collectedAt` (YYYY-MM-DD) — **첫 수집일(불변)**. 사이트 "수집일별" 누적/필터 기준(`index.html?date=`). 재분석해도 안 바뀜
+- `analyzedAt` (YYYY-MM-DD) — 분석 날짜(재분석 시 갱신)
 - `ad` (0~100) — 광고 의심도
 - `trust` (0~100) — 실제 후기 신뢰도
 - `sat` (pos|neg|mix) — 만족도 (긍정·부정·혼재)

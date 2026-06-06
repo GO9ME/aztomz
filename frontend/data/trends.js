@@ -101,7 +101,8 @@ window.HANGEUT_DATA = {
         "디저트",
         "편의점",
         "초콜릿"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "nudake",
@@ -165,7 +166,8 @@ window.HANGEUT_DATA = {
         "카페",
         "성수",
         "디저트카페"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "betong",
@@ -257,7 +259,8 @@ window.HANGEUT_DATA = {
         "베이커리",
         "성수",
         "소금빵"
-      ]
+      ],
+      "collectedAt": "2026-06-04"
     },
     {
       "id": "ube",
@@ -304,7 +307,8 @@ window.HANGEUT_DATA = {
         "디저트",
         "우베",
         "보라디저트"
-      ]
+      ],
+      "collectedAt": "2026-06-03"
     },
     {
       "id": "yakgwa",
@@ -351,7 +355,8 @@ window.HANGEUT_DATA = {
         "디저트",
         "약과",
         "전통디저트"
-      ]
+      ],
+      "collectedAt": "2026-05-20"
     },
     {
       "id": "shanghai-buttertteok",
@@ -441,7 +446,8 @@ window.HANGEUT_DATA = {
         "디저트",
         "상하이버터떡",
         "떡"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "pickbake",
@@ -500,7 +506,8 @@ window.HANGEUT_DATA = {
         "베이커리",
         "성수",
         "에그타르트"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "im-donut-seongsu",
@@ -597,7 +604,8 @@ window.HANGEUT_DATA = {
         "디저트",
         "성수",
         "도넛"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "east-bagel-dasan",
@@ -691,7 +699,8 @@ window.HANGEUT_DATA = {
         "다산",
         "남양주",
         "베이글"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "nanrijabeth",
@@ -786,7 +795,8 @@ window.HANGEUT_DATA = {
         "신조어",
         "밈",
         "유행어"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "illit-itsme",
@@ -876,7 +886,8 @@ window.HANGEUT_DATA = {
         "아일릿",
         "챌린지",
         "K팝"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "balloon-pants",
@@ -928,7 +939,8 @@ window.HANGEUT_DATA = {
         "패션",
         "벌룬팬츠",
         "와이드팬츠"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "ai-fashion-portrait",
@@ -976,7 +988,8 @@ window.HANGEUT_DATA = {
         "AI프롬프트",
         "AI화보",
         "챗GPT"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "ai-ghibli-style",
@@ -1023,7 +1036,8 @@ window.HANGEUT_DATA = {
         "AI프롬프트",
         "지브리풍",
         "챗GPT"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     },
     {
       "id": "ai-scribble-prompt",
@@ -1109,7 +1123,8 @@ window.HANGEUT_DATA = {
         "AI프롬프트",
         "하찮은그림",
         "낙서풍"
-      ]
+      ],
+      "collectedAt": "2026-06-05"
     }
   ]
 };

@@ -158,7 +158,10 @@
       <div class="d-head"><span class="kicker">${H.esc(t.cat)} · ${H.esc(t.buzz)}</span></div>
       <h1 class="d-title">${H.esc(t.title)}</h1>
       <div><span class="label ${t.labelCls}">${H.esc(t.label)}</span></div>
-      ${t.tags&&t.tags.length?`<div class="tags">${t.tags.map(tg=>`<a class="tag-chip" href="index.html?tag=${encodeURIComponent(tg)}">#${H.esc(tg)}</a>`).join('')}</div>`:''}
+      <div class="tags">
+        <a class="tag-chip date" href="index.html?date=${encodeURIComponent(t.collectedAt||t.analyzedAt)}">📅 ${H.esc(t.collectedAt||t.analyzedAt)} 수집</a>
+        ${(t.tags||[]).map(tg=>`<a class="tag-chip" href="index.html?tag=${encodeURIComponent(tg)}">#${H.esc(tg)}</a>`).join('')}
+      </div>
       <div class="freshline">분석일 ${H.fmtISO(t.analyzedAt)} ${H.freshChip(t.analyzedAt)} · 오늘 ${H.todayStr()} 기준</div>
       ${H.freshness(t.analyzedAt).cls==='stale' ? `<div class="stale-banner">⚠ 이 분석은 ${H.daysSince(t.analyzedAt)}일 전 기준이에요. 유행은 빨리 바뀌니 방문 전 최신 상황을 다시 확인하세요.</div>` : ''}
       <div class="d-actions">

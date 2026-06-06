@@ -67,19 +67,23 @@
   H.boot();
   const href = (id)=>`trend.html?id=${encodeURIComponent(id)}`;
 
-  // 🔖 해시태그 필터 모드: ?tag=X → 그 태그 트렌드만 보여주고 나머지 홈은 숨김
+  // 🔖 필터 모드: ?tag=X(해시태그) 또는 ?date=YYYY-MM-DD(수집일) → 해당 트렌드만, 나머지 홈 숨김
   const _tag = H.param('tag');
-  if(_tag){
-    const matched = H.TRENDS.filter(t=>(t.tags||[]).includes(_tag));
+  const _date = H.param('date');
+  if(_tag || _date){
+    const matched = _date
+      ? H.TRENDS.filter(t=>(t.collectedAt||t.analyzedAt)===_date)
+      : H.TRENDS.filter(t=>(t.tags||[]).includes(_tag));
+    const head = _date ? `📅 ${H.esc(_date)} 수집` : `#${H.esc(_tag)}`;
     const card = (t)=>`<a class="chip-card" href="${href(t.id)}">${H.coverHTML(t)}<div class="cc-meta"><div class="cc-stage">${H.esc(t.cat)}</div><div class="cc-title">${H.esc(t.title)}</div></div></a>`;
     const sec = document.createElement('section');
     sec.style.margin = '8px 0 20px';
-    sec.innerHTML = `<div class="sec-head"><span class="no">#</span><h2>#${H.esc(_tag)}</h2><span class="note">${matched.length}개 · <a href="index.html" style="color:var(--accent);font-weight:700">← 전체 트렌드</a></span></div>`
-      + (matched.length ? `<div class="strip" style="margin-top:14px">${matched.map(card).join('')}</div>` : `<div class="strip-empty" style="display:block">'#${H.esc(_tag)}' 태그의 트렌드가 아직 없어요. <a href="index.html" style="color:var(--accent)">전체 보기</a></div>`);
+    sec.innerHTML = `<div class="sec-head"><span class="no">${_date?'📅':'#'}</span><h2>${head}</h2><span class="note">${matched.length}개 · <a href="index.html" style="color:var(--accent);font-weight:700">← 전체 트렌드</a></span></div>`
+      + (matched.length ? `<div class="strip" style="margin-top:14px">${matched.map(card).join('')}</div>` : `<div class="strip-empty" style="display:block">해당 ${_date?'날짜':'태그'}의 트렌드가 없어요. <a href="index.html" style="color:var(--accent)">전체 보기</a></div>`);
     const wrap = document.querySelector('#featured').closest('.wrap');  // 본문 wrap (헤더 .wrap 아님)
     [...wrap.children].forEach(c=>{ c.style.display = 'none'; });
     wrap.insertBefore(sec, wrap.firstChild);
-    document.title = `#${_tag} — 한끗`;
+    document.title = `${head} — 한끗`;
   }
 
   // 오늘 날짜 + 데이터 신선도 (브라우저 시계 기준, 라이브)
@@ -87,6 +91,16 @@
   H.q('#freshline').innerHTML =
     `오늘 <b style="font-style:normal;color:var(--ink)">${H.todayStr()}</b> 기준 · 분석 ${H.TRENDS.length}건`
     + (H.generatedAt ? ` · 마지막 갱신 ${H.fmtISO(H.generatedAt)} <span class="fresh-chip ${ff.cls}" style="font-style:normal">${ff.text}</span>` : '');
+
+  // 📅 수집일별 보기 — 최근 수집일 칩(클릭 → ?date= 필터)
+  const _colDates = [...new Set(H.TRENDS.map(t=>t.collectedAt||t.analyzedAt).filter(Boolean))].sort().reverse().slice(0,7);
+  if(_colDates.length){
+    const dn = document.createElement('div');
+    dn.className = 'date-nav';
+    dn.innerHTML = '<span class="date-nav-label">📅 수집일별</span>'
+      + _colDates.map(d=>`<a class="tag-chip" href="index.html?date=${encodeURIComponent(d)}">${d}</a>`).join('');
+    H.q('#freshline').insertAdjacentElement('afterend', dn);
+  }
 
   // featured = 첫 신뢰분석
   const f = H.TRENDS.find(t=>t.type==='신뢰분석');
