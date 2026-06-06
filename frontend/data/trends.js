@@ -796,7 +796,8 @@ window.HANGEUT_DATA = {
         "밈",
         "유행어"
       ],
-      "collectedAt": "2026-06-05"
+      "collectedAt": "2026-06-05",
+      "def": "갑자기 분위기가 대혼란에 빠진 상황을 익살스럽게 부르는 말"
     },
     {
       "id": "illit-itsme",
@@ -1182,6 +1183,159 @@ window.HANGEUT_DATA = {
         "볼륨스커트",
         "벌룬스커트",
         "화이트스커트"
+      ]
+    },
+    {
+      "type": "트렌드",
+      "cat": "신조어",
+      "coverCat": "cat-slang",
+      "collectedAt": "2026-06-06",
+      "analyzedAt": "2026-06-06",
+      "buzz": "화제성 높음",
+      "label": "지금 써도 됨",
+      "labelCls": "good",
+      "pull": "",
+      "verdict": "“영(young)”+“ㅋㅋㅋ”. 젊은 감성의 가볍고 트렌디한 웃음. 그룹 코르티스 ‘YOUNG CREATOR CREW’에서 번진 말로, 모르면 ‘늙크크’ 소리 듣는다는 농담까지 세트로 유행.",
+      "recs": [
+        [
+          "뜻 알고 쓰기",
+          "◎",
+          1
+        ],
+        [
+          "맥락 맞게",
+          "○",
+          1
+        ],
+        [
+          "격식 자리",
+          "✕",
+          0
+        ]
+      ],
+      "tags": [
+        "신조어",
+        "밈",
+        "유행어"
+      ],
+      "id": "young-keukeu",
+      "title": "영크크",
+      "def": "젊은 세대의 가볍고 트렌디한 웃음. ㅋㅋㅋ의 ‘영(young)’ 버전",
+      "excerpt": "“영(young)”+“ㅋㅋㅋ”. 젊은 감성의 가볍고 트렌디한 웃음. 그룹 코르티스 ‘YOUNG CREATOR CREW’에서 번진 말로, 모르면 ‘늙크크’ 소리 듣는다는 농담까지 세트로 유행.",
+      "pureKorean": "풋웃음 / 젊은 웃음",
+      "stage": "피크",
+      "stageMsg": "2026 상반기 최신 — 지금 쓰면 자연스러움",
+      "src": [
+        [
+          "코르티스發 ‘영크크’ 열풍(인사이트)",
+          "https://www.insight.co.kr/news/557234"
+        ],
+        [
+          "영크크 뜻 완벽 정리(감사라이프)",
+          "https://gamsalife.com/posts/%EC%98%81%ED%81%AC%ED%81%AC-%EB%9C%BB-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC-MZ%EC%84%B8%EB%8C%80-%EB%B0%88-%EC%9C%A0%EB%9E%98%EB%B6%80%ED%84%B0-%EB%8A%99%ED%81%AC%ED%81%AC%EA%B9%8C%EC%A7%80"
+        ]
+      ]
+    },
+    {
+      "type": "트렌드",
+      "cat": "신조어",
+      "coverCat": "cat-slang",
+      "collectedAt": "2026-06-06",
+      "analyzedAt": "2026-06-06",
+      "buzz": "화제성 높음",
+      "label": "지금 써도 됨",
+      "labelCls": "good",
+      "pull": "",
+      "verdict": "‘영크크’의 반대말. 옛날 감성이거나 요즘 유행을 못 따라가는 ‘나이 든 웃음’을 가리킨다. “영크크 모르면 늙크크”처럼 짝지어 쓴다.",
+      "recs": [
+        [
+          "뜻 알고 쓰기",
+          "◎",
+          1
+        ],
+        [
+          "맥락 맞게",
+          "○",
+          1
+        ],
+        [
+          "격식 자리",
+          "✕",
+          0
+        ]
+      ],
+      "tags": [
+        "신조어",
+        "밈",
+        "유행어"
+      ],
+      "id": "old-keukeu",
+      "title": "늙크크",
+      "def": "옛 감성·나이 든 웃음. 요즘 유행을 못 따라가는 웃음",
+      "excerpt": "‘영크크’의 반대말. 옛날 감성이거나 요즘 유행을 못 따라가는 ‘나이 든 웃음’을 가리킨다. “영크크 모르면 늙크크”처럼 짝지어 쓴다.",
+      "pureKorean": "옛웃음",
+      "stage": "피크",
+      "stageMsg": "영크크와 세트로 유행 중",
+      "src": [
+        [
+          "‘영크크’ 모르면 ‘늙크크’(인사이트)",
+          "https://www.insight.co.kr/news/557234"
+        ],
+        [
+          "영크크·늙크크 뜻(감사라이프)",
+          "https://gamsalife.com/posts/%EC%98%81%ED%81%AC%ED%81%AC-%EB%9C%BB-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC-MZ%EC%84%B8%EB%8C%80-%EB%B0%88-%EC%9C%A0%EB%9E%98%EB%B6%80%ED%84%B0-%EB%8A%99%ED%81%AC%ED%81%AC%EA%B9%8C%EC%A7%80"
+        ]
+      ]
+    },
+    {
+      "type": "트렌드",
+      "cat": "신조어",
+      "coverCat": "cat-slang",
+      "collectedAt": "2026-06-06",
+      "analyzedAt": "2026-06-06",
+      "buzz": "화제성 높음",
+      "label": "지금 써도 됨",
+      "labelCls": "good",
+      "pull": "",
+      "verdict": "화가 마르크 샤갈에서 온 감탄사. ‘샤-샤-샤갈’ 리듬이 포인트다. 짜증·당황 같은 순간에 던지는 부정적 뉘앙스로 쓰는 용례가 많아, ‘신난다’는 긍정으로 오해하기 쉬우니 맥락 주의.",
+      "recs": [
+        [
+          "뜻 알고 쓰기",
+          "◎",
+          1
+        ],
+        [
+          "맥락 맞게",
+          "○",
+          1
+        ],
+        [
+          "격식 자리",
+          "✕",
+          0
+        ]
+      ],
+      "tags": [
+        "신조어",
+        "밈",
+        "유행어"
+      ],
+      "id": "chagall-slang",
+      "title": "샤갈",
+      "def": "유명 화가 이름에서 온 감탄사. 짜증·당황한 순간에 리듬감 있게 내뱉는 말",
+      "excerpt": "화가 마르크 샤갈에서 온 감탄사. ‘샤-샤-샤갈’ 리듬이 포인트다. 짜증·당황 같은 순간에 던지는 부정적 뉘앙스로 쓰는 용례가 많아, ‘신난다’는 긍정으로 오해하기 쉬우니 맥락 주의.",
+      "pureKorean": "에휴 / 아이고",
+      "stage": "상승",
+      "stageMsg": "뜻이 헷갈리는 단어 — 맥락 주의",
+      "src": [
+        [
+          "샤갈 뜻·유래(+야르)(삶의지혜)",
+          "https://salmeuijihye.com/%EC%83%A4%EA%B0%88%EB%9C%BB-%EC%9C%A0%ED%96%89%EC%96%B4-%EB%9C%BB-%EB%B0%8F-%EC%9C%A0%EB%9E%98-%EC%8B%A0%EC%A1%B0%EC%96%B4-%EC%95%BC%EB%A5%B4-%EC%83%A4%EA%B0%88-%EC%8C%B0%EA%B0%88/"
+        ],
+        [
+          "샤갈 뜻과 유래 총정리(레윈)",
+          "https://redwinters.com/%EC%8B%A0%EC%A1%B0%EC%96%B4-%EC%83%A4%EA%B0%88-%EB%9C%BB%EA%B3%BC-%EC%9C%A0%EB%9E%98-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EB%B0%88%EC%9D%98-%EC%8B%9C%EC%9E%91%EB%B6%80%ED%84%B0-%EC%96%B4%EC%9B%90%EA%B9%8C/"
+        ]
       ]
     }
   ]

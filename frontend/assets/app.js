@@ -152,6 +152,19 @@
     clearTimeout(H._tt); H._tt=setTimeout(()=>el.classList.remove('show'),1900);
   };
 
+  /* ---------- 공유 (네이티브 공유 시트 → 실패 시 링크 복사) ---------- */
+  H.share = async (opts)=>{
+    const data = { title: opts.title||'한끗', text: opts.text||'', url: opts.url||location.href };
+    try{
+      if(navigator.share){ await navigator.share(data); return 'shared'; }
+    }catch(e){ if(e && e.name==='AbortError') return 'cancel'; }
+    try{
+      await navigator.clipboard.writeText((data.text?data.text+'\n':'')+data.url);
+      H.toast && H.toast('링크를 복사했어요 — 붙여넣기 하세요');
+      return 'copied';
+    }catch(e){ H.toast && H.toast('공유를 지원하지 않는 환경이에요'); return 'fail'; }
+  };
+
   /* ---------- masthead (auth-aware), injected into [data-mast] ---------- */
   H.renderMast = ()=>{
     const host=H.q('[data-mast]'); if(!host) return;
@@ -166,6 +179,8 @@
       <nav>
         <a href="index.html#ad">광고일까 진짜일까</a>
         <a href="index.html#trend">요즘 트렌드</a>
+        <a href="dictionary.html">MZ 사전</a>
+        <a href="quiz.html">유행어 퀴즈</a>
         <a href="pulse.html">트렌드 펄스</a>
         ${right}
       </nav>

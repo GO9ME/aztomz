@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
+<title>MZ 사전 — 요즘 말, 1초에 해석 | 한끗</title>
+<meta name="description" content="요즘 유행어·밈·신조어를 뜻·예쁜 우리말·출처와 함께 정리한 MZ 사전. 한끗이 출처까지 확인한 정확한 뜻만 담았습니다." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="assets/styles.css" />
+<style>
+  .lead{padding:36px 0 8px;border-bottom:1px solid var(--line)}
+  .lead h1{font-size:38px;font-weight:900;line-height:1.12;letter-spacing:-0.045em;margin:12px 0 10px}
+  .lead h1 .hl{color:var(--accent)}
+  .lead p{font-size:15.5px;color:var(--body);max-width:44ch;margin:0;word-break:keep-all}
+  @media(max-width:520px){.lead h1{font-size:31px}}
+  .dict-tools{display:flex;gap:10px;align-items:center;margin:18px 0 6px;flex-wrap:wrap}
+  .dict-search{flex:1;min-width:200px;padding:11px 14px;border:1.5px solid var(--line);border-radius:9px;
+    background:var(--card);color:var(--ink);font-size:15px;font-family:inherit}
+  .dict-search:focus{outline:none;border-color:var(--accent)}
+  .dict-count{font-size:13px;color:var(--ink-2);font-family:var(--serif)}
+  .dlist{display:flex;flex-direction:column;gap:0;margin:6px 0 30px}
+  .dword{display:block;padding:18px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;
+    transition:background .12s}
+  .dword:hover{background:color-mix(in srgb, var(--accent) 5%, transparent)}
+  .dw-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .dw-term{font-size:23px;font-weight:900;letter-spacing:-0.03em;color:var(--ink)}
+  .dw-cat{font-size:11.5px;font-weight:800;color:var(--ink-2);border:1px solid var(--line);border-radius:4px;padding:2px 7px}
+  .dw-def{margin:8px 0 0;font-size:15px;color:var(--body);line-height:1.55;word-break:keep-all}
+  .dw-kr{margin-top:8px;font-size:13.5px;color:var(--accent);font-weight:700}
+  .dw-more{margin-top:6px;font-size:12.5px;color:var(--ink-2)}
+  .dict-empty{padding:40px 0;text-align:center;color:var(--ink-2)}
+  .dict-cta{margin:8px 0 34px;padding:20px;border:1.5px solid var(--line);border-radius:12px;
+    background:var(--card);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .dict-cta b{font-size:16px}
+  .dict-cta p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+  <div data-mast></div>
+  <div class="wrap">
+
+    <section class="lead">
+      <span class="kicker">MZ 사전</span>
+      <h1>요즘 말, <span class="hl">1초에 해석</span>.</h1>
+      <p>유행어·밈·신조어를 뜻·예쁜 우리말·출처까지 정리했어요. 한끗이 <b>출처를 확인한 정확한 뜻</b>만 담습니다 — 떠도는 ‘대충 뜻’과 다릅니다.</p>
+      <div class="freshline" id="freshline"></div>
+    </section>
+
+    <div class="dict-tools">
+      <input class="dict-search" id="q" type="search" placeholder="🔎 단어·뜻으로 검색 (예: 샤갈, 웃음)" aria-label="사전 검색" />
+      <span class="dict-count" id="count"></span>
+    </div>
+
+    <div class="dlist" id="list"></div>
+    <div class="dict-empty" id="empty" hidden>그 단어는 아직 사전에 없어요. <a href="index.html" style="color:var(--accent)">전체 트렌드</a>에서 찾아보세요.</div>
+
+    <div class="dict-cta">
+      <div><b>🎮 내 MZ력은 몇 점?</b><p>방금 본 단어들로 바로 테스트 — 친구랑 점수 대결해요.</p></div>
+      <a class="btn accent" href="quiz.html">유행어 퀴즈 풀기 →</a>
+    </div>
+
+    <footer class="site">
+      <div class="fwm">한<b>끗</b></div>
+      AZ와 MZ는 한 끗 차이 · 트렌드 번역소<br>뜻은 출처를 확인해 싣지만, 신조어는 빨리 변해요. 날짜를 함께 봐주세요.
+    </footer>
+  </div>
+
+<script src="data/trends.js"></script>
+<script src="assets/app.js"></script>
+<script>
+  H.boot();
+  const SLANG = H.TRENDS.filter(t=>t.coverCat==='cat-slang' || t.cat==='신조어')
+    .sort((a,b)=> (a.title||'').localeCompare(b.title||'', 'ko'));
+
+  const ff = H.feedFreshness();
+  H.q('#freshline').innerHTML = `오늘 <b style="font-style:normal;color:var(--ink)">${H.todayStr()}</b> 기준 · 단어 ${SLANG.length}개`
+    + (H.generatedAt ? ` · 마지막 갱신 ${H.fmtISO(H.generatedAt)} <span class="fresh-chip ${ff.cls}" style="font-style:normal">${ff.text}</span>` : '');
+
+  const def = (t)=> t.def || (t.excerpt||'').split(/(?<=[.!?。])\s/)[0] || t.excerpt || '';
+  const row = (t)=>`
+    <a class="dword" href="trend.html?id=${encodeURIComponent(t.id)}">
+      <div class="dw-top">
+        <span class="dw-term">${H.esc(t.title)}</span>
+        ${H.freshChip(t.analyzedAt)}
+        ${t.stage?`<span class="dw-cat">${H.esc(t.stage)}</span>`:''}
+      </div>
+      <p class="dw-def">${H.esc(def(t))}</p>
+      ${t.pureKorean?`<div class="dw-kr">🌸 예쁜 우리말 · ${H.esc(t.pureKorean)}</div>`:''}
+      <div class="dw-more">자세히·출처 보기 →</div>
+    </a>`;
+
+  function render(q){
+    const k = (q||'').trim().toLowerCase();
+    const list = !k ? SLANG : SLANG.filter(t=>
+      (t.title||'').toLowerCase().includes(k) ||
+      (def(t)||'').toLowerCase().includes(k) ||
+      (t.pureKorean||'').toLowerCase().includes(k) ||
+      (t.tags||[]).some(x=>x.toLowerCase().includes(k)));
+    H.q('#list').innerHTML = list.map(row).join('');
+    H.q('#empty').hidden = list.length>0;
+    H.q('#count').textContent = k ? `${list.length} / ${SLANG.length}개` : `총 ${SLANG.length}개`;
+  }
+  render('');
+  H.q('#q').addEventListener('input', e=> render(e.target.value));
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
+<title>유행어 퀴즈 — 내 MZ력 테스트 | 한끗</title>
+<meta name="description" content="요즘 유행어·신조어 뜻 맞히기 퀴즈. 출처로 검증한 정확한 뜻으로 내 MZ력을 1분에 테스트하고 친구와 점수 대결하세요." />
+<meta property="og:title" content="유행어 퀴즈 — 내 MZ력은? | 한끗" />
+<meta property="og:description" content="요즘 유행어 뜻 맞히기. 1분 테스트하고 점수 자랑하기 👉" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="assets/styles.css" />
+<style>
+  .qwrap{max-width:560px;margin:0 auto}
+  .qhead{padding:30px 0 6px}
+  .qhead h1{font-size:34px;font-weight:900;letter-spacing:-0.045em;line-height:1.12;margin:10px 0 8px}
+  .qhead h1 .hl{color:var(--accent)}
+  .qhead p{font-size:15px;color:var(--body);margin:0;word-break:keep-all}
+  @media(max-width:520px){.qhead h1{font-size:29px}}
+
+  .qprog{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin:18px 0 4px}
+  .qprog i{display:block;height:100%;background:var(--accent);transition:width .3s}
+  .qmeta{font-size:13px;color:var(--ink-2);font-family:var(--serif);margin-bottom:14px}
+
+  .qcard{border:1.5px solid var(--line);border-radius:14px;background:var(--card);padding:24px 20px;margin-bottom:16px}
+  .qhint-label{font-size:12px;font-weight:800;color:var(--ink-2);letter-spacing:.04em}
+  .qhint{font-size:20px;font-weight:800;line-height:1.45;margin:8px 0 2px;color:var(--ink);word-break:keep-all}
+  .qask{font-size:14px;color:var(--ink-2);margin-top:8px}
+
+  .qopts{display:flex;flex-direction:column;gap:10px;margin:4px 0 0}
+  .qopt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;
+    border:1.5px solid var(--line);border-radius:11px;background:var(--card);color:var(--ink);
+    padding:15px 16px;font-size:17px;font-weight:700;font-family:inherit;transition:.12s}
+  .qopt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-1px)}
+  .qopt:disabled{cursor:default}
+  .qopt .mk{flex:none;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);
+    display:grid;place-items:center;font-size:13px;color:var(--ink-2)}
+  .qopt.correct{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
+  .qopt.correct .mk{background:var(--green);border-color:var(--green);color:#fff}
+  .qopt.wrong{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+  .qopt.wrong .mk{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  /* 결과 */
+  .qresult{text-align:center;border:1.5px solid var(--line);border-radius:16px;background:var(--card);padding:30px 22px;margin:8px 0 18px}
+  .qr-emoji{font-size:52px;line-height:1}
+  .qr-score{font-size:46px;font-weight:900;letter-spacing:-0.04em;margin:8px 0 2px}
+  .qr-score b{color:var(--accent)}
+  .qr-grade{font-size:20px;font-weight:900;margin:6px 0 6px}
+  .qr-sub{font-size:14.5px;color:var(--ink-2);word-break:keep-all}
+  .qr-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+  .qexp{margin:6px 0 30px}
+  .qexp h3{font-size:15px;margin:0 0 10px;color:var(--ink-2)}
+  .qe-row{padding:13px 2px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;display:block}
+  .qe-row .t{font-weight:900;font-size:16px}
+  .qe-row .t .ox{font-size:13px;margin-left:6px}
+  .qe-row .d{font-size:13.5px;color:var(--body);margin-top:4px;word-break:keep-all}
+  .qe-row .k{font-size:12.5px;color:var(--accent);margin-top:3px;font-weight:700}
+</style>
+</head>
+<body>
+  <div data-mast></div>
+  <div class="wrap"><div class="qwrap">
+
+    <div class="qhead">
+      <span class="kicker">유행어 퀴즈</span>
+      <h1>내 <span class="hl">MZ력</span>은 몇 점?</h1>
+      <p>요즘 유행어 뜻 맞히기. <b>출처로 검증한 정확한 뜻</b>으로 내요 — 떠도는 ‘대충 뜻’ 말고. 1분이면 끝!</p>
+    </div>
+
+    <div id="stage"></div>
+
+    <footer class="site">
+      <div class="fwm">한<b>끗</b></div>
+      AZ와 MZ는 한 끗 차이 · 트렌드 번역소<br>뜻은 출처를 확인해 싣지만 신조어는 빨리 변해요. 재미로 즐겨주세요.
+    </footer>
+  </div></div>
+
+<script src="data/trends.js"></script>
+<script src="assets/app.js"></script>
+<script>
+  H.boot();
+  const SHARE_URL = location.origin + location.pathname.replace(/quiz\.html$/, 'quiz.html');
+  const shuffle = (a)=>{ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+  const def = (t)=> t.def || (t.excerpt||'').split(/(?<=[.!?。])\s/)[0] || t.excerpt || '';
+
+  const POOL = H.TRENDS.filter(t=>t.coverCat==='cat-slang' || t.cat==='신조어').filter(t=>def(t));
+  const MAXQ = Math.min(8, POOL.length);
+
+  const stage = H.q('#stage');
+  let quiz=[], idx=0, score=0, answers=[];
+
+  function build(){
+    const items = shuffle(POOL).slice(0, MAXQ);
+    quiz = items.map(t=>{
+      let opts;
+      if(POOL.length<=4){ opts = shuffle(POOL); }
+      else { const others = shuffle(POOL.filter(x=>x.id!==t.id)).slice(0,3); opts = shuffle([t,...others]); }
+      return { t, opts };
+    });
+    idx=0; score=0; answers=[];
+  }
+
+  function start(){
+    stage.innerHTML = `
+      <div class="qcard" style="text-align:center">
+        <div style="font-size:46px">🧠</div>
+        <div style="font-size:19px;font-weight:900;margin:8px 0 4px">요즘 유행어, 몇 개나 알아?</div>
+        <p class="qask" style="margin-bottom:16px">${MAXQ}문제 · 약 1분 · 출처로 검증한 뜻</p>
+        <button class="btn accent" id="go">시작하기 →</button>
+      </div>
+      <p class="qmeta" style="text-align:center">사전에 ${POOL.length}개의 검증된 단어가 있어요 · <a href="dictionary.html" style="color:var(--accent)">MZ 사전 보기</a></p>`;
+    H.q('#go').onclick = ()=>{ build(); question(); };
+  }
+
+  function question(){
+    const {t,opts} = quiz[idx];
+    const pct = Math.round((idx)/quiz.length*100);
+    stage.innerHTML = `
+      <div class="qprog"><i style="width:${pct}%"></i></div>
+      <div class="qmeta">문제 ${idx+1} / ${quiz.length} · 현재 ${score}점</div>
+      <div class="qcard">
+        <div class="qhint-label">이런 뜻의 요즘 말은?</div>
+        <div class="qhint">“${H.esc(def(t))}”</div>
+        ${t.stage?`<div class="qask">유행 단계: ${H.esc(t.stage)}</div>`:''}
+      </div>
+      <div class="qopts" id="opts"></div>`;
+    const box = H.q('#opts');
+    box.innerHTML = opts.map((o,i)=>`<button class="qopt" data-id="${o.id}"><span class="mk">${'ABCD'[i]}</span>${H.esc(o.title)}</button>`).join('');
+    H.qa('#opts .qopt').forEach(btn=> btn.onclick = ()=> pick(btn, t));
+  }
+
+  function pick(btn, correct){
+    const chosen = btn.dataset.id;
+    const ok = chosen===correct.id;
+    if(ok) score++;
+    answers.push({ t: correct, ok, chosen });
+    H.qa('#opts .qopt').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.id===correct.id) b.classList.add('correct');
+      else if(b===btn) b.classList.add('wrong');
+    });
+    setTimeout(()=>{ idx++; (idx<quiz.length) ? question() : result(); }, 850);
+  }
+
+  function gradeOf(p){
+    if(p>=100) return ['🔥','찐 영크크','요즘 말 완전 정복! 트렌드 최전선이에요.'];
+    if(p>=75)  return ['✨','영크크 인정','젊은 감각 충분 — 몇 개만 더 챙기면 만점!'];
+    if(p>=50)  return ['😅','애매크크','반은 알고 반은 ‘샤갈…’. 사전 한 번 훑어요.'];
+    if(p>=25)  return ['👀','늙크크 주의보','요즘 말이 슬슬 어렵죠? 곧 따라잡아요.'];
+    return ['👴','늙크크 확정','괜찮아요 — 사전 보고 다시 오면 영크크 됩니다.'];
+  }
+
+  function result(){
+    const p = Math.round(score/quiz.length*100);
+    const [emoji,grade,sub] = gradeOf(p);
+    stage.innerHTML = `
+      <div class="qresult">
+        <div class="qr-emoji">${emoji}</div>
+        <div class="qr-score"><b>${score}</b> / ${quiz.length}</div>
+        <div class="qr-grade">${grade} (MZ력 ${p}%)</div>
+        <p class="qr-sub">${sub}</p>
+        <div class="qr-btns">
+          <button class="btn accent" id="share">📤 점수 자랑하기</button>
+          <button class="btn" id="retry">다시 풀기</button>
+        </div>
+      </div>
+      <div class="qexp">
+        <h3>📖 정답 해설 (출처로 확인한 뜻)</h3>
+        ${answers.map(a=>`
+          <a class="qe-row" href="trend.html?id=${encodeURIComponent(a.t.id)}">
+            <div class="t">${H.esc(a.t.title)}<span class="ox">${a.ok?'✅ 맞음':'❌ 틀림'}</span></div>
+            <div class="d">${H.esc(def(a.t))}</div>
+            ${a.t.pureKorean?`<div class="k">🌸 예쁜 우리말 · ${H.esc(a.t.pureKorean)}</div>`:''}
+          </a>`).join('')}
+        <p class="qmeta" style="margin-top:14px">단어를 누르면 자세한 뜻·출처를 볼 수 있어요 · <a href="dictionary.html" style="color:var(--accent)">MZ 사전 전체보기</a></p>
+      </div>`;
+    H.q('#retry').onclick = ()=>{ build(); question(); };
+    H.q('#share').onclick = ()=> H.share({
+      title: '한끗 유행어 퀴즈',
+      text: `나 요즘 유행어 ${score}/${quiz.length}점 (MZ력 ${p}%) — ${grade}! 너도 해봐 👇`,
+      url: SHARE_URL,
+    });
+  }
+
+  if(!POOL.length){
+    stage.innerHTML = `<div class="qcard" style="text-align:center">아직 퀴즈에 쓸 단어가 모이는 중이에요. <a href="dictionary.html" style="color:var(--accent)">MZ 사전</a>을 먼저 둘러보세요!</div>`;
+  } else { start(); }
+</script>
+</body>
+</html>
