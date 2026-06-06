@@ -134,6 +134,13 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .featured .excerpt{font-size:16px;color:var(--body);line-height:1.6;margin:0 0 14px}
 .featured a.more{margin-top:auto;font-weight:800;color:var(--accent);text-decoration:none;font-size:15px}
 @media(max-width:620px){.featured{grid-template-columns:1fr;gap:14px}}
+/* 좁은 폰(≤400px): 큰 디스플레이 제목이 2줄로 넘치지 않게 톤다운 */
+@media(max-width:400px){
+  .cover.tall .c-title{font-size:27px}
+  .cover .c-title{font-size:22px}
+  .featured h3{font-size:24px}
+  .sec-head h2{font-size:20px}
+}
 
 /* ---------- ranked index (광고일까 진짜일까) ---------- */
 /* 와이드 화면: 멀티컬럼으로 채움 — 세로 우선 읽기(01·02·03 ↓ 왼쪽 → 04·05·06 ↓ 오른쪽). 좁은 화면은 1단 자동 */
