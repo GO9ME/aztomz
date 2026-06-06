@@ -12,15 +12,25 @@ Hermes는 [Nous Research](https://nousresearch.com)의 AI 에이전트 런타임
 ```
 사람: "한끗 실행"  ──▶  고구미봇이 아래를 한 세션에서 수행
                          │
-   수집 ─▶ 분석 ─▶ 🔍최신성 검증 ─▶ 🔗출처 검증 ─▶ 정리 ─▶ 디스코드 초안
-                                                              │
-사람: "한끗 개발 반영" ◀── 검수·승인 ──────────────────────────┘
-   │
-   └▶ backend/data/trends.json 반영 ─▶ refresh.mjs ─▶ frontend/data/trends.js ─▶ 사이트
+   수집 ─▶ 분석 ─▶ 정리 ─▶ .pipeline/curate.json(후보)
+                              │
+                              ▼ (09:10 자동 진행)
+                    auto-build.mjs 자동검증
+                   (중복·404/410·관련성 제거)
+                              │
+                    검증통과분만 ┌─────────────────────────┐
+                              │                           │
+                              ▼                           ▼
+      ✅ backend/data/trends.json 반영    ✋ 보류(거짓/무관/못읽음만)
+                              │
+          refresh.mjs ─▶ frontend/data/trends.js
+                              │
+          Vercel 자동 배포 ◀── git push(자동)
 ```
 
-- **자동:** 수집 → 분석 → 검증 → 디스코드 초안.
-- **사람 승인 후:** 사이트 반영(자동 게시 금지).
+- **수집·분석:** 고구미봇 온디맨드(디스코드 "한끗 실행" 명령).
+- **자동검증·게시:** auto-build.mjs가 아침 08:10 자동 실행 → 통과분만 사이트에 올라감 (사람 승인 불필요).
+- **보류:** 출처가 404·무관·못읽음만 있는 항목은 자동 보류, 디스코드에 보고.
 
 ---
 
@@ -58,11 +68,11 @@ Hermes는 [Nous Research](https://nousresearch.com)의 AI 에이전트 런타임
 ### 파이프라인 (메인 트렌드)
 | 스킬 | 역할 |
 |---|---|
-| `hangeut-run` | **원샷 오케스트레이터** — 수집→분석→검증→정리를 한 세션에서. 진입점("한끗 실행") |
+| `hangeut-run` | **원샷 오케스트레이터** — 수집→분석→정리를 한 세션에서 (검증 제외). 진입점("한끗 실행"). 결과는 `.pipeline/curate.json` 저장 |
 | `hangeut-collect` | SNS·웹에서 전 분야(디저트·식당·카페·신조어·노래·패션·AI프롬프트) 수집 |
 | `hangeut-review` | PRD 룰셋으로 광고/신뢰/만족 분석 (인게이지먼트 팟=품앗이 댓글 = 광고 신호) |
 | `hangeut-curate` | JSON 정리·중복제거·디스코드 초안 |
-| `hangeut-build` | **사람이 승인한 항목만** trends.json 반영 + trends.js 재생성 |
+| `hangeut-build` | **auto-build.mjs 래퍼** — 검증통과분만 trends.json 반영 + git push |
 | `hangeut-design` | 새 카테고리/카드 디자인 제안 |
 
 ### 검증 게이트 (적대적 검증)
@@ -95,6 +105,7 @@ Hermes는 [Nous Research](https://nousresearch.com)의 AI 에이전트 런타임
 
 | 작업 | 주기 | 내용 |
 |---|---|---|
+| **한끗 자동 수집·게시** (신규) | 매일 08:10 | `hangeut-run`(수집·분석) → `auto-build.mjs`(자동검증·게시). 검증통과분만 사이트 반영 · git push → Vercel 배포 |
 | **한끗 주간 갱신** (`dc54cec90b5e`) | 매주 월 06:30 | `hangeut_daily.py`(no-agent) — trends.json 날짜 스탬프 + 신선도 리포트. 무료·안 죽음 |
 | **한끗 펄스 — 오늘의 분야** (`f3a0b6724fa4`) | 매일 07:00 | `pulse_categories.py`(no-agent) — 오늘 분석할 펄스 분야를 디스코드로 안내 |
 
@@ -118,8 +129,8 @@ Hermes는 [Nous Research](https://nousresearch.com)의 AI 에이전트 런타임
 
 | 명령 | 동작 |
 |---|---|
-| `한끗 실행` | hangeut-run — 수집·분석·정리 후 디코에 **검수용 초안** 게시 |
-| `한끗 개발 반영` | 승인분을 `backend/data/trends.json`에 추가 + refresh → 사이트 반영 |
+| `한끗 실행` | hangeut-run — 수집·분석·정리 후 `.pipeline/curate.json` 저장. (다음날 08:10 자동검증·게시 또는 "한끗 개발 반영"으로 수동 실행) |
+| `한끗 개발 반영` | hangeut-build(auto-build.mjs 호출) — curate.json 항목을 자동검증 후 통과분만 trends.json 반영 + git push |
 | `한끗 펄스` | 오늘 요일의 창업 트렌드 분야를 깊게 분석 (상세 아이디어 3개) |
 | `한끗 디자인` | 새 카드 디자인 제안 |
 | `기억해둬: …` | hangeut-learn — 교훈을 learnings.md에 기록 |
@@ -129,25 +140,37 @@ Hermes는 [Nous Research](https://nousresearch.com)의 AI 에이전트 런타임
 ## 사이트와의 접점 (데이터 흐름)
 
 ```
-고구미봇 ─writes─▶ backend/data/trends.json (canonical 원본)
-                          │  node backend/scripts/refresh.mjs
-                          ▼
-                  frontend/data/trends.js (window.HANGEUT_DATA, 생성물·편집금지)
-                          │
-                          ▼
-                  사이트(index/trend/pulse.html)가 로드
+고구미봇 ─writes─▶ .pipeline/curate.json (후보)
+                        │
+                        ▼
+            auto-build.mjs (자동검증: 중복·404·관련성)
+                        │
+        검증통과분 ──▶ backend/data/trends.json (canonical 원본)
+                        │ node backend/scripts/refresh.mjs
+                        ▼
+                frontend/data/trends.js (window.HANGEUT_DATA, 생성물·편집금지)
+                        │ git push (자동)
+                        ▼
+                    Vercel 배포
+                        │
+                        ▼
+                사이트(index/trend/pulse.html)가 로드
 ```
 
 - 고구미봇이 채우는 **상세페이지 필드**: `verdict`(한 줄) · `article`(블로그형 본문) · `video`(유튜브/틱톡 임베드) · `images`(대표 이미지) · `prompt`(AI 명령어, 길고 디테일하게) · `pureKorean`(신조어 우리말).
+- auto-build.mjs가 **검증 게이트**: 중복(id/title 기존재) 제거 · 404/410 링크 제거 · 본문에 제목 핵심어 없으면 무관으로 제거.
 - 펄스(창업 레이더)는 `backend/data/pulse.json`의 `daily[]`(주간 픽)만 소유. 빌트인 110개(`trends[]`)는 read-only.
 
 ---
 
 ## 핵심 원칙
 
-1. **자동 사이트 반영 금지** — 디스코드 초안까지만, 사이트 추가는 사람 승인 후 hangeut-build가.
-2. **거짓 신선도 금지** — 실제 재분석한 것만 오늘 날짜. 키 없으면 갱신을 스킵하고 빌드를 안 깬다.
-3. **추측 출처 금지** — 검색결과 실제 URL만. 200이어도 본문 무관하면 가짜.
+1. **자동 게시(검증 통과분만)** — auto-build.mjs가 출처 자동검증 후 통과분만 사이트 반영. 거짓·무관·404 출처만 있으면 자동 보류.
+   - 검증 게이트: 중복(id/title) · 404/410(죽음) · 본문 관련성(제목 핵심어 0개면 무관)
+   - 잘못 올라간 건 **사후에 사람이** 수정/삭제. 최종 책임은 사람.
+2. **거짓 신선도 금지** — 실제 재분석한 것만 오늘 날짜(`analyzedAt`). 안 한 항목은 그대로.
+3. **추측 출처 금지** — 검색결과 실제 URL만. auto-build.mjs가 404/410 + 본문 관련성 검증.
 4. **정직** — 끝물·거품·광고 의심은 또렷이. 점수는 추정치.
+5. **절대경로 사용** — Hermes 봇의 CWD가 C:\Users\admin이라, 모든 node/python 명령은 절대경로로 실행(상대경로 금지).
 
 자세한 분석 룰은 [docs/prd.md](prd.md), 누적 교훈은 [learnings.md](../learnings.md) 참고.

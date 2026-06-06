@@ -15,6 +15,7 @@
 | `frontend/data/trends.js`·`pulse.js` | 브라우저가 로드하는 **생성물** — **직접 편집 금지** |
 | `backend/` | 비공개(배포 안 됨) — 데이터 원본 + 빌드 스크립트 |
 | `backend/data/trends.json`·`pulse.json` | ★ **canonical 데이터 원본** (사람·스크립트가 수정) |
+| `backend/scripts/auto-build.mjs` | **자동 게시 엔진** — 출처 자동검증(404/410/관련성) · 중복 제거 · 통과분만 trends.json 반영 · git push |
 | `backend/scripts/refresh.mjs` 등 | 일일 갱신·출처검증·이미지 스크립트 |
 | `docs/` | 기획·아키텍처·메뉴별 문서 |
 
@@ -44,16 +45,24 @@ node backend/scripts/refresh.mjs   # backend/data/trends.json → frontend/data/
 ## 데이터 흐름
 
 ```
-backend/data/trends.json (원본, 사람/스크립트가 수정)
+.pipeline/curate.json (Hermes가 생성한 후보 항목들)
+    ↓
+backend/scripts/auto-build.mjs (자동검증: 중복 제거 · 출처 404/410 제거 · 본문 관련성 검증)
+    ↓
+검증 통과분만 → backend/data/trends.json (canonical 원본)
     ↓
 backend/scripts/refresh.mjs (validation + 생성)
     ↓
 frontend/data/trends.js (브라우저가 로드 → H.TRENDS)
     ↓
 사이트 frontend/*.html (마스트헤드·피처·리스트 렌더링)
+    ↓
+Vercel 자동 배포 (git push 시)
 ```
 
-**핵심:** trends.json만 수정. trends.js는 건드리지 말 것.
+**핵심:** 
+- trends.json만 수정. trends.js는 건드리지 말 것.
+- auto-build.mjs가 출처 자동검증(게이트) — 죽음·무관·못읽음 출처만 있으면 자동 보류
 
 ---
 
@@ -89,10 +98,11 @@ git push origin main              # → Vercel 자동 재배포
 | 항목 | 규칙 |
 |---|---|
 | **신선도** | `analyzedAt`은 **실제로 재분석한 항목만** 오늘 날짜로 갱신. 안 한 항목은 그대로 둠 → "갱신 필요" 노출 |
-| **출처** | 검색 결과에 **실제로 나온 URL만** 사용. 추측·단축·조립 금지. `node backend/scripts/check-links.mjs`로 검증 |
+| **출처** | 검색 결과에 **실제로 나온 URL만** 사용. 추측·단축·조립 금지. auto-build.mjs가 404/410 제거 + 본문 관련성 검증 |
 | **점수** | 모든 점수는 **추정치**이며 확정 판정이 아님. 단정 표현 금지 |
 | **신뢰도 ≠ 만족도** | 신뢰도(믿을 만한가) ≠ 만족도(좋은가) — 별개 축으로 표기. 신뢰도 높아도 내용이 '별로'면 neg |
 | **신조어** | 출처에 "2024 신조어" 류 표시면 2026.6 기준으로 한물 의심. 재검증 필수 |
+| **게시 정책** | auto-build.mjs가 출처 검증(관련성·생존성) 후 통과분만 자동 게시. 거짓·무관·404 출처만 있으면 자동 보류 |
 
 ---
 
