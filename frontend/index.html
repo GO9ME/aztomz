@@ -113,8 +113,13 @@
     H.q('#freshline').insertAdjacentElement('afterend', dn);
   }
 
-  // featured = 첫 신뢰분석
-  const f = H.TRENDS.find(t=>t.type==='신뢰분석');
+  // 오늘의 한끗 = '가장 최근 재확인된' 광고/진짜 분석. 매일 1건씩 재확인되면(recheck-ad) 그게 뜬다.
+  // 같은 날짜가 여럿이면 오늘 날짜 기준으로 회전 → 고정되지 않고 매일 바뀜.
+  const _ana = H.TRENDS.filter(t=>t.type==='신뢰분석');
+  const _newest = _ana.reduce((m,t)=> (t.analyzedAt||'')>m ? (t.analyzedAt||'') : m, '');
+  const _fresh = _ana.filter(t=>(t.analyzedAt||'')===_newest);
+  const _dayIdx = Math.floor(Date.now()/86400000);
+  const f = (_fresh.length ? _fresh[_dayIdx % _fresh.length] : _ana[0]) || H.TRENDS[0];
   H.q('#featured').innerHTML = `
     <a href="${href(f.id)}" style="text-decoration:none;color:inherit">${H.coverHTML(f,{tall:true})}</a>
     <div class="fx-body">
@@ -135,8 +140,9 @@
   const HOME_AD_MAX = 6;     // 광고 분석 (2단 × 3행)
   const HOME_TREND_MAX = 8;  // 트렌드 카드 (대략 2행)
 
-  // ranked index = 신뢰분석들 (상위 6개)
-  const analyses = H.TRENDS.filter(t=>t.type==='신뢰분석');
+  // ranked index = 신뢰분석들 (최근 재확인 순 → 매일 재확인된 항목이 위로)
+  const analyses = H.TRENDS.filter(t=>t.type==='신뢰분석')
+    .sort((a,b)=> (b.analyzedAt||'').localeCompare(a.analyzedAt||''));
   H.q('#indexList').innerHTML = analyses.slice(0, HOME_AD_MAX).map((t,i)=>H.adRowHTML(t, i+1)).join('');
   const adMore = H.q('#adMore');
   if(analyses.length > HOME_AD_MAX){
