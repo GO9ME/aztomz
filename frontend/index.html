@@ -71,19 +71,29 @@
   const _tag = H.param('tag');
   const _date = H.param('date');
   if(_tag || _date){
-    const matched = _date
-      ? H.TRENDS.filter(t=>(t.collectedAt||t.analyzedAt)===_date)
-      : H.TRENDS.filter(t=>(t.tags||[]).includes(_tag));
-    const head = _date ? `📅 ${H.esc(_date)} 수집` : `#${H.esc(_tag)}`;
     const card = (t)=>`<a class="chip-card" href="${href(t.id)}">${H.coverHTML(t)}<div class="cc-meta"><div class="cc-stage">${H.esc(t.cat)}</div><div class="cc-title">${H.esc(t.title)}</div></div></a>`;
     const sec = document.createElement('section');
     sec.style.margin = '8px 0 20px';
-    sec.innerHTML = `<div class="sec-head"><span class="no">${_date?'📅':'#'}</span><h2>${head}</h2><span class="note">${matched.length}개 · <a href="index.html" style="color:var(--accent);font-weight:700">← 전체 트렌드</a></span></div>`
-      + (matched.length ? `<div class="strip" style="margin-top:14px">${matched.map(card).join('')}</div>` : `<div class="strip-empty" style="display:block">해당 ${_date?'날짜':'태그'}의 트렌드가 없어요. <a href="index.html" style="color:var(--accent)">전체 보기</a></div>`);
+    if(_date === 'all'){
+      // 📅 전체 수집 기록 — 날짜별로 묶어 타임라인(최신일 먼저)
+      const g = {};
+      H.TRENDS.forEach(t=>{ const d=t.collectedAt||t.analyzedAt||'미상'; (g[d]=g[d]||[]).push(t); });
+      const dates = Object.keys(g).sort().reverse();
+      sec.innerHTML = `<div class="sec-head"><span class="no">📅</span><h2>수집 기록</h2><span class="note">${H.TRENDS.length}개 · <a href="index.html" style="color:var(--accent);font-weight:700">← 전체 트렌드</a></span></div>`
+        + dates.map(d=>`<div class="date-group"><div class="date-group-h">📅 ${H.esc(d)} <span>${g[d].length}개</span></div><div class="strip" style="margin-top:10px">${g[d].map(card).join('')}</div></div>`).join('');
+      document.title = `수집 기록 — 한끗`;
+    } else {
+      const matched = _date
+        ? H.TRENDS.filter(t=>(t.collectedAt||t.analyzedAt)===_date)
+        : H.TRENDS.filter(t=>(t.tags||[]).includes(_tag));
+      const head = _date ? `📅 ${H.esc(_date)} 수집` : `#${H.esc(_tag)}`;
+      sec.innerHTML = `<div class="sec-head"><span class="no">${_date?'📅':'#'}</span><h2>${head}</h2><span class="note">${matched.length}개 · <a href="index.html" style="color:var(--accent);font-weight:700">← 전체 트렌드</a></span></div>`
+        + (matched.length ? `<div class="strip" style="margin-top:14px">${matched.map(card).join('')}</div>` : `<div class="strip-empty" style="display:block">해당 ${_date?'날짜':'태그'}의 트렌드가 없어요. <a href="index.html" style="color:var(--accent)">전체 보기</a></div>`);
+      document.title = `${head} — 한끗`;
+    }
     const wrap = document.querySelector('#featured').closest('.wrap');  // 본문 wrap (헤더 .wrap 아님)
     [...wrap.children].forEach(c=>{ c.style.display = 'none'; });
     wrap.insertBefore(sec, wrap.firstChild);
-    document.title = `${head} — 한끗`;
   }
 
   // 오늘 날짜 + 데이터 신선도 (브라우저 시계 기준, 라이브)
@@ -98,7 +108,8 @@
     const dn = document.createElement('div');
     dn.className = 'date-nav';
     dn.innerHTML = '<span class="date-nav-label">📅 수집일별</span>'
-      + _colDates.map(d=>`<a class="tag-chip" href="index.html?date=${encodeURIComponent(d)}">${d}</a>`).join('');
+      + _colDates.map(d=>`<a class="tag-chip" href="index.html?date=${encodeURIComponent(d)}">${d}</a>`).join('')
+      + `<a class="tag-chip" href="index.html?date=all" style="font-weight:800;border-color:var(--ink-2)">전체 기록 →</a>`;
     H.q('#freshline').insertAdjacentElement('afterend', dn);
   }
 

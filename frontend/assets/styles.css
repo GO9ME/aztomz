@@ -233,6 +233,11 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .tag-chip.date{color:#176b40;background:var(--green-soft);border-color:#bfe0cd;font-family:var(--serif);font-style:normal}
 .date-nav{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:14px 0 2px}
 .date-nav-label{font-size:13px;font-weight:800;color:var(--ink-2)}
+/* 수집 기록 — 날짜별 그룹 */
+.date-group{margin:0 0 26px}
+.date-group-h{font-family:var(--serif);font-style:normal;font-size:18px;font-weight:700;color:var(--ink);
+  border-bottom:1px solid var(--line);padding-bottom:7px;margin:0}
+.date-group-h span{font-size:13px;color:var(--faint);font-weight:400;margin-left:6px}
 .stale-banner{background:var(--accent-soft);border:1px solid #f0b9a8;border-radius:var(--r);
   padding:10px 13px;font-size:13.5px;color:#bd3415;font-weight:700;margin:12px 0}
 
