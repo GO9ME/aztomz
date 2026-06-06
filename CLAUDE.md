@@ -13,8 +13,7 @@
 | `frontend/` | ★ 배포 대상(Vercel `outputDirectory`). 브라우저가 받는 정적 파일 |
 | `frontend/index.html` | 홈 — 오늘의 한끗·급상승·광고일까 진짜일까·요즘 트렌드 |
 | `frontend/trend.html?id=` | 상세 — 점수(광고/신뢰)·만족도·한끗 판단·추천·출처·후기 |
-| `frontend/dictionary.html` | MZ 사전 — 검증된 신조어 뜻·순화어·출처 검색/열람 |
-| `frontend/quiz.html` | 유행어 퀴즈 — 뜻→단어 객관식·MZ력 점수·공유(바이럴 루프) |
+| `frontend/dictionary.html` | MZ 사전 — 검증된 신조어 카드(뜻·예문·순화어·출처) 검색/열람 |
 | `frontend/{login,signup,me,pulse}.html` | 인증 · 마이페이지(내 한끗) · 트렌드 펄스 |
 | `frontend/assets/styles.css`·`app.js`·`pulse.js` | 디자인 시스템 / 목 스토어(`H.*`) / 펄스 |
 | `frontend/data/trends.js`·`pulse.js` | `backend/scripts`가 생성 — **직접 편집 금지** |
@@ -73,7 +72,6 @@ Agent(
 |---|---|
 | `home.md` | 오늘의 한끗 (홈) |
 | `dictionary.md` | MZ 사전 (dictionary.html) |
-| `quiz.md` | 유행어 퀴즈 (quiz.html) |
 | `food.md` | 요즘 음식 |
 | `dessert.md` | 요즘 디저트 |
 | `hotplace.md` | 요즘 핫플 |

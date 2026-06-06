@@ -152,8 +152,8 @@
     clearTimeout(H._tt); H._tt=setTimeout(()=>el.classList.remove('show'),1900);
   };
 
-  /* ---------- 신조어 신선도: 한물간 단어는 '오늘의 퀴즈/사전 최신'에서 제외 ---------- */
-  // 제외 조건: stage에 끝물/한물/지남 표시 OR analyzedAt이 14일+ 미갱신(재확인 안 된 옛 단어).
+  /* ---------- 신조어 신선도: 한물간 단어는 사전 '최신'에서 빠지고 '지난 유행어'로 보관 ---------- */
+  // 한물 조건: stage에 끝물/한물/지남 표시 OR analyzedAt이 14일+ 미갱신(재확인 안 된 옛 단어).
   H.SLANG_STALE_DAYS = 14;
   H.isFreshSlang = (t)=>{
     if(t.fresh===false) return false;                       // 사람이 '지남'으로 마킹
@@ -192,7 +192,6 @@
         <a href="index.html#ad">광고일까 진짜일까</a>
         <a href="index.html#trend">요즘 트렌드</a>
         <a href="dictionary.html">MZ 사전</a>
-        <a href="quiz.html">유행어 퀴즈</a>
         <a href="pulse.html">트렌드 펄스</a>
         ${right}
       </nav>
