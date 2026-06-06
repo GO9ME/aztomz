@@ -85,7 +85,8 @@
   const shuffle = (a)=>{ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
   const def = (t)=> t.def || (t.excerpt||'').split(/(?<=[.!?。])\s/)[0] || t.excerpt || '';
 
-  const POOL = H.TRENDS.filter(t=>t.coverCat==='cat-slang' || t.cat==='신조어').filter(t=>def(t));
+  // 신선도 게이트: 한물간 단어(끝물 표시/14일+ 미갱신)는 '오늘의 퀴즈'에서 제외 → 항상 최신만 출제
+  const POOL = H.TRENDS.filter(t=>t.coverCat==='cat-slang' || t.cat==='신조어').filter(t=>def(t)).filter(H.isFreshSlang);
   const MAXQ = Math.min(8, POOL.length);
 
   const stage = H.q('#stage');

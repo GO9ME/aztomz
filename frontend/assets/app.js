@@ -152,6 +152,17 @@
     clearTimeout(H._tt); H._tt=setTimeout(()=>el.classList.remove('show'),1900);
   };
 
+  /* ---------- 신조어 신선도: 한물간 단어는 '오늘의 퀴즈/사전 최신'에서 제외 ---------- */
+  // 제외 조건: stage에 끝물/한물/지남 표시 OR analyzedAt이 14일+ 미갱신(재확인 안 된 옛 단어).
+  H.SLANG_STALE_DAYS = 14;
+  H.isFreshSlang = (t)=>{
+    if(t.fresh===false) return false;                       // 사람이 '지남'으로 마킹
+    if(/끝물|한물|지남|옛유행|outdated/.test(t.stage||'')) return false;
+    const d = t.analyzedAt || t.collectedAt;
+    if(d){ const days = (Date.now() - new Date(d+'T00:00:00').getTime())/864e5; if(days >= H.SLANG_STALE_DAYS) return false; }
+    return true;
+  };
+
   /* ---------- 공유 (네이티브 공유 시트 → 실패 시 링크 복사) ---------- */
   H.share = async (opts)=>{
     const data = { title: opts.title||'한끗', text: opts.text||'', url: opts.url||location.href };

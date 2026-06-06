@@ -30,6 +30,10 @@
   .dw-def{margin:8px 0 0;font-size:15px;color:var(--body);line-height:1.55;word-break:keep-all}
   .dw-kr{margin-top:8px;font-size:13.5px;color:var(--accent);font-weight:700}
   .dw-more{margin-top:6px;font-size:12.5px;color:var(--ink-2)}
+  .dw-arch{font-size:11.5px;font-weight:800;color:var(--ink-2);background:var(--paper-2);
+    border:1px solid var(--line);border-radius:4px;padding:2px 7px}
+  .dword.is-arch{opacity:.62}
+  .dword.is-arch:hover{opacity:.85}
   .dict-empty{padding:40px 0;text-align:center;color:var(--ink-2)}
   .dict-cta{margin:8px 0 34px;padding:20px;border:1.5px solid var(--line);border-radius:12px;
     background:var(--card);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
@@ -72,7 +76,8 @@
 <script>
   H.boot();
   const SLANG = H.TRENDS.filter(t=>t.coverCat==='cat-slang' || t.cat==='신조어')
-    .sort((a,b)=> (a.title||'').localeCompare(b.title||'', 'ko'));
+    // 신선한 단어 먼저, 한물간 건 뒤로(가나다순)
+    .sort((a,b)=> (H.isFreshSlang(b)-H.isFreshSlang(a)) || (a.title||'').localeCompare(b.title||'', 'ko'));
 
   const ff = H.feedFreshness();
   H.q('#freshline').innerHTML = `오늘 <b style="font-style:normal;color:var(--ink)">${H.todayStr()}</b> 기준 · 단어 ${SLANG.length}개`
@@ -80,10 +85,10 @@
 
   const def = (t)=> t.def || (t.excerpt||'').split(/(?<=[.!?。])\s/)[0] || t.excerpt || '';
   const row = (t)=>`
-    <a class="dword" href="trend.html?id=${encodeURIComponent(t.id)}">
+    <a class="dword${H.isFreshSlang(t)?'':' is-arch'}" href="trend.html?id=${encodeURIComponent(t.id)}">
       <div class="dw-top">
         <span class="dw-term">${H.esc(t.title)}</span>
-        ${H.freshChip(t.analyzedAt)}
+        ${H.isFreshSlang(t)?H.freshChip(t.analyzedAt):'<span class="dw-arch">🕰 지난 유행어</span>'}
         ${t.stage?`<span class="dw-cat">${H.esc(t.stage)}</span>`:''}
       </div>
       <p class="dw-def">${H.esc(def(t))}</p>
@@ -100,7 +105,8 @@
       (t.tags||[]).some(x=>x.toLowerCase().includes(k)));
     H.q('#list').innerHTML = list.map(row).join('');
     H.q('#empty').hidden = list.length>0;
-    H.q('#count').textContent = k ? `${list.length} / ${SLANG.length}개` : `총 ${SLANG.length}개`;
+    const freshN = SLANG.filter(H.isFreshSlang).length;
+    H.q('#count').textContent = k ? `${list.length} / ${SLANG.length}개` : `최신 ${freshN} · 전체 ${SLANG.length}개`;
   }
   render('');
   H.q('#q').addEventListener('input', e=> render(e.target.value));
