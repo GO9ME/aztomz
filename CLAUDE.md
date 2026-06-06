@@ -129,7 +129,7 @@ Agent(
 - **광고/진짜 일일 재확인.** "광고일까 진짜일까"는 카테고리와 무관하게 **매일 1건**(가장 오래된 신뢰분석)을
   `backend/scripts/recheck-ad.mjs`로 출처 재검증한다(결정적·LLM 없음). 살아있는 출처가 1개+면 `analyzedAt`을
   오늘로 갱신 → **홈 '오늘의 한끗'이 그 항목으로 회전**(고정 아님). 0개면 갱신 안 하고 '사람 확인 필요' 보고.
-  · 일일 no-agent 크론: **20:55 `한끗 광고/진짜 일일 재확인`**(recheck_ad.py→recheck-ad.mjs).
+  · 일일 no-agent 크론: **21:15 `한끗 광고/진짜 일일 재확인`**(recheck_ad.py→recheck-ad.mjs). 메인(21:00)과 trends.json 쓰기 충돌 방지로 15분 뒤.
 - 인스타/틱톡/페북 **직접 스크래핑 금지(ToS).** ddgs 공개검색 + 유튜브 API만 사용.
 - 실서비스(Supabase) 전환 시 **UI/페이지는 손대지 말고** `app.js`의 `H.*` 내부 구현만 교체.
 
@@ -144,4 +144,4 @@ Agent(
 
 - OS: Windows 11 / 셸: PowerShell (Bash 도구도 사용 가능)
 - 배포: GitHub `GO9ME/aztomz`(public) → Vercel 정적 배포, push마다 자동 재배포
-- Hermes(고구미봇): 별도 레포 `E:\workspace\side_project\hermes`. cron은 **저녁 클러스터(KST 20:30~21:00, PC 켜진 시간대)** — 메인 `한끗 자동 수집·게시` 21:00(목=신조어 주간 사전), 광고/진짜 재확인 20:55, 펄스 안내 20:50, 주간 갱신 월 20:30. ⚠️ Hermes는 로컬이라 **그 시각에 PC+게이트웨이가 켜져 있어야** 실행됨(`tools/start-hermes.bat`).
+- Hermes(고구미봇): 별도 레포 `E:\workspace\side_project\hermes`. cron은 **전부 KST 21시대(저녁, PC 켜진 시간대)** — 메인 `한끗 자동 수집·게시` 21:00(목=신조어 주간 사전), 펄스/수집 분야 안내 21:00, 주간 갱신 월 21:00, 광고/진짜 재확인 21:15(충돌 방지로 15분 뒤). ⚠️ Hermes는 로컬이라 **그 시각에 PC+게이트웨이가 켜져 있어야** 실행됨(`tools/start-hermes.bat`).
