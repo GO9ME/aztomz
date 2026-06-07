@@ -96,6 +96,28 @@ function sh(cmd, a) {
   return execFileSync(cmd, a, { cwd: repoRoot, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
 }
 
+// src 정규화: 표준 [["이름","url"]] 외에 봇이 자주 쓰는 [{name,url}] 객체도 허용
+function srcPairs(t) {
+  return (t.src || []).map(s =>
+    Array.isArray(s) ? [s[0], s[1]] : [s && (s.name || s.title || s.src || ''), s && (s.url || s.href || s.link || '')]
+  ).filter(([, url]) => url);
+}
+// 스키마 자동 교정: recs/필수필드가 잘못 오면 사이트가 안 깨지게 기본값으로 정정
+function sanitizeItem(t) {
+  if (!Array.isArray(t.recs) || !t.recs.every(r => Array.isArray(r) && r.length >= 2)) {
+    t.recs = [['뜻·맥락 알고 쓰기', '◎', 1], ['상황 맞게', '○', 1], ['격식 자리', '✕', 0]];
+  }
+  t.type = t.type || '트렌드';
+  t.label = t.label || '지금 써도 됨';
+  t.labelCls = ['good', 'warn', 'mid'].includes(t.labelCls) ? t.labelCls : 'good';
+  t.excerpt = t.excerpt || t.def || t.title || '';
+  t.verdict = t.verdict || t.excerpt || '';
+  t.buzz = t.buzz || '화제성 상승';
+  if (!Array.isArray(t.tags)) t.tags = t.tags ? [String(t.tags)] : [];
+  if (typeof t.pull !== 'string') t.pull = '';
+  return t;
+}
+
 // ── curate 로드
 if (!existsSync(curatePath)) { console.log(`· curate 없음(${curatePath}) — 게시할 것 없음.`); process.exit(0); }
 let curate;
@@ -119,7 +141,7 @@ for (const cand of candidates) {
 
   const titleKws = titleKeywords(cand), extraKws = extraKeywords(cand);
   const good = [];
-  for (const [name, url] of (cand.src || [])) {
+  for (const [name, url] of srcPairs(cand)) {
     const st = await httpStatus(url);
     if (st === 404 || st === 410) { console.log(`   ❌ ${st} 죽음  ${name}`); continue; }
     const rel = relevance(extract(url), titleKws, extraKws);
@@ -132,7 +154,8 @@ for (const cand of candidates) {
     cand.collectedAt = cand.collectedAt || TODAY;   // 첫 수집일 불변
     cand.analyzedAt = TODAY;
     if (!cand.coverCat) cand.coverCat = { 디저트:'cat-dessert', 카페:'cat-cafe', 베이커리:'cat-bakery',
-      '카페·베이커리':'cat-cafe', 식당:'cat-food', 음료:'cat-drink', 패션:'cat-fashion' }[cand.cat] || 'cat-trend';
+      '카페·베이커리':'cat-cafe', 식당:'cat-food', 음료:'cat-drink', 패션:'cat-fashion', 신조어:'cat-slang' }[cand.cat] || 'cat-trend';
+    sanitizeItem(cand);   // recs/필수필드 스키마 자동 교정(봇 실수 방지)
     published.push(cand);
     haveIds.add(cand.id); haveTitles.add(normTitle(cand.title));
     console.log(`  → 게시: ${title} (검증 출처 ${good.length}개)\n`);

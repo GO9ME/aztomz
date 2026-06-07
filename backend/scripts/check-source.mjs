@@ -25,6 +25,13 @@ if (onlyIds) trends = trends.filter(t => onlyIds.includes(t.id));
 const STOP = new Set(['그리고','하지만','이게','정도','진짜','현','보라','첫주',
   '국내','이번','요즘','지금','오늘','관련','대한','위한','있는','없는']);
 
+// src 정규화: [["이름","url"]] 표준 외에 [{name,url}] 객체 형태도 허용(봇이 종종 객체로 씀)
+function srcPairs(t) {
+  return (t.src || []).map(s =>
+    Array.isArray(s) ? [s[0], s[1]] : [s && (s.name || s.title || s.src || ''), s && (s.url || s.href || s.link || '')]
+  ).filter(([, url]) => url);
+}
+
 // 트렌드 제목 → 키워드 집합
 function keywordsOf(t) {
   const raw = (t.title || '')
@@ -75,7 +82,7 @@ for (const t of trends) {
   const kws = keywordsOf(t);
   console.log(`[${(t.coverCat || '').replace('cat-', '')}] ${t.title}`);
   console.log(`   키워드: ${kws.join(', ')}`);
-  for (const [name, url] of (t.src || [])) {
+  for (const [name, url] of srcPairs(t)) {
     const body = extract(url);
     const r = verdict(body, kws);
     const hitStr = r.hits.length ? '  (' + r.hits.map(([k, c]) => `${k}×${c}`).join(', ') + ')' : '';

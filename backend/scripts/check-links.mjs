@@ -15,7 +15,9 @@ const UA = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKi
 const data = JSON.parse(await readFile(file, 'utf8'));
 const items = Array.isArray(data) ? data : (data.trends || data.items || data.reviewed || []);
 const urls = [];
-for (const t of items) for (const s of (t.src || [])) urls.push({ id: t.id || t.title, name: s[0], url: s[1] });
+// src 정규화: [["이름","url"]] 외에 [{name,url}] 객체 형태도 허용
+const pair = (s) => Array.isArray(s) ? [s[0], s[1]] : [s && (s.name || s.title || ''), s && (s.url || s.href || s.link || '')];
+for (const t of items) for (const s of (t.src || [])) { const [name, url] = pair(s); if (url) urls.push({ id: t.id || t.title, name, url }); }
 
 let dead = 0, warn = 0;
 for (const u of urls) {

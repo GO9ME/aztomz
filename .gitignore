@@ -24,3 +24,4 @@ Thumbs.db
 
 # Hermes 파이프라인 작업파일
 .pipeline/
+.gstack/
