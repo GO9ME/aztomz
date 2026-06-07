@@ -7,7 +7,7 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
 :root{
   --paper:#f3efe6; --paper-2:#fbf9f3; --card:#fff;
-  --ink:#17140f; --ink-2:#5c554c; --faint:#726857;  /* faint: 2.4→4.8:1 대비(WCAG AA) */
+  --ink:#17140f; --ink-2:#4c463c; --faint:#5e5443;  /* muted 8.1:1 · faint 6.5:1 — 가독성 ↑(AA 여유) */
   --line:#ddd5c6; --rule:#17140f;
   --accent:#e8431f; --accent-soft:#fbe3da;
   --accent-text:#bf3611;  /* 본문/링크용 액센트 — 라이트 4.9:1(AA). fill/커버는 --accent 유지 */
