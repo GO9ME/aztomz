@@ -16,7 +16,7 @@
 | `frontend/data/trends.js`·`pulse.js` | 브라우저가 로드하는 **생성물** — **직접 편집 금지** |
 | `backend/` | 비공개(배포 안 됨) — 데이터 원본 + 빌드 스크립트 |
 | `backend/data/trends.json`·`pulse.json` | ★ **canonical 데이터 원본** (사람·스크립트가 수정) |
-| `backend/scripts/auto-build.mjs` | **자동 게시 엔진** — 출처 자동검증(404/410/관련성) · 중복 제거 · 통과분만 trends.json 반영 · images 필드 자동 주입(og:image) · git push |
+| `backend/scripts/auto-build.mjs` | **자동 게시 엔진** — 출처 자동검증(404/410/관련성) · 중복 제거 · 통과분만 trends.json 반영 · images 필드 자동 주입(og:image) · shops 배열 URL 생존성 검증(죽은 링크 제거) · git push |
 | `backend/scripts/recheck-ad.mjs` | **광고/진짜 일일 재확인** — 가장 오래된 신뢰분석 1건의 출처 재검증(ddgs) → 살아있으면 analyzedAt=오늘 갱신(→ 홈 featured 회전) |
 | `backend/scripts/refresh.mjs` 등 | 일일 갱신·출처검증·이미지 스크립트 |
 | `docs/` | 기획·아키텍처·메뉴별 문서 |
@@ -130,7 +130,7 @@ git push origin main              # → Vercel 자동 재배포
 - `recs` (array) — 추천 목록 [항목, 평가, 점수]
 - `reasons` (object) — **점수별 근거** `{ad, trust, sat}` (각 점수를 그렇게 본 이유, 상세페이지에 "왜 이 점수?"로 노출)
 - `tags` (array) — **해시태그** (분야·지역·키워드, '#' 없이). 상세페이지에서 클릭 → `index.html?tag=값`으로 같은 태그 필터. 예: `["베이커리","성수","에그타르트"]`
-- **선택:** `def` (신조어, 한 줄 뜻 — 사전 카드·상세 요약) / `example` (신조어, 사용 예문 — 상세 '💬 이렇게 써요') / `fresh` (신조어, false면 한물간 처리 — 사전 '최신'에서 제외, '지난 유행어'로 보관) / `pureKorean` (신조어, 예쁜 우리말) / `prompt` (AI 명령어, 길고 디테일하게) / `stage` (트렌드·신조어의 유행 단계. 신조어의 경우 '끝물'·'한물'·'지남' 등으로 표시하면 신선도 게이트 제외) / `article` (블로그형 본문 블록) / `video` (유튜브 임베드, **oembed 200(임베드 가능)만**) / `images` (대표 이미지 — 비어있으면 auto-build.mjs가 출처의 og:image 자동 추출·주입)
+- **선택:** `def` (신조어, 한 줄 뜻 — 사전 카드·상세 요약) / `example` (신조어, 사용 예문 — 상세 '💬 이렇게 써요') / `fresh` (신조어, false면 한물간 처리 — 사전 '최신'에서 제외, '지난 유행어'로 보관) / `pureKorean` (신조어, 예쁜 우리말) / `prompt` (AI 명령어, 길고 디테일하게) / `stage` (트렌드·신조어의 유행 단계. 신조어의 경우 '끝물'·'한물'·'지남' 등으로 표시하면 신선도 게이트 제외) / `article` (블로그형 본문 블록) / `video` (유튜브 임베드, **oembed 200(임베드 가능)만**) / `images` (대표 이미지 — 비어있으면 auto-build.mjs가 출처의 og:image 자동 추출·주입) / `shops` (선택사항, 파는 가게·가볼 곳 목록 — `[{name, area?, url?, note?}]` 배열. 디저트·음식 트렌드일 때만 채움. auto-build.mjs가 각 url 생존성 검증(404/410/ERR 제거, 이름·지역·메모는 유지). 최대 6곳.)
 
 ---
 
