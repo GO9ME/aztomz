@@ -9,6 +9,37 @@ window.HANGEUT_DATA = {
       "coverCat": "cat-dessert",
       "analyzedAt": "2026-06-08",
       "title": "두바이 초콜릿 (편의점판)",
+      "shops": [
+        {
+          "name": "이치서울",
+          "area": "서울 강남·가로수길",
+          "url": "https://www.marieclairekorea.com/culture/lifestyle/2026/01/dubai-desserts/",
+          "note": "두바이 디저트 파르페·쁘띠 케이크"
+        },
+        {
+          "name": "마망젤라또 성수",
+          "area": "서울 성수",
+          "url": "https://www.marieclairekorea.com/culture/lifestyle/2026/01/dubai-desserts/",
+          "note": "두바이 쫀득 젤라또"
+        },
+        {
+          "name": "끼(KKI)",
+          "area": "서울 용산",
+          "url": "https://www.marieclairekorea.com/culture/lifestyle/2026/01/dubai-desserts/",
+          "note": "카다이프 식감 살린 두바이 디저트"
+        },
+        {
+          "name": "뿡어당",
+          "area": "서울 성북",
+          "url": "https://www.marieclairekorea.com/culture/lifestyle/2026/01/dubai-desserts/",
+          "note": "두바이초코 뿡어빵"
+        },
+        {
+          "name": "편의점 CU·GS25·세븐일레븐",
+          "area": "전국",
+          "note": "각사 PB 두바이 초콜릿 — 줄 안 서고 바로 구매"
+        }
+      ],
       "buzz": "화제성 매우 높음",
       "ad": 57,
       "trust": 57,
@@ -2352,6 +2383,14 @@ window.HANGEUT_DATA = {
       "images": [
         "https://kormedi.com/wp-content/uploads/2026/05/gettyimages-1283415242.jpg",
         "https://cdn.thetrippick.com/news/photo/202605/3827_15769_2244.jpg"
+      ],
+      "shops": [
+        {
+          "name": "켈피",
+          "area": "서울 망원동",
+          "url": "https://kr.trip.com/moments/detail/seoul-234-16319123/",
+          "note": "이튼메스를 내는 망원동 카페 (주로 집에서 만드는 디저트라 파는 곳은 드뭅니다)"
+        }
       ],
       "def": "딸기, 머랭, 휘핑크림을 거칠게 섞어 만드는 영국 전통 디저트",
       "excerpt": "노오븐으로 재료 세 가지로 5분 만에 만들 수 있어 숏폼·SNS에서 급속히 유행하는 영국 전통 디저트.",

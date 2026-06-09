@@ -10,6 +10,7 @@
       → '정확/약함'(핵심어 1종+)인 출처만 통과로 남긴다.
    3) 통과 출처가 1개 이상인 항목만 trends.json 에 추가. 0개면 '보류'(게시 안 함).
       · images 가 비어 있으면 검증 통과 출처의 og:image 를 썸네일로 자동 주입(추가 fetch 없이 본문 재사용).
+      · shops(파는 가게 목록)가 있으면 각 가게 URL 상태점검 → 죽은 링크만 제거(이름·지역은 유지).
    4) refresh.mjs 로 trends.js 재생성.
    5) git pull --rebase → add → commit → push (Vercel 자동 배포). (--no-git 면 생략)
 
@@ -108,6 +109,31 @@ async function httpStatus(url) {
   } catch { return 'ERR'; }
 }
 
+// 🏪 가게(shops) 검증: 모양 교정 + 죽은 URL 제거(이름·지역·메모는 유지).
+//    LLM이 지어낸 가게 링크가 사이트에 남지 않게 — src와 같은 신뢰 철칙(추측 URL 금지) 적용.
+//    같은 URL은 한 번만 점검(캐시). 최대 6곳.
+async function verifyShops(cand) {
+  if (!Array.isArray(cand.shops) || !cand.shops.length) { delete cand.shops; return; }
+  const clean = [], cache = new Map();
+  for (const sh of cand.shops) {
+    if (!sh || !sh.name) continue;
+    const out = { name: String(sh.name).trim() };
+    if (sh.area) out.area = String(sh.area).trim();
+    if (sh.note) out.note = String(sh.note).trim();
+    const url = sh.url && String(sh.url).trim();
+    if (url && /^https?:\/\//.test(url)) {
+      let st = cache.get(url);
+      if (st === undefined) { st = await httpStatus(url); cache.set(url, st); }
+      if (st === 404 || st === 410 || st === 'ERR') console.log(`   🏪✋ 죽은 가게링크 제거(${st}) ${out.name}`);
+      else out.url = url;
+    }
+    clean.push(out);
+    if (clean.length >= 6) break;
+  }
+  if (clean.length) { cand.shops = clean; console.log(`   🏪 가게 ${clean.length}곳`); }
+  else delete cand.shops;
+}
+
 function sh(cmd, a) {
   return execFileSync(cmd, a, { cwd: repoRoot, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
 }
@@ -179,6 +205,7 @@ for (const cand of candidates) {
     cand.analyzedAt = TODAY;
     if (!cand.coverCat) cand.coverCat = { 디저트:'cat-dessert', 카페:'cat-cafe', 베이커리:'cat-bakery',
       '카페·베이커리':'cat-cafe', 식당:'cat-food', 음료:'cat-drink', 패션:'cat-fashion', 신조어:'cat-slang' }[cand.cat] || 'cat-trend';
+    await verifyShops(cand);   // 🏪 가게 목록 검증(죽은 링크 제거, 이름·지역 유지)
     sanitizeItem(cand);   // recs/필수필드 스키마 자동 교정(봇 실수 방지)
     published.push(cand);
     haveIds.add(cand.id); haveTitles.add(normTitle(cand.title));
