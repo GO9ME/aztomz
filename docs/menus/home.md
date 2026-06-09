@@ -12,7 +12,8 @@
 
 ## 표시 데이터
 - `H.TRENDS` 전체 (trends.json에서 로드)
-- 필드: id·title·cat·buzz·ad·trust·sat·label·analyzedAt·stage(트렌드만)·coverCat
+- 필드: id·title·cat·buzz·ad·trust·sat·label·analyzedAt·stage(트렌드만)·coverCat·**images**(썸네일)
+- 썸네일 `images`: 자동 게시 항목은 auto-build.mjs가 출처의 og:image 자동 추출·주입. 빈 경우 프론트의 onerror가 색 커버로 폴백
 - 신선도 칩: `H.freshness(analyzedAt)` (오늘/N일 전/갱신 필요)
 
 ## 현재 상태
