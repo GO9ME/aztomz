@@ -477,7 +477,7 @@ window.HANGEUT_DATA = {
       "type": "신뢰분석",
       "cat": "카페·핫플",
       "coverCat": "cat-bakery",
-      "analyzedAt": "2026-06-05",
+      "analyzedAt": "2026-06-10",
       "title": "픽베이크 성수 (에그타르트)",
       "buzz": "화제성 높음",
       "ad": 30,
