@@ -148,7 +148,8 @@ Agent(
   Gemini 무료 OAuth가 21시대에 구글측 429(용량)로 막히는 일이 있음. 타사 폴백은 검토 후 폐기
   (OpenRouter 키들은 크레딧 $0 무료 계정이라 유료 모델 불가, Anthropic OAuth는 서드파티 앱이
   extra usage 크레딧 필요) — **Gemini 단독 운용 확정**(2026-06-11).
-  기본 모델은 **`gemini-3.1-flash-lite-preview`**(라이트 풀, 무료 일일 1000회로 flash 250회보다 넉넉) +
-  같은 Gemini OAuth 내부 폴백 `gemini-2.5-flash-lite` → `gemini-2.5-flash` (프리뷰 은퇴 404도 자동 흡수).
+  기본 모델은 **`gemini-3-flash-preview`**(품질 우선 — lite는 리서치를 대충 해 기본으론 부적합) +
+  같은 Gemini OAuth 내부 폴백 `gemini-3.1-flash-lite-preview` → `gemini-2.5-flash-lite` → `gemini-2.5-flash`
+  (lite 풀은 무료 일일 1000회로 넉넉해 혼잡 시 가용성 백업, 프리뷰 은퇴 404도 자동 흡수).
   그래도 크론이 429로 죽은 날은 나중에 `hermes cron run 9ddacd750b48`로 수동 재실행.
   OpenRouter 키는 hermes에서 해지함(`.env` 주석 + auth 풀 삭제, 백업 `auth.json.bak.20260611_openrouter`).
