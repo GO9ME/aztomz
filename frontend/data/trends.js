@@ -3422,6 +3422,185 @@ window.HANGEUT_DATA = {
       "images": [
         "https://scontent-ssn1-1.cdninstagram.com/v/t51.75761-19/501212958_18044917637562763_5244357760032401184_n.jpg?stp=dst-jpg_s100x100_tt6&amp;_nc_cat=108&amp;ccb=7-5&amp;_nc_sid=bf7eb4&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy40MjAuQzMifQ%3D%3D&amp;_nc_ohc=Bj-uOWu2BgwQ7kNvwHfAN9i&amp;_nc_oc=AdrTcGXN1mmVSKBxzm9fiNmpsTfByMFXqAZ6NTjiR2ofk8KB0lR4leEjSX7u_cnLcjU&amp;_nc_zt=24&amp;_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_gid=2vmxNibBSt5fTKyqC7yQ8w&amp;_nc_ss=7b689&amp;oh=00_Af8MAW9st2m_IJjVcIzOL_e_hv6a8VimakCyKJ539z9WQQ&amp;oe=6A331F01"
       ]
+    },
+    {
+      "id": "miniature-room-prompt",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "collectedAt": "2026-06-14",
+      "analyzedAt": "2026-06-14",
+      "buzz": "Threads 챌린지 유행",
+      "stage": "상승",
+      "stageMsg": "스레드 '내 방 인증' 챌린지로 급상승 중",
+      "label": "지금 써도 됨",
+      "labelCls": "good",
+      "title": "내 방을 작고 소중하게, 미니어처 디오라마",
+      "def": "일상 공간을 한 손 크기의 정교한 모형처럼 만드는 프롬프트",
+      "excerpt": "현실 공간을 동화 속 한 장면처럼! 요즘 스레드에서 내 방을 미니어처로 만드는 '드림룸 챌린지'가 대유행입니다.",
+      "pull": "마치 걸리버가 된 기분? 틸트-시프트 기법으로 만드는 나만의 작은 세상.",
+      "verdict": "단순히 작게 그리는 게 아니라, 실물의 질감과 매크로 렌즈 특유의 흐림 처리가 핵심입니다. AZ분들도 자녀방이나 거실 사진을 변환해 선물해보세요.",
+      "recs": [
+        [
+          "재현도 높음",
+          "◎",
+          1
+        ],
+        [
+          "인테리어 활용",
+          "○",
+          1
+        ],
+        [
+          "복잡한 야외",
+          "✕",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "DDP 디자인닥터",
+          "https://youtu.be/tnMF5pQvbwo"
+        ]
+      ],
+      "tags": [
+        "AI프롬프트",
+        "미니어처",
+        "인테리어"
+      ],
+      "prompt": "[변환목표]\n일상의 공간을 한 손에 들어올 듯한 작고 정교한 미니어처 디오라마로 변환합니다.\n\n[스타일]\n- Hyper-realistic miniature room diorama\n- Tilt-shift photography style\n- Macro lens focus (shallow depth of field)\n\n[공간 구성]\n- 아늑한 침실(Cozy bedroom) 또는 작업실(Creative studio)\n- 정교한 가구: 원목 책상, 노트북, 펼쳐진 책, 작은 실내 식물\n- 모든 요소는 나무 상자(Wooden base) 또는 디스플레이 케이스 안에 배치\n\n[디테일 & 텍스처]\n- 나무결(Wood grain), 침대보의 섬유 질감(Fabric texture), 노트북 화면의 미세한 반사(Reflection)\n- 배경은 부드럽게 흐릿한 거대하고 따뜻한 실내 공간(Out-of-focus giant indoor background)\n\n[조명 & 색감]\n- 작은 창문을 통해 들어오는 부드러운 아침 햇살\n- 책상 위 스탠드의 따뜻한 노란색 포인트 조명\n- 전체적으로 따뜻하고 풍부한 채도의 색감\n\n[카메라 설정]\n- Aperture: f/2.8\n- Focal length: 100mm Macro\n- Focus: 책상 위의 작은 소품에 집중, 전경과 배경은 극도로 흐릿하게\n\n[피해야 할 것]\n- 메인 피사체의 흐림(Blurry main subject)\n- 평면적인 조명(Flat lighting)\n- 비현실적인 비율(Unrealistic proportions)\n\n[비율]\n- 4:5 (인스타그램/스레드 최적화)",
+      "article": [
+        [
+          "h",
+          "내 책상이 손바닥 위에? 미니어처 열풍"
+        ],
+        [
+          "p",
+          "요즘 Threads(스레드)를 켜면 '제 방 미니어처로 만들어봤어요'라는 글이 심심치 않게 보입니다. 실제 방 사진을 AI에 넣거나, 프롬프트만으로 상상 속의 아늑한 방을 10cm 크기의 정교한 모형처럼 구현하는 것이 유행이죠."
+        ],
+        [
+          "q",
+          "핵심은 '틸트-시프트(Tilt-shift)' 기법! 눈앞의 사물을 아주 가깝게 들여다보는 듯한 마법 같은 시점을 제공합니다."
+        ],
+        [
+          "h",
+          "왜 떴을까?"
+        ],
+        [
+          "p",
+          "초고해상도 실사 이미지에 지친 유저들이 '작고 소중한' 것에 반응하기 시작했습니다. 특히 1인 가구가 늘어나면서 자신의 좁은 방을 더 예쁘고 특별하게 기록하고 싶은 욕구가 AI 기술과 만난 결과죠."
+        ],
+        [
+          "h",
+          "한끗 정리: 따라 해도 될까?"
+        ],
+        [
+          "p",
+          "지금 바로 도전해보세요! 미드저니나 챗GPT(DALL-E 3)에서 아래 프롬프트를 복사해 넣기만 하면 됩니다. 인스타그램 프로필이나 폰 배경화면으로 쓰기 딱 좋은 감성입니다."
+        ],
+        [
+          "h",
+          "실용 팁"
+        ],
+        [
+          "ul",
+          [
+            "주제를 'Cozy'하게 잡을수록 예쁘게 나옵니다.",
+            "피사체를 나무 상자 위에 올려달라고 명시하세요.",
+            "인물보다는 공간과 소품 위주로 배치하는 것이 성공 확률이 높습니다."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "vintage-digicam-prompt",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "collectedAt": "2026-06-14",
+      "analyzedAt": "2026-06-14",
+      "buzz": "Y2K·저화소 감성 재점화",
+      "stage": "피크",
+      "stageMsg": "고화질보다 '힙한 저화질'을 찾는 MZ의 선택",
+      "label": "지금 써도 됨",
+      "labelCls": "good",
+      "title": "화질구지라 더 힙한 '90년대 빈티지 디카'",
+      "def": "2000년대 초반 저화소 디지털 카메라의 날것 그대로의 질감을 재현하는 프롬프트",
+      "excerpt": "8K 해상도가 당연한 시대, 오히려 '화질구지'를 찾는 사람들이 늘었습니다. 강한 플래시와 오렌지색 날짜 스탬프가 포인트!",
+      "pull": "선명하지 않아서 더 예쁜, 노이즈 가득한 그 시절 감성.",
+      "verdict": "완벽한 사진보다 '순간의 기록' 느낌을 주는 게 포인트입니다. 오른쪽 하단 날짜 표시가 없으면 가짜 감성이니 꼭 챙기세요.",
+      "recs": [
+        [
+          "인물 사진 추천",
+          "◎",
+          1
+        ],
+        [
+          "야간 촬영 꿀조합",
+          "○",
+          1
+        ],
+        [
+          "풍경 사진",
+          "✕",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "SBS 뉴스",
+          "https://youtu.be/e0MoraPBJL0"
+        ]
+      ],
+      "tags": [
+        "AI프롬프트",
+        "Y2K",
+        "빈티지",
+        "디카감성"
+      ],
+      "prompt": "[변환목표]\n2000년대 초반 저화소 디지털 카메라로 찍은 듯한 날것의 감성을 재현합니다.\n\n[스타일]\n- 90s/Early 2000s vintage digital camera aesthetic\n- Amateur snapshot, Lo-fi mood\n- Harsh direct flash photography\n\n[피사체 & 배경]\n- 밤거리의 편의점(Convenience store at night) 또는 화려한 야간 길거리\n- 힙한 스타일의 인물이 무심하게 서 있는 모습\n\n[효과 & 아티팩트]\n- 강한 플래시로 인한 얼굴의 번들거림(Flash flare)\n- 오른쪽 하단 오렌지색 디지털 폰트 날짜 표시: '06 14 26' (Date stamp)\n- 약간의 흔들림(Motion blur)과 색수차(Chromatic aberration)\n- 의도적인 노이즈(Grainy noise)와 낮은 해상도 질감(Digital artifacts)\n\n[색감]\n- 과포화된 피부 톤(Oversaturated skin tones)\n- 어두운 부분의 푸른 빛(Cyan-shifted shadows)\n- 후지필름(Fujifilm) 또는 코닥(Kodak) 초창기 디카 색감\n\n[카메라 특성]\n- 200만 화소(2.0-megapixel) 느낌의 거친 디테일\n- 고정 초점(Fixed focus)으로 인한 주변부 화질 저하\n\n[피해야 할 것]\n- 8K 초고해상도(Ultra-high resolution)\n- 시네마틱한 조명(Cinematic lighting)\n- 선명한 엣지(Sharp edges)\n\n[비율]\n- 3:4",
+      "article": [
+        [
+          "h",
+          "화질 낮은 게 왜 힙할까? 빈티지 디카의 역습"
+        ],
+        [
+          "p",
+          "스마트폰 카메라가 dSLR을 위협하는 시대에, MZ세대들은 당근마켓에서 20년 전 깡통 디카를 찾고 있습니다. 이제 그 감성을 AI가 완벽하게 복제해내고 있죠."
+        ],
+        [
+          "q",
+          "예쁘게 찍힌 사진보다 '그때 그 기분'이 느껴지는 사진이 더 가치 있는 시대입니다."
+        ],
+        [
+          "h",
+          "광고야 진짜야? 유행의 실체"
+        ],
+        [
+          "p",
+          "처음엔 일시적인 유행인 줄 알았으나, 이제는 하나의 사진 장르로 자리 잡았습니다. 광고 화보에서도 일부러 저화질 느낌을 내는 경우가 많아졌죠. 인스타그램 피드에 한 장만 섞어줘도 분위기가 확 살아납니다."
+        ],
+        [
+          "h",
+          "AZ 주의점"
+        ],
+        [
+          "p",
+          "부모님 세대에게는 '버려야 할 옛날 사진'처럼 보일 수 있습니다. 하지만 이 '노이즈'와 '물빠진 색감'이 지금은 가장 비싼 감성이라는 점! '사진이 왜 이리 뿌옇니?'라고 물으시면 아재 인증입니다."
+        ],
+        [
+          "h",
+          "실용 팁"
+        ],
+        [
+          "ul",
+          [
+            "밤에 찍은 듯한 설정을 추가하면 플래시 효과가 극대화됩니다.",
+            "날짜 스탬프 폰트는 반드시 'Digital font'여야 합니다.",
+            "약간 흔들린 듯한(Motion blur) 명령어를 섞어주면 더 진짜 같습니다."
+          ]
+        ]
+      ]
     }
   ]
 };
