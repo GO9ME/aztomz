@@ -3601,6 +3601,104 @@ window.HANGEUT_DATA = {
           ]
         ]
       ]
+    },
+    {
+      "id": "glass-flower-prompt",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "collectedAt": "2026-06-14",
+      "analyzedAt": "2026-06-14",
+      "buzz": "SNS 감성 인테리어 이미지로 화제",
+      "stage": "상승",
+      "stageMsg": "인스타·스레드 배경화면용으로 급부상 중",
+      "label": "지금 써도 됨",
+      "labelCls": "good",
+      "title": "투명함의 미학, 신비로운 '유리 꽃' 프롬프트",
+      "def": "빛을 투과하는 투명한 유리 질감의 꽃 오브제를 생성하는 프롬프트",
+      "excerpt": "현실에선 존재할 수 없는 투명한 꽃! 유리 공예품처럼 반짝이는 '유리 꽃' 이미지가 SNS 인테리어 사진으로 각광받고 있습니다.",
+      "pull": "빛과 유리가 만나 빚어낸 신비로운 한 송이.",
+      "verdict": "단순히 '유리'라고만 하면 투박해집니다. '굴절(Refraction)'과 '반사(Caustics)'를 강조해야 영롱한 느낌이 살아납니다.",
+      "recs": [
+        [
+          "신비로운 분위기",
+          "◎",
+          1
+        ],
+        [
+          "배경화면 추천",
+          "○",
+          1
+        ],
+        [
+          "실사 위주 촬영",
+          "✕",
+          0
+        ]
+      ],
+      "src": [
+        [
+          "aitechlab (미드저니 꿀팁)",
+          "https://aitechlab.dev/midjourney-glass-flower-ai-prompt/"
+        ],
+        [
+          "OpenPrompt (유리 나비와 꽃)",
+          "https://www.prpt.ai/prompt/imageDetail/1065"
+        ]
+      ],
+      "tags": [
+        "AI프롬프트",
+        "유리공예",
+        "인테리어",
+        "감성사진"
+      ],
+      "prompt": "[변환목표]\n빛을 받아 영롱하게 반짝이는 투명한 유리 질감의 꽃 오브제를 구현합니다.\n\n[스타일]\n- Ethereal glass flower sculpture\n- Translucent glass petals with internal glow\n- Macro photography, studio lighting\n\n[피사체 구성]\n- 단 한 송이의 신비로운 꽃(Single mystical flower)\n- 꽃잎마다 미세한 결이 살아있는 정교한 유리 세공 느낌\n- 줄기와 잎사귀 또한 투명하거나 반투명한 에메랄드 빛 유리 질감\n\n[조명 & 광학 효과]\n- 백라이팅(Backlighting)을 통해 꽃잎 사이로 빛이 투과되는 모습\n- 바닥면에 비치는 영롱한 굴절 그림자(Caustic reflections and light refractions)\n- 부드러운 전역 조명(Soft global illumination)\n\n[텍스처 & 마감]\n- 크리스탈처럼 맑은 투명도(Crystal-clear transparency)\n- 표면의 미세한 이슬 방울 또는 서리 효과(Frozen/Frosted accents)\n- 높은 반사율(High reflectivity)\n\n[카메라 설정]\n- ISO 100, f/4.0\n- Clean minimalist background (Soft grey or deep velvet blue)\n- Focus on the inner heart of the flower\n\n[피해야 할 것]\n- 불투명한 질감(Opaque textures)\n- 복잡하고 어지러운 배경(Cluttered background)\n- 플라스틱 느낌(Plastic look)\n\n[비율]\n- 9:16 (폰 배경화면/릴스 최적화)",
+      "article": [
+        [
+          "h",
+          "손대면 깨질 듯, SNS를 홀린 '유리 꽃'"
+        ],
+        [
+          "p",
+          "요즘 인스타그램 감성 계정이나 스레드를 보면, 현실에는 존재하지 않는 신비로운 유리 꽃 이미지가 자주 올라옵니다. 인공지능이기에 가능한 '극강의 투명함'이 사람들의 시선을 사로잡고 있죠."
+        ],
+        [
+          "q",
+          "빛을 머금은 유리 꽃 한 송이는 그 자체로 완벽한 디지털 예술품이 됩니다."
+        ],
+        [
+          "h",
+          "왜 화제인가?"
+        ],
+        [
+          "p",
+          "고화질 실사 사진이 흔해지면서, 사람들은 이제 현실에서 볼 수 없는 '몽환적인 소재'에 열광하기 시작했습니다. 특히 유리 질감은 AI가 가장 잘 표현하는 영역 중 하나로, 빛의 굴절과 반사를 완벽하게 계산해 실물보다 더 실물 같은 영롱함을 보여줍니다."
+        ],
+        [
+          "h",
+          "따라 해도 될까?"
+        ],
+        [
+          "p",
+          "스마트폰 배경화면을 바꾸고 싶다면 지금 바로 도전해보세요! 텍스트 한 줄로 세상에 하나뿐인 유리 공예품을 가질 수 있습니다. 프롬프트에 '배경화면용(Smartphone wallpaper)'이라는 단어를 섞어주면 더 좋습니다."
+        ],
+        [
+          "h",
+          "실용 팁"
+        ],
+        [
+          "ul",
+          [
+            "'Backlighting(역광)' 키워드를 넣어야 유리 꽃잎이 빛나 보입니다.",
+            "'Caustics'라는 단어를 쓰면 바닥에 맺히는 빛의 무늬가 정교해집니다.",
+            "단순한 배경일수록 꽃의 투명함이 돋보입니다."
+          ]
+        ]
+      ],
+      "images": [
+        "https://aitechlab.dev/wp-content/uploads/2025/08/midjourney-ai-image.webp",
+        "https://api.prpt.ai/image/ab4f38d2-19a1-4a9d-a297-82f032e7a346"
+      ]
     }
   ]
 };
