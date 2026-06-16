@@ -246,7 +246,7 @@ try {
   sh('git', ['add', 'backend/data/trends.json', 'frontend/data/trends.js']);
   sh('git', ['commit', '-m', `auto: 트렌드 자동 게시(검증통과 ${published.length}) ${TODAY}`,
     '-m', published.map(t => `- ${t.title}`).join('\n')]);
-  try { sh('git', ['pull', '--rebase', 'origin', 'main']); }
+  try { sh('git', ['pull', '--rebase', '--autostash', 'origin', 'main']); }
   catch (e) { console.error('⚠ pull --rebase 실패(충돌 가능) — push 보류:', (e.stderr || e.message || '').toString().slice(0, 200)); process.exit(0); }
   sh('git', ['push', 'origin', 'main']);
   console.log(`\n✓ 자동 게시·배포: ${published.length}건 push 완료 → Vercel 재배포.`);

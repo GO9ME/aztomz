@@ -116,7 +116,7 @@ if (NO_GIT) { console.log('\n--no-git: 파일만 갱신.'); process.exit(0); }
 try {
   sh(['add', 'backend/data/trends.json', 'frontend/data/trends.js']);
   sh(['commit', '-m', `auto: 광고/진짜 일일 재확인 — ${target.title} (${TODAY})`]);
-  try { sh(['pull', '--rebase', 'origin', 'main']); }
+  try { sh(['pull', '--rebase', '--autostash', 'origin', 'main']); }
   catch (e) { console.error('⚠ pull --rebase 실패 — push 보류:', (e.stderr || e.message || '').toString().slice(0, 160)); process.exit(0); }
   sh(['push', 'origin', 'main']);
   console.log(`\n✓ 재확인 push 완료 → Vercel 재배포. '오늘의 한끗' = ${target.title}`);
