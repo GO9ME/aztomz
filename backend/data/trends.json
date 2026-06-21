@@ -4526,6 +4526,97 @@
       "images": [
         "https://www.esquirekorea.co.kr/resources/online/thumbnail/hf/2026/03/24/3cb24a4e-e544-4f01-9cb8-5cc04df17fa3.jpg"
       ]
+    },
+    {
+      "id": "miniature-diorama-prompt",
+      "type": "트렌드",
+      "cat": "AI 프롬프트",
+      "coverCat": "cat-ai",
+      "collectedAt": "2026-06-21",
+      "analyzedAt": "2026-06-21",
+      "buzz": "꾸준한 인기",
+      "stage": "안정화",
+      "stageMsg": "다양한 스타일로 변주되며 꾸준히 사용됨",
+      "label": "언제든 활용하기 좋음",
+      "labelCls": "good",
+      "title": "미니어처 디오라마 AI 프롬프트",
+      "def": "세상을 아기자기한 축소 모형(디오라마)처럼 표현하는 명령어",
+      "excerpt": "방이나 도시 풍경을 작은 상자 속 세상처럼 만드는 프롬프트. 점토, 펠트, 나무 등 다양한 재질감을 더해 스톱모션 애니메이션 같은 따뜻한 분위기를 연출하는 것이 특징입니다.",
+      "verdict": "복잡한 세상을 한눈에 들어오는 작은 모형으로 만드는 '미니어처 디오라마' 프롬프트는 꾸준히 사랑받는 스테디셀러입니다. 특히 특정 인물이나 브랜드를 아기자기한 캐릭터로 만들어 디오라마 속에 배치하는 방식이 인기가 많습니다. 따뜻하고 감성적인 분위기 덕분에 상업적인 디자인이나 개인적인 작업물에도 널리 활용됩니다.",
+      "recs": [
+        [
+          "창의력 발휘하기 좋음",
+          "◎",
+          1
+        ],
+        [
+          "따뜻하고 감성적인 결과물",
+          "◎",
+          1
+        ],
+        [
+          "프롬프트가 다소 복잡함",
+          "△",
+          1
+        ]
+      ],
+      "src": [
+        [
+          "티스토리",
+          "https://projectnftbus.tistory.com/561"
+        ],
+        [
+          "allmyuniverse",
+          "https://allmyuniverse.com/image-prompt-guide-needle-felt-wool-stop-motion-diorama/"
+        ]
+      ],
+      "tags": [
+        "AI프롬프트",
+        "디오라마",
+        "미니어처",
+        "스톱모션",
+        "3D"
+      ],
+      "article": [
+        [
+          "h",
+          "나만의 작은 세상을 만들다, 미니어처 디오라마"
+        ],
+        [
+          "p",
+          "책상 위 작은 상자 안에 펼쳐진 아기자기한 세상을 본 적 있나요? AI 이미지 생성으로 그 감성을 그대로 재현하는 '미니어처 디오라마 프롬프트'가 꾸준한 인기를 끌고 있습니다. 복잡한 현실을 단순하고 따뜻하게 재해석하는 매력이 있습니다."
+        ],
+        [
+          "q",
+          "핵심은 '규모의 축소'와 '재질감'을 통해 아날로그 감성을 살리는 것입니다."
+        ],
+        [
+          "h",
+          "디오라마 프롬프트의 매력 포인트"
+        ],
+        [
+          "p",
+          "실제 사진이나 인물을 3D 캐릭터처럼 변환해 디오라마 속에 배치할 수 있어, 나만의 이야기나 팬아트를 만드는 데 효과적입니다. 점토(Clay), 펠트(Felt), 나무(Wood) 등 특정 재질을 지정하면 스톱모션 애니메이션 같은 독특한 분위기를 연출할 수 있습니다."
+        ],
+        [
+          "h",
+          "한끗 정리: 디테일을 살리는 팁"
+        ],
+        [
+          "ul",
+          [
+            "Tilt-shift, macro photography 같은 카메라 용어를 사용해 미니어처 효과를 극대화하세요.",
+            "캐릭터의 표정이나 동세를 구체적으로 묘사하면 더 생동감 있는 결과물을 얻을 수 있습니다.",
+            "배경 소품(책, 화분, 조명)을 구체적으로 지정해 세상의 밀도를 높여보세요."
+          ]
+        ]
+      ],
+      "prompt": "A miniature diorama of a cozy writer's room inside a cut-open box. A cute 3D character is sitting at a wooden desk, surrounded by mini bookshelves, a coffee cup, and a sleeping cat. The scene is illuminated by warm, soft indoor lighting, creating a quiet and cozy atmosphere. needle-felt stop motion style.\n\n--ar 4:3 --stylize 500\n\n**[변환 목표]**\n아늑한 작가의 방을 미니어처 디오라마로 표현한다.\n\n**[스타일]**\n- 형식: 잘라낸 상자 안에 담긴 디오라마 (miniature diorama inside a cut-open box)\n- 재질: 양모 펠트(needle-felt)를 뭉쳐 만든 스톱모션 애니메이션 스타일 (stop motion style)\n- 분위기: 조용하고 아늑한 분위기 (quiet and cozy atmosphere)\n\n**[구성 요소]**\n- 인물: 귀여운 3D 캐릭터가 나무 책상에 앉아 있음 (A cute 3D character is sitting at a wooden desk)\n- 소품: 미니 책장, 커피잔, 잠자는 고양이 (surrounded by mini bookshelves, a coffee cup, and a sleeping cat)\n\n**[조명]**\n- 따뜻하고 부드러운 실내 조명 (warm, soft indoor lighting)\n\n**[카메라 및 렌즈]**\n- 앵글: 디오라마 전체가 보이도록 살짝 위에서 내려다보는 앵글\n- 렌즈: 얕은 심도로 배경을 살짝 흐리게 하여 미니어처 느낌 강조 (shallow depth of field)\n\n**[피해야 할 것]**\n- 날카롭고 딱딱한 질감, 사실적인 비율의 인물, 차가운 조명",
+      "images": [
+        "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FcE8PYn%2FbtsNf8YuFYK%2FAAAAAAAAAAAAAAAAAAAAAIrbRTR_7_Swz0xwvsA8phloh54V_jUi7rdff_xMGXtZ%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1782831599%26allow_ip%3D%26allow_referer%3D%26signature%3DUW5SjPhKQWQB3MXM0f%252FX38PvAzc%253D",
+        "https://app.allmyuniverse.com/apps/gen-studio/users/2-da4b9237/1780977085001-gpt-image-2-8e6e1699-rwgl4c.webp"
+      ],
+      "pull": ""
     }
   ]
 }
