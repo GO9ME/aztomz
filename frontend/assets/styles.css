@@ -192,9 +192,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .idx-row .t{display:flex;flex-direction:column}
 .idx-row .t .it-title{display:block;font-size:17px;font-weight:800;letter-spacing:0;line-height:1.3;word-break:keep-all}
 .idx-row .t .it-title .fresh-chip{margin-right:7px;vertical-align:2px}
-.idx-row .t .it-cat{display:block;font-size:13px;letter-spacing:0;color:var(--faint);font-weight:700;margin-top:4px}
-.idx-row .t .it-label{display:block;font-size:13.5px;color:var(--ink-2);margin-top:3px}
-.idx-row .t .it-desc{display:block;font-size:13.5px;color:var(--body);line-height:1.45;margin-top:5px;word-break:keep-all}
+/* 소제목(카테고리·화제성) — 세리프 메타 서체로 제목·본문과 구분 */
+.idx-row .t .it-cat{display:block;font-family:var(--serif);font-size:13px;letter-spacing:0;
+  color:var(--muted);font-weight:700;margin-top:6px}
+/* 라벨("믿고 가볼 만함") — trend.html 상세와 동일한 색 배지로, 한눈에 보이는 판단(verdict) 역할 */
+.idx-row .t .it-label{display:inline-flex;align-self:flex-start;font-size:12px;padding:3px 10px;margin-top:8px}
+.idx-row .t .it-desc{display:block;font-size:13.5px;color:var(--muted);line-height:1.5;margin-top:9px;word-break:keep-all}
 /* 점수 바 컬럼도 상단 정렬 — 제목 첫 줄 높이에 맞춰 살짝 내림 */
 .idx-row .mini{text-align:right;min-width:120px;margin-top:2px}
 .mini .mrow{display:flex;align-items:center;gap:6px;justify-content:flex-end;font-size:13px;color:var(--ink-2);margin:2px 0}

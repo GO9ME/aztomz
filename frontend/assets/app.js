@@ -163,7 +163,7 @@
       <span class="t">
         <span class="it-title">${H.freshChip(t.analyzedAt)}${H.esc(t.title)}</span>
         <span class="it-cat">${H.esc(t.cat)} · ${H.esc(t.buzz)}</span>
-        <span class="it-label">${H.esc(t.label)}</span>
+        <span class="label it-label ${H.esc(t.labelCls||'mid')}">${H.esc(t.label)}</span>
         ${H.summary(t)?`<span class="it-desc">${H.esc(H.summary(t, 96))}</span>`:''}
       </span>
       <span class="mini">
