@@ -56,8 +56,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,28px)}
 /* 본문 읽기 폭 — 긴 글(분석/마이페이지)은 가독성을 위해 좁게 유지 */
 .wrap.reading{max-width:var(--readw)}
-/* 분석·마이페이지: 마스트헤드도 읽기 폭에 맞춰 본문과 좌측 라인 정렬 */
-body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
+/* 마스트헤드는 항상 전체 폭 유지 — 읽기 폭에 맞추면 데스크톱 네비가 2줄로 꺾인다(분석/마이페이지에서 확인됨) */
 .muted{color:var(--ink-2)}
 .serif{font-family:var(--serif)}
 
@@ -114,9 +113,12 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
   background:var(--ink);display:flex;flex-direction:column;justify-content:flex-end;
   padding:16px;min-height:150px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
   background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 11px)}
-.cover .c-kicker{position:absolute;top:13px;left:16px;font-family:var(--serif);
-  font-size:13px;letter-spacing:0;text-transform:uppercase;opacity:.85}
-.cover .c-buzz{position:absolute;top:13px;right:16px;font-size:13px;font-weight:700;opacity:.8}
+/* 킥커/버즈: 절대배치 두 텍스트가 카드 폭이 좁을 때 가운데서 겹치지 않도록 각각 폭 상한 + 말줄임 */
+.cover .c-kicker{position:absolute;top:13px;left:16px;right:52%;font-family:var(--serif);
+  font-size:13px;letter-spacing:0;text-transform:uppercase;opacity:.85;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cover .c-buzz{position:absolute;top:13px;right:16px;left:52%;font-size:13px;font-weight:700;opacity:.8;
+  text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cover .c-title{font-size:26px;font-weight:900;line-height:1.12;letter-spacing:0;
   text-shadow:0 1px 12px rgba(0,0,0,.25)}
 /* 라벨 배지: 우하단 절대배치(제목과 겹침) → 제목 '위'로 흐름 배치해 겹침 제거 */
@@ -177,18 +179,21 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 /* ---------- ranked index (광고일까 진짜일까) ---------- */
 /* 와이드 화면: 멀티컬럼으로 채움 — 세로 우선 읽기(01·02·03 ↓ 왼쪽 → 04·05·06 ↓ 오른쪽). 좁은 화면은 1단 자동 */
 .index{margin:8px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}
-.idx-row{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;
+.idx-row{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:start;
   padding:14px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);
   text-decoration:none;color:inherit;break-inside:avoid;transition:transform .16s,border-color .16s,box-shadow .16s}
 .idx-row:hover{border-color:#c9baa2;box-shadow:0 10px 24px rgba(44,38,27,.08);transform:translateY(-2px)}
-.idx-row .rank{font-family:var(--serif);font-style:normal;font-size:22px;color:var(--accent-text);text-align:center}
+/* align-items:start(위 정렬) 기준으로 랭크 번호를 제목 첫 줄과 baseline 맞춤 */
+.idx-row .rank{font-family:var(--serif);font-style:normal;font-size:22px;color:var(--accent-text);
+  text-align:center;line-height:1.3;margin-top:-1px}
 .idx-row .t{display:flex;flex-direction:column}
 .idx-row .t .it-title{display:block;font-size:17px;font-weight:800;letter-spacing:0;line-height:1.3}
 .idx-row .t .it-title .fresh-chip{margin-right:7px;vertical-align:2px}
 .idx-row .t .it-cat{display:block;font-size:13px;letter-spacing:0;color:var(--faint);font-weight:700;margin-top:4px}
 .idx-row .t .it-label{display:block;font-size:13.5px;color:var(--ink-2);margin-top:3px}
 .idx-row .t .it-desc{display:block;font-size:13.5px;color:var(--body);line-height:1.45;margin-top:5px;word-break:keep-all}
-.idx-row .mini{text-align:right;min-width:120px}
+/* 점수 바 컬럼도 상단 정렬 — 제목 첫 줄 높이에 맞춰 살짝 내림 */
+.idx-row .mini{text-align:right;min-width:120px;margin-top:2px}
 .mini .mrow{display:flex;align-items:center;gap:6px;justify-content:flex-end;font-size:13px;color:var(--ink-2);margin:2px 0}
 .mini .mbar{width:54px;height:6px;background:var(--track);border-radius:99px;overflow:hidden}
 .mini .mbar i{display:block;height:100%;border-radius:99px}
@@ -219,6 +224,10 @@ body:has(.wrap.reading) .mast .wrap{max-width:var(--readw)}
 .chip-card .cover .c-title{font-size:18px;line-height:1.18;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .chip-card .cover .c-stamp{font-size:11.5px;margin-bottom:6px}
+/* 좁은 스트립 카드(~180px)는 킥커·버즈 폰트를 한 단계 줄여 겹침 여유 확보 */
+.chip-card .cover .c-kicker,.chip-card .cover .c-buzz{font-size:11px;top:11px}
+.chip-card .cover .c-kicker{left:13px;right:52%}
+.chip-card .cover .c-buzz{right:13px;left:52%}
 .chip-card .cc-meta{margin-top:10px;display:flex;flex-direction:column;flex:1 1 auto}
 .chip-card .cc-stage{font-size:13px;font-weight:800;color:var(--accent-text)}
 /* 카드 제목 2줄 클램프 → 아래 배지/칩 시작 위치를 카드끼리 맞춤 */

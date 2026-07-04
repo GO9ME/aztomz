@@ -83,6 +83,27 @@ Agent(
 
 ---
 
+## 🎨 UI 디자인 검증 정책
+
+**CSS/레이아웃을 손댄 뒤(디자인 리프레시·컴포넌트 추가·반응형 수정 등) 시각적으로 문제가
+있어 보이면 `design-reviewer` 서브에이전트를 호출해 실제 브라우저 프리뷰로 검증한다.**
+코드만 읽고 짐작하지 말고, 반드시 스크린샷·inspect로 확인 후 고치게 한다.
+
+호출 방법 — `Agent` 도구:
+
+```
+Agent(
+  subagent_type: "design-reviewer",   // .claude/agents/design-reviewer.md
+  description: "UI 디자인 검증",
+  prompt: "확인할 페이지/증상: <스크린샷·설명 요약>. 의심 파일: <있으면>."
+)
+```
+
+`design-reviewer`가 등록 안 됐으면 에이전트 정의 파일
+([.claude/agents/design-reviewer.md](.claude/agents/design-reviewer.md))의 지침을 그대로 전달한다.
+
+---
+
 ## 🚫 철칙 (Rules) — 다시는 반복하지 않기
 
 > 작업 전 [learnings.md](learnings.md)를 **먼저 읽고** 적용한다. 아래는 반복 사고를 막는 고정 규칙.
