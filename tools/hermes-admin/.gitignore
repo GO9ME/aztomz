@@ -1,0 +1,7 @@
+# 런타임/로컬 전용 — 커밋 금지 (트레일링 주석은 gitignore에서 안 먹으니 줄 단위로)
+# 자동 실행 OFF 마커(멈춘 작업 id)
+.automation-off.json
+# 혹시 토큰/시크릿을 파일로 둘 경우
+.token
+.env
+*.local.json

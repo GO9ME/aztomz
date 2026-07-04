@@ -9,11 +9,9 @@
   const D = global.PULSE_DATA || { generatedAt: null, trends: [], daily: [] };
 
   const CATS = ['전체', '테크', 'K뷰티', '헬스', '푸드', '금융', '교육', '패션', '엔터', '라이프', '등산', '관광'];
-  // 플랫폼 글리프(기능 표식 — 타이포 커버의 '이모지 금지' 규칙과 무관)
-  const PI = { Google: '🔍', YouTube: '▶️', Instagram: '📷', TikTok: '🎵', X: '𝕏' };
+  const PI = { Google: 'G', YouTube: 'YT', Instagram: 'IG', TikTok: 'TT', X: 'X' };
   // 분야 → 커버 색(슬러그). styles.css의 .pcat-* 와 매칭
   const PCAT = { '테크': 'tech', 'K뷰티': 'beauty', '헬스': 'health', '푸드': 'food', '금융': 'finance', '교육': 'edu', '패션': 'fashion', '엔터': 'enter', '라이프': 'life', '등산': 'hiking', '관광': 'travel' };
-  const LS_KEY = 'hangeut.pulseIdeas';
   const IDEA_CAP = 80;
 
   /* ---------- 점수 → tier/라벨 (한끗 토큰 기반) ---------- */
@@ -68,17 +66,17 @@
       <div class="tp-body">
         <div class="tp-meta">
           <span class="tp-pl">${platformsHTML(t.pl)}</span>
-          ${opts.today && t.date ? H.freshChip(t.date) : ''}
+          ${H.freshChip(t.date || D.generatedAt)}
           <span class="tp-spark ${tt.tier}">${spark(t.sp, 66, 20)}</span>
         </div>
         <p class="tp-why">${H.esc(t.why)}</p>
-        ${t.angle ? `<div class="tp-angle">💡 <b>핵심 각도</b> · ${H.esc(t.angle)}</div>` : ''}
-        <div class="tp-more">▾ 빠른 창업 아이디어 3개 보기</div>
+        ${t.angle ? `<div class="tp-angle"><b>핵심 각도</b> · ${H.esc(t.angle)}</div>` : ''}
+        <div class="tp-more">빠른 창업 아이디어 3개 보기</div>
         <div class="tp-ideas" hidden>
           <div class="tp-ideas-h">빠른 창업 아이디어 3</div>
           <ol class="tp-idea-list">${quickIdeasOf(t).map((s) => `<li>${H.esc(s)}</li>`).join('')}</ol>
           <div class="tp-ideas-foot">
-            <button class="tp-quick" data-quick="${H.esc(t.id)}">📥 저장</button>
+            <button class="tp-quick" data-quick="${H.esc(t.id)}">저장</button>
             <button class="tp-future" data-future disabled title="라이브 AI는 추후 제공됩니다">AI 상세 창업 아이템 (준비 중)</button>
           </div>
         </div>
@@ -87,7 +85,7 @@
   };
 
   /* ---------- 상태 ---------- */
-  const S = { cat: '전체', q: '', view: 'radar' };
+  const S = { cat: '전체', q: '', view: 'weekly' };
 
   /* ---------- 필터/검색/정렬 ---------- */
   function filtered() {
@@ -122,17 +120,17 @@
     box.innerHTML = daily.map((t) => H.pulse.card(t, { today: true })).join('');
   }
 
-  /* ---------- 아이디어 저장(localStorage) ---------- */
-  function loadIdeas() { try { return JSON.parse(global.localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; } }
-  function saveIdeas(arr) { try { global.localStorage.setItem(LS_KEY, JSON.stringify(arr.slice(0, IDEA_CAP))); } catch (e) { /* quota/private */ } }
+  /* ---------- 아이디어 저장(H.* store) ---------- */
+  function loadIdeas() { return H.pulseIdeas ? H.pulseIdeas.list() : []; }
+  function saveIdeas(arr) { return H.pulseIdeas ? H.pulseIdeas.save(arr.slice(0, IDEA_CAP)) : { ok:false }; }
 
   function makeQuickIdeas(t) {
     const now = new Date().toISOString();
     const base = (t.angle || '').split('또는')[0].trim() || t.angle || t.kw;
     return [
-      { id: 'i-' + Date.now(), fromTrend: t.kw, gr: t.gr, text: `💡 ${base}\n\n트렌드: ${t.kw} (+${t.gr}%)\n배경: ${t.why}`, createdAt: now },
-      { id: 'i-' + (Date.now() + 1), fromTrend: t.kw, gr: t.gr, text: `💡 ${t.kw} 전문 커뮤니티/미디어 (콘텐츠 비즈니스)\n\n트렌드: ${t.kw} (+${t.gr}%)\n배경: ${t.why}`, createdAt: now },
-      { id: 'i-' + (Date.now() + 2), fromTrend: t.kw, gr: t.gr, text: `💡 ${t.kw} 데이터 분석·큐레이션 도구 (SaaS)\n\n트렌드: ${t.kw} (+${t.gr}%)\n배경: ${t.why}`, createdAt: now },
+      { id: 'i-' + Date.now(), fromTrend: t.kw, gr: t.gr, text: `${base}\n\n트렌드: ${t.kw} (+${t.gr}%)\n배경: ${t.why}`, createdAt: now },
+      { id: 'i-' + (Date.now() + 1), fromTrend: t.kw, gr: t.gr, text: `${t.kw} 전문 커뮤니티/미디어 (콘텐츠 비즈니스)\n\n트렌드: ${t.kw} (+${t.gr}%)\n배경: ${t.why}`, createdAt: now },
+      { id: 'i-' + (Date.now() + 2), fromTrend: t.kw, gr: t.gr, text: `${t.kw} 데이터 분석·큐레이션 도구 (SaaS)\n\n트렌드: ${t.kw} (+${t.gr}%)\n배경: ${t.why}`, createdAt: now },
     ];
   }
 
@@ -160,7 +158,7 @@
     const box = H.q('#tpIdeas'); if (!box) return;
     const ideas = loadIdeas();
     if (!ideas.length) {
-      box.innerHTML = `<div class="empty"><div class="e-mark">💡</div><h3>저장한 아이디어가 없어요</h3><p>트렌드 카드를 펼쳐 아이디어 아래 '📥 저장'을 눌러보세요.</p></div>`;
+      box.innerHTML = `<div class="empty"><div class="e-mark">Idea</div><h3>저장한 아이디어가 없어요</h3><p>트렌드 카드를 펼쳐 아이디어 아래 '저장'을 눌러보세요.</p></div>`;
       return;
     }
     box.innerHTML = ideas.map((idea) => {
@@ -179,9 +177,14 @@
 
   /* ---------- 탭(레이더 / 저장 아이디어) ---------- */
   function renderTabs() {
-    const tabs = [{ k: 'radar', l: '트렌드 레이더' }, { k: 'ideas', l: `저장한 아이디어 (${ideaCount()})` }];
+    const tabs = [
+      { k: 'weekly', l: '이번 주 트렌드' },
+      { k: 'radar', l: `트렌드 레이더 ${D.trends.length}개` },
+      { k: 'ideas', l: `저장한 아이디어 (${ideaCount()})` }
+    ];
     H.q('#tpTabs').innerHTML = tabs.map((t) =>
-      `<button class="tp-tab${S.view === t.k ? ' on' : ''}" data-view="${t.k}">${t.l}</button>`).join('');
+      `<button class="tp-tab${S.view === t.k ? ' on' : ''}" role="tab" aria-selected="${S.view === t.k}" data-view="${t.k}">${t.l}</button>`).join('');
+    H.q('#tpWeekly').hidden = S.view !== 'weekly';
     H.q('#tpRadar').hidden = S.view !== 'radar';
     H.q('#tpIdeas').hidden = S.view !== 'ideas';
   }
@@ -204,8 +207,7 @@
       clearTimeout(tmr); const v = e.target.value;
       tmr = setTimeout(() => { S.q = v; renderList(); }, 120);
     });
-    // 레이더 영역 위임: 카드 펼침 + 빠른 아이디어
-    H.q('#tpRadar').addEventListener('click', (e) => {
+    const handleCardArea = (e) => {
       const quick = e.target.closest('[data-quick]');
       if (quick) {
         e.stopPropagation();
@@ -222,7 +224,10 @@
       const card = e.target.closest('.tp-card'); if (!card) return;
       const ideas = H.q('.tp-ideas', card); if (ideas) ideas.hidden = !ideas.hidden;
       card.classList.toggle('open');
-    });
+    };
+    // 카드 펼침 + 빠른 아이디어
+    H.q('#tpRadar').addEventListener('click', handleCardArea);
+    H.q('#tpWeekly').addEventListener('click', handleCardArea);
     // 아이디어 뷰: 다운로드 / 삭제
     H.q('#tpIdeas').addEventListener('click', (e) => {
       const dl = e.target.closest('[data-dl]');
@@ -246,7 +251,7 @@
       fresh.innerHTML = `트렌드 ${D.trends.length}건` +
         (D.generatedAt ? ` · 마지막 갱신 ${H.fmtISO(D.generatedAt)} <span class="fresh-chip ${f.cls}">${f.text}</span>` : '');
     }
-    S.view = (H.param('tab') === 'ideas') ? 'ideas' : 'radar';
+    S.view = (['weekly','radar','ideas'].includes(H.param('tab'))) ? H.param('tab') : 'weekly';
     renderTabs(); renderFilter(); renderList(); renderDaily();
     if (S.view === 'ideas') renderIdeas();
     wire();

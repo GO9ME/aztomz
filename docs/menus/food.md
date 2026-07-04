@@ -1,48 +1,7 @@
-# 요즘 음식 (음식점·카페)
-
-## 목적
-SNS에서 자주 보이는 음식점·카페를 광고 의심도·신뢰도로 분석. 가서 안 후회할지 판단 제공.
-
-## 진입·화면
-- **파일:**
-  - `frontend/index.html` (홈: 트렌드 미리보기 섹션)
-  - `frontend/list.html?type=trend` (마스트헤드 "요즘 트렌드" 메뉴 → 트렌드 전체 목록 + 카테고리 필터)
-  - `frontend/list.html?type=trend&cat=음식` (음식 카테고리만 필터, 페이지당 12개)
-  - `frontend/trend.html?id=<음식id>` (상세 페이지)
-- **마스트헤드 메뉴:** "요즘 트렌드" (list.html?type=trend 직접 연결)
-- **타입:** type=='신뢰분석' 또는 type=='트렌드', cat==[음식 관련 카테고리]
-- **표시:** 카버(카테고리별 컬러) + 제목·카테고리·화제성·점수(광고의심도/신뢰도)·만족도 뱃지
-
-## 표시 데이터
-**신뢰분석 (광고의심도·신뢰도 분석 있음):**
-- `t.type` = "신뢰분석"
-- `t.ad` (0~100, 광고 의심도)
-- `t.trust` (0~100, 실제 후기 신뢰도)
-- `t.sat` (pos|neg|mix, 만족도)
-- `t.satTxt` (만족도 설명)
-- `t.label` (판정, 예: "SNS 기대치 조절 필요")
-- `t.verdict` (상세 분석)
-- `t.recs` (추천 목록, 예: ["사진·힙스팟", "◎", 1])
-- **`t.shops` (선택, "어디서 사 먹지?" 섹션)** — **소문난 맛집 위주** 목록 `[{name, rep?, area?, url?, note?}]`. `rep`은 맛집 평판 한 줄(상세페이지 초록 배지). 실제 방문 또는 배달 구매 가능 장소. auto-build.mjs가 각 url 생존성 검증(404/410/ERR 제거)
-
-**트렌드 (단순 소개):**
-- `t.type` = "트렌드"
-- `t.stage` (유행 단계)
-- `t.label` / `t.verdict` (설명)
-- **`t.shops` (선택)** — 재료나 조리법 지원 가게, 또는 대표 판매처
-
-## 현재 상태
-구현됨. 신뢰분석 3건(두바이 초콜릿·누데이크·멜로워) 이상 존재. 점수·만족도·추천 렌더링 동작 확인. "어디서 사 먹지?" 섹션(shops) 추가됨 (2026-06-09).
-
-## 관련 코드
-- `frontend/trend.html` : 상세 페이지 (L1~80+, scoresBlock() 함수로 신뢰분석/트렌드 분기)
-- `frontend/assets/app.js` : H.bandTxt() (점수 설명 텍스트), H.coverHTML() (카버 렌더링) (L29, L102~109)
-- `backend/data/trends.json` : type=='신뢰분석' || type=='트렌드' 중 cat 포함 음식점·카페 항목
-
-## 비고
-- **카테고리 예:** 디저트, 성수 카페, 베이커리 등 — coverCat으로 스타일링 (cat-dessert, cat-cafe, cat-bakery)
-- 신뢰분석: 광고/신뢰도 점수 + 바차트 렌더링 (frontend/assets/app.js L56~62)
-- 트렌드: 단계(stage) + 단계 설명(stageMsg) 표시
-- **가게 목록(shops):** 상세 페이지 중단부에 "어디서 사 먹지?"로 표시. 인스타/다이닝코드 profile 금지, 실제 검색에 나온 본문이 읽히는 링크만. auto-build.mjs가 각 url 생존성 검증해 죽은 링크 제거
-- 출처 검증 필수: `node backend/scripts/check-links.mjs` + `check-source.mjs` (learnings.md 참고)
-- **전체 목록 조회:** list.html?type=trend&cat=음식 (카테고리 필터로 음식만 선택)
+# 요즘 음식
+- 목적: 요즘 음식·맛집 트렌드를 광고 분석 또는 트렌드 카드로 보여주고 상세 판단으로 연결한다.
+- 진입/화면: `frontend/list.html?type=trend&cat=맛집` 또는 별칭 `frontend/list.html?type=trend&cat=음식`, 홈의 요즘 트렌드 섹션, `frontend/trend.html?id=<id>` 상세.
+- 표시 데이터: 정규 카테고리 `cat === '맛집'`. 현재 데이터 기준(2026-07-04) 7건(신뢰분석 5건, 트렌드 2건). 목록 카드는 `title`, `cat`, `stage`, `label`, `images`, `analyzedAt`, `H.summary()`를 쓰고, 신뢰분석 상세는 `ad`, `trust`, `sat`, `recs`, `shops`, `src`를 함께 표시한다.
+- 현재 상태: 구현됨. `list.html`에서 `cat=음식`을 `맛집`으로 정규화하고, 카드/랭킹에는 짧은 설명이 표시된다.
+- 관련 코드: `frontend/list.html`의 `CAT_ALIAS`/`normalizeCat()`/`filtered()`, `frontend/assets/app.js`의 `H.trendCardHTML()`/`H.adRowHTML()`/`H.summary()`, `frontend/trend.html`의 `shopsBlock()`, `backend/data/trends.json`.
+- 비고: 새 데이터의 `cat`은 `맛집`으로 넣는다. `음식`은 URL 호환용 별칭일 뿐 canonical 카테고리가 아니다.

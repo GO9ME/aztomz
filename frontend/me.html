@@ -4,39 +4,46 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
-<title>내 한끗 — 한끗</title>
-<meta name="description" content="이 브라우저에 저장된 한끗 로컬 계정의 저장한 트렌드와 내가 쓴 후기를 모아봅니다." />
+<title>내 보관함 — 한끗</title>
+<meta name="description" content="이 브라우저에 저장한 한끗 트렌드, 후기, 펄스 아이디어를 모아봅니다." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="한끗" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:title" content="내 한끗 — 한끗" />
-<meta property="og:description" content="이 브라우저에만 저장된 한끗 로컬 개인화 기록을 확인합니다." />
+<meta property="og:title" content="내 보관함 — 한끗" />
+<meta property="og:description" content="이 브라우저에만 저장된 한끗 로컬 보관함입니다." />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="내 한끗 — 한끗" />
-<meta name="twitter:description" content="이 브라우저에만 저장된 한끗 로컬 개인화 기록을 확인합니다." />
+<meta name="twitter:title" content="내 보관함 — 한끗" />
+<meta name="twitter:description" content="이 브라우저에만 저장된 한끗 로컬 보관함입니다." />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="stylesheet" href="assets/styles.css" />
 <style>
-  .me-hd{display:flex;align-items:center;gap:14px;margin:30px 0 6px}
-  .me-hd .big-av{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--on-ink);
-    display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900}
-  .me-hd h1{font-size:24px;font-weight:900;margin:0;letter-spacing:0}
-  .me-hd .em{font-size:13.5px;color:var(--ink-2)}
-  .me-hd .logout{margin-left:auto;font-size:13.5px;font-weight:800;color:var(--ink-2);
-    background:none;border:1.5px solid var(--line);border-radius:var(--r);padding:8px 12px;cursor:pointer}
-  .savedrow{display:grid;grid-template-columns:64px 1fr auto;gap:13px;align-items:center;
-    padding:12px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
-  .savedrow:hover{background:var(--paper-2)}
-  .savedrow .cover{min-height:48px;height:48px;padding:0;border-radius:5px}
+  .vault-hero{padding:34px 0 10px;border-bottom:1px solid var(--line)}
+  .vault-hero h1{font-size:34px;font-weight:900;line-height:1.12;letter-spacing:0;margin:12px 0 8px}
+  .vault-hero p{font-size:15.5px;color:var(--body);max-width:48ch;margin:0;word-break:keep-all}
+  .vault-note{margin:16px 0 2px}
+  .savedrow{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;
+    padding:13px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+  .savedrow:hover{background:var(--paper-soft)}
+  .savedrow .cover{min-height:54px;height:54px;padding:0;border-radius:8px}
   .savedrow .cover .c-title{font-size:13px;padding:4px 6px;text-shadow:none}
   .savedrow .cover .c-kicker,.savedrow .cover .c-buzz,.savedrow .cover .c-stamp{display:none}
-  .savedrow .s-t{font-size:15.5px;font-weight:800;letter-spacing:0}
-  .savedrow .s-l{font-size:13.5px;color:var(--ink-2)}
-  .savedrow .unsave{font-size:13.5px;color:var(--faint);background:none;border:none;cursor:pointer}
-  .myrv{border-top:1px solid var(--line);padding:13px 0}
-  .myrv a{font-weight:800;text-decoration:none;color:var(--ink)}
+  .savedrow .s-t{font-size:15.5px;font-weight:900;letter-spacing:0}
+  .savedrow .s-l{font-size:13.5px;color:var(--muted)}
+  .savedrow .unsave{font-size:13px;color:var(--muted);background:var(--paper-soft);
+    border:1px solid var(--line);border-radius:999px;padding:7px 10px;cursor:pointer}
+  .myrv,.vault-idea{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:14px 15px;margin:10px 0}
+  .myrv a{font-weight:900;text-decoration:none;color:var(--ink)}
   .myrv .meta{font-size:13px;color:var(--faint);margin-left:8px}
-  .myrv .txt{font-size:14.5px;color:var(--body);margin-top:4px}
+  .myrv .txt{font-size:14.5px;color:var(--body);margin-top:6px;line-height:1.55}
+  .vault-idea-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+  .vault-idea b{font-size:14px;color:var(--pulse)}
+  .vault-idea time{font-size:12px;color:var(--faint)}
+  .vault-idea p{margin:7px 0 0;font-size:14.5px;color:var(--body);line-height:1.55;white-space:pre-wrap}
+  @media(max-width:540px){
+    .vault-hero h1{font-size:29px}
+    .savedrow{grid-template-columns:64px 1fr;gap:12px}
+    .savedrow .unsave{grid-column:2;justify-self:start}
+  }
 </style>
 </head>
 <body>
@@ -47,33 +54,30 @@
 <script src="assets/app.js"></script>
 <script>
   H.boot();
-  let u = null;
-  (async ()=>{
-    u = await H.resolve(H.user());
-    if(!u){ location.replace(H.loginHref('me.html')); }
-    else render();
-  })();
+  render();
 
   function render(){
     const main = H.q('#main');
     main.innerHTML = `
-      <div class="me-hd">
-        <span class="big-av">${H.esc(u.name.slice(0,1))}</span>
-        <div><h1>${H.esc(u.name)}님의 한끗</h1><div class="em">${H.esc(u.email)}</div></div>
-        <button class="logout" id="logout">로그아웃</button>
-      </div>
-      <p class="local-note"><strong>로컬 개인화</strong>: 저장한 트렌드와 후기는 이 브라우저에만 남습니다. 공개 서버에 저장되지 않고 다른 기기와 동기화되지 않습니다.</p>
+      <section class="vault-hero">
+        <span class="kicker">Local scrapbook</span>
+        <h1>내 보관함</h1>
+        <p>읽다가 저장한 트렌드와 직접 남긴 후기, 펄스 아이디어를 한곳에 모아둡니다.</p>
+        <p class="local-note vault-note"><strong>로컬 보관함</strong>: 저장한 트렌드와 후기는 이 브라우저에만 보관됩니다. 다른 기기와 동기화되지 않습니다.</p>
+      </section>
 
-      <div class="sec-head"><span class="no">★</span><h2>저장한 트렌드</h2><span class="note" id="savedCount"></span></div>
+      <div class="sec-head"><span class="no">01</span><h2>저장한 트렌드</h2><span class="note" id="savedCount"></span></div>
       <div id="savedList"></div>
 
-      <div class="sec-head"><span class="no">✎</span><h2>내가 쓴 후기</h2><span class="note" id="rvCount"></span></div>
+      <div class="sec-head"><span class="no">02</span><h2>내가 쓴 후기</h2><span class="note" id="rvCount"></span></div>
       <div id="myReviews"></div>
+
+      <div class="sec-head"><span class="no">03</span><h2>저장한 펄스 아이디어</h2><span class="note" id="ideaCount"></span></div>
+      <div id="pulseIdeas"></div>
 
       <footer class="site"><div class="fwm">한<b>끗</b></div>AZ와 MZ는 한 끗 차이 · 트렌드 번역소</footer>`;
 
-    H.q('#logout').onclick = async ()=>{ await H.resolve(H.logout()); H.toast('로그아웃했어요'); setTimeout(()=>location.href='index.html',400); };
-    renderSaved(); renderMyReviews();
+    renderSaved(); renderMyReviews(); renderPulseIdeas();
   }
 
   async function renderSaved(){
@@ -81,7 +85,7 @@
     const items = ids.map(H.trend).filter(Boolean);
     H.q('#savedCount').textContent = items.length ? `${items.length}개` : '';
     const box = H.q('#savedList');
-    if(!items.length){ box.innerHTML = `<div class="empty"><div class="e-mark">★</div><h3>아직 저장한 트렌드가 없어요</h3><p>분석을 보다가 ☆ 저장을 누르면 여기에 모여요.</p><a class="btn primary" href="index.html">분석 둘러보기</a></div>`; return; }
+    if(!items.length){ box.innerHTML = `<div class="empty"><div class="e-mark">Save</div><h3>아직 저장한 트렌드가 없어요.</h3><p>요즘 트렌드를 보다가 저장을 누르면 여기에 모여요.</p><a class="btn primary" href="list.html?type=trend">요즘 트렌드 보러가기</a></div>`; return; }
     box.innerHTML = items.map(t=>`
       <a class="savedrow" href="trend.html?id=${t.id}">
         ${H.coverHTML(t)}
@@ -95,11 +99,25 @@
     const rs = await H.resolve(H.myReviews());
     H.q('#rvCount').textContent = rs.length ? `${rs.length}개` : '';
     const box = H.q('#myReviews');
-    if(!rs.length){ box.innerHTML = `<div class="empty"><div class="e-mark">✎</div><h3>아직 쓴 후기가 없어요</h3><p>다녀온 곳의 솔직한 한 줄이 다음 사람을 살립니다.</p><a class="btn primary" href="index.html">후기 남기러 가기</a></div>`; return; }
+    if(!rs.length){ box.innerHTML = `<div class="empty"><div class="e-mark">Review</div><h3>아직 쓴 후기가 없어요.</h3><p>상세 페이지에서 별점과 짧은 후기를 남겨보세요.</p><a class="btn primary" href="index.html">요즘 트렌드 보러가기</a></div>`; return; }
     box.innerHTML = rs.map(r=>{ const t=H.trend(r.trendId); return `<div class="myrv">
-      <a href="trend.html?id=${r.trendId}">${t?H.esc(t.title):r.trendId}</a>
+      <a href="trend.html?id=${r.trendId}">${t?H.esc(t.title):H.esc(r.trendId)}</a>
       <span class="stars">${H.starHTML(r.rating)}</span><span class="meta">${H.fmtDate(r.ts)}</span>
       <div class="txt">${H.esc(r.text)}</div></div>`; }).join('');
+  }
+
+  function renderPulseIdeas(){
+    const ideas = H.pulseIdeas ? H.pulseIdeas.list() : [];
+    H.q('#ideaCount').textContent = ideas.length ? `${ideas.length}개` : '';
+    const box = H.q('#pulseIdeas');
+    if(!ideas.length){ box.innerHTML = `<div class="empty"><div class="e-mark">Idea</div><h3>저장한 펄스 아이디어가 없어요.</h3><p>트렌드 펄스에서 카드를 펼쳐 빠른 아이디어를 저장해보세요.</p><a class="btn primary" href="pulse.html">트렌드 펄스 보기</a></div>`; return; }
+    box.innerHTML = ideas.map(idea=>{
+      const first = (idea.text || '').split('\n')[0] || '';
+      return `<article class="vault-idea">
+        <div class="vault-idea-top"><b>${H.esc(idea.fromTrend || '펄스 아이디어')}</b><time>${idea.createdAt ? H.fmtDate(idea.createdAt) : ''}</time></div>
+        <p>${H.esc(first)}</p>
+      </article>`;
+    }).join('');
   }
 </script>
 </body>

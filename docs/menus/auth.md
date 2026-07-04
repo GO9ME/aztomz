@@ -1,7 +1,7 @@
-# 로그인 / 회원가입
-- 목적: 저장, 후기, 내 한끗 접근에 필요한 브라우저 로컬 계정 생성과 로그인을 제공한다.
-- 진입/화면: `frontend/login.html`, `frontend/signup.html`, `frontend/me.html` 로그인 가드, 마스트헤드 인증 영역. `next` 파라미터는 `H.safeNext()`로 허용된 정적 페이지만 복귀시킨다.
-- 표시 데이터: 회원가입은 `name`, `email`, `password`, 로그인은 `email`, `password`를 입력받는다. 저장소는 localStorage의 `hangeut.users`, `hangeut.session`, `hangeut.saves`, `hangeut.reviews`를 사용한다.
-- 현재 상태: 구현됨. 회원가입, 중복 이메일 차단, 로그인, 로그아웃, 로그인 후 `next` 복귀, 이미 로그인한 사용자의 즉시 복귀가 localStorage 기반으로 동작한다.
-- 관련 코드: `frontend/login.html`의 `next` 처리와 로그인 폼, `frontend/signup.html`의 `next` 처리와 가입 폼, `frontend/me.html`의 인증 가드, `frontend/assets/app.js`의 `H.safeNext()`, `H.loginHref()`, `H.signupHref()`, `H.signup()`, `H.login()`, `H.logout()`, `H.user()`.
-- 비고: 로컬 계정 정보는 이 브라우저에만 남고 공개 서버에 저장되지 않으며 다른 기기와 동기화되지 않는다. 비밀번호 저장은 단순 해시이므로 중요한 비밀번호를 재사용하지 않도록 안내한다. `H.safeNext()` 허용 목록은 `index.html`, `list.html`, `trend.html`, `dictionary.html`, `login.html`, `signup.html`, `me.html`, `pulse.html`이다.
+# 로그인 / 회원가입 안내
+- 목적: 과거 정적 링크 안정성을 위해 `login.html`, `signup.html`을 유지하되, 현재 한끗은 로그인 없이 사용할 수 있음을 안내한다.
+- 진입/화면: 일반 서비스 플로우에서는 노출하지 않는다. 사용자가 직접 `frontend/login.html` 또는 `frontend/signup.html`에 접근하면 noindex 안내 페이지와 "홈으로 이동", "내 보관함 보기" 버튼을 보여준다.
+- 표시 데이터: 별도 입력 폼 없음. 저장과 후기가 이 브라우저에만 보관된다는 안내 문구를 표시한다.
+- 현재 상태: 로그인/회원가입 UI 제거됨. 저장, 후기, 펄스 아이디어는 `H.*`를 통해 단일 localStorage 보관함으로 동작한다.
+- 관련 코드: `frontend/login.html`, `frontend/signup.html`, `frontend/assets/app.js`의 deprecated `H.signup()`, `H.login()`, `H.logout()`, `H.user()`.
+- 비고: `login.html`과 `signup.html`은 직접 접근 안정성용 파일이며 검색 노출을 막기 위해 `noindex,nofollow`를 둔다.

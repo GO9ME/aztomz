@@ -1,42 +1,7 @@
-# 요즘 핫플 (핫플레이스)
-
-## 목적
-SNS 인기 장소(카페·식당·명소)를 광고도·신뢰도·경험 가치로 분석. 가서 사진 찍을 맛이 있는지 판단.
-
-## 진입·화면
-- **파일:**
-  - `frontend/index.html` (홈: 트렌드 미리보기 섹션)
-  - `frontend/list.html?type=trend` (마스트헤드 "요즘 트렌드" 메뉴 → 트렌드 전체 목록 + 카테고리 필터)
-  - `frontend/list.html?type=trend&cat=핫플` (핫플 카테고리만 필터, 페이지당 12개)
-  - `frontend/trend.html?id=<핫플id>` (상세 페이지)
-- **마스트헤드 메뉴:** "요즘 트렌드" (list.html?type=trend 직접 연결)
-- **타입:** type=='신뢰분석', cat==[핫플 카테고리]
-- **표시:** 카버 + 제목·카테고리·점수·판정 뱃지
-
-## 표시 데이터
-- `t.cat` = "성수 카페" / "강남 핫플" / "명소" 등 지역·장소 카테고리
-- `t.type` = "신뢰분석"
-- `t.ad` (광고 의심도, 예: 45)
-- `t.trust` (신뢰도, 예: 57)
-- `t.sat` (만족도: pos|neg|mix, 예: mix)
-- `t.satTxt` (만족도 상세, 예: "비주얼 호평 / 맛·가성비는 \"한번이면 족\"")
-- `t.label` (판정, 예: "취향 따라 갈림")
-- `t.verdict` (장문 분석: 분위기·가격대·웨이팅·추천 용도 등)
-- `t.recs` (추천 체크리스트, 예: [["사진·힙스팟", "◎", 1], ["맛·재방문", "△", 0]])
-- **`t.shops` (선택, "어디서 사 먹지?" 섹션)** — **소문난 맛집·핫플 위주** 목록 `[{name, rep?, area?, url?, note?}]`. `rep`은 평판 한 줄(상세페이지 초록 배지). 지역·예약링크·영업시간 등. auto-build.mjs가 각 url 생존성 검증(404/410/ERR 제거)
-
-## 현재 상태
-구현됨. 누데이크 성수(카페) 등 1건 이상 존재. 점수·추천 리스트 렌더링 동작 확인. "어디서 사 먹지?" 섹션(shops) 추가됨 (2026-06-09).
-
-## 관련 코드
-- `frontend/trend.html` : 상세 페이지 (L49~64, scores 블록)
-- `frontend/assets/app.js` : H.coverHTML() (카버 렌더링), H.bandTxt() (점수 설명, L29)
-- `backend/data/trends.json` : type=='신뢰분석' & cat 핫플 항목들
-
-## 비고
-- **체험 가치 중심:** "힙스팟 사진", "공간 감상", "분위기" 추천도 높음 (누데이크 사례)
-- **트레이드오프 명시:** 비주얼 호평하면서 맛·가성비 부정적인 케이스 다수. satTxt로 괴리 설명 필수
-- **방문 팁:** 웨이팅·주문시간·평일 추천 등 실무적 조언 verdict에 포함
-- **가격대:** verdict에 "1인 7,000~15,000원" 형식으로 명시
-- **가게 목록(shops):** 상세 페이지 중단부에 "어디서 사 먹지?"로 표시. **맛집 평판 배지(rep)로 식별, 평판 높은 순 정렬**. 예약링크·지도링크·공식 페이지 등 본문이 읽히는 링크. auto-build.mjs가 각 url 생존성 검증해 죽은 링크 제거 (이름·평판·지역·메모는 유지)
-- **전체 목록 조회:** list.html?type=trend&cat=핫플 (카테고리 필터로 핫플만 선택)
+# 요즘 핫플
+- 목적: 카페·핫플 계열 트렌드와 장소성 있는 항목을 광고 의심도, 후기 신뢰도, 경험 가치와 함께 보여준다.
+- 진입/화면: `frontend/list.html?type=trend&cat=카페·핫플` 또는 별칭 `frontend/list.html?type=trend&cat=핫플`, 홈의 요즘 트렌드 섹션, `frontend/trend.html?id=<id>` 상세.
+- 표시 데이터: 정규 카테고리 `cat === '카페·핫플'`. 현재 데이터 기준(2026-07-04) 6건(신뢰분석 5건, 트렌드 1건). 목록은 `title`, `cat`, `label`, `stage`, `images`, `analyzedAt`, `H.summary()`를 쓰고, 상세는 `ad`, `trust`, `sat`, `satTxt`, `verdict`, `recs`, `shops`, `src`를 표시한다.
+- 현재 상태: 구현됨. `list.html`에서 `cat=핫플`을 `카페·핫플`로 정규화하고, 같은 카테고리 관련 콘텐츠를 상세 하단에 우선 표시한다.
+- 관련 코드: `frontend/list.html`의 `CAT_ALIAS`, `frontend/assets/app.js`의 `H.trendCardHTML()`/`H.adRowHTML()`, `frontend/trend.html`의 `sameCat` 관련 콘텐츠 로직과 `shopsBlock()`, `backend/data/trends.json`.
+- 비고: `성수 카페`, `강남 핫플` 같은 지역·세부명은 canonical 카테고리로 쓰지 않는다. 지역은 `title`, `tags`, `shops.area`에 둔다.

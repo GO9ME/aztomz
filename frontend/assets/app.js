@@ -1,6 +1,6 @@
 /* ============================================================
    한끗 — 공유 스토어 + 헬퍼 (데이터는 data/trends.js 에서 로드)
-   회원/세션/저장/리뷰는 localStorage 기반 로컬 개인화.
+   저장/후기/펄스 아이디어는 localStorage 기반 로컬 개인화.
    ▶ H.* 는 로컬 스토어 추상화 계층. 향후 백엔드를 붙여도 UI는 이 인터페이스만 사용.
    ▶ 신선도: 항상 '오늘'(브라우저 new Date) 대비 analyzedAt 으로 계산해 라이브 표시.
    ============================================================ */
@@ -60,8 +60,8 @@
     const page = (global.location.pathname.split('/').pop() || 'index.html');
     return H.safeNext(`${page}${global.location.search}${global.location.hash}`);
   };
-  H.loginHref = (next)=> `login.html?next=${encodeURIComponent(H.safeNext(next || H.currentPage()))}`;
-  H.signupHref = (next)=> `signup.html?next=${encodeURIComponent(H.safeNext(next || H.currentPage()))}`;
+  H.loginHref = (next)=> H.safeNext(next || 'me.html', 'me.html');
+  H.signupHref = (next)=> H.safeNext(next || 'me.html', 'me.html');
 
   /* ---------- 오늘 / 신선도 (라이브) ---------- */
   H.todayStr = ()=>{ const d=new Date(); const p=x=>String(x).padStart(2,'0'); return `${d.getFullYear()}.${p(d.getMonth()+1)}.${p(d.getDate())}`; };
@@ -78,53 +78,48 @@
   // 데이터 묶음 신선도(홈 발행라인용)
   H.feedFreshness = ()=> H.freshness(H.generatedAt);
 
-  /* ---------- auth (mock) ---------- */
-  H.user = ()=> read(K.session, null);
+  /* ---------- deprecated auth API (kept for old links/scripts) ---------- */
+  H.user = ()=> null;
   H.signup = ({name,email,password})=>{
-    name=(name||'').trim(); email=(email||'').trim().toLowerCase();
-    if(name.length<1) return {ok:false,error:'이름을 입력해주세요.'};
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return {ok:false,error:'올바른 이메일 형식이 아니에요.'};
-    if((password||'').length<6) return {ok:false,error:'비밀번호는 6자 이상이어야 해요.'};
-    const users = read(K.users, []);
-    if(users.some(u=>u.email===email)) return {ok:false,error:'이미 가입된 이메일이에요. 로그인해주세요.'};
-    const u = { name, email, pw:hash(password) };
-    users.push(u); write(K.users, users);
-    write(K.session, { name, email });
-    return {ok:true};
+    return {ok:true, deprecated:true};
   };
   H.login = ({email,password})=>{
-    email=(email||'').trim().toLowerCase();
-    const users = read(K.users, []);
-    const u = users.find(x=>x.email===email);
-    if(!u || u.pw!==hash(password||'')) return {ok:false,error:'이메일 또는 비밀번호가 일치하지 않아요.'};
-    write(K.session, { name:u.name, email:u.email });
-    return {ok:true};
+    return {ok:true, deprecated:true};
   };
   H.logout = ()=>{ LS.removeItem(K.session); };
 
   /* ---------- saves (bookmarks) ---------- */
-  function savesMap(){ return read(K.saves, {}); }
-  H.saves = ()=>{ const u=H.user(); if(!u) return []; return savesMap()[u.email] || []; };
+  function uniq(arr){ return [...new Set((arr || []).filter(Boolean))]; }
+  function savedIds(){
+    const raw = read(K.saves, []);
+    if(Array.isArray(raw)) return uniq(raw);
+    if(raw && typeof raw === 'object'){
+      const all = [];
+      Object.keys(raw).forEach(k=>{ if(Array.isArray(raw[k])) all.push(...raw[k]); });
+      return uniq(all);
+    }
+    return [];
+  }
+  function writeSavedIds(arr){ write(K.saves, uniq(arr).slice(0, 200)); }
+  H.saves = ()=> savedIds();
   H.isSaved = (id)=> H.saves().includes(id);
   H.toggleSave = (id)=>{
-    const u=H.user(); if(!u) return {needAuth:true};
-    const m=savesMap(); const arr=m[u.email]||[];
+    const arr=savedIds();
     const i=arr.indexOf(id);
     if(i>=0) arr.splice(i,1); else arr.unshift(id);
-    m[u.email]=arr; write(K.saves,m);
+    writeSavedIds(arr);
     return {saved: i<0};
   };
 
   /* ---------- reviews ---------- */
   H.reviews = (trendId)=> read(K.reviews, []).filter(r=>r.trendId===trendId).sort((a,b)=>b.ts-a.ts);
-  H.myReviews = ()=>{ const u=H.user(); if(!u) return []; return read(K.reviews,[]).filter(r=>r.email===u.email).sort((a,b)=>b.ts-a.ts); };
+  H.myReviews = ()=> read(K.reviews,[]).sort((a,b)=>b.ts-a.ts);
   H.addReview = (trendId,{rating,text})=>{
-    const u=H.user(); if(!u) return {needAuth:true};
     rating=Number(rating)||0; text=(text||'').trim();
     if(rating<1||rating>5) return {ok:false,error:'별점을 선택해주세요.'};
     if(text.length<5) return {ok:false,error:'후기를 5자 이상 적어주세요.'};
     const all=read(K.reviews,[]);
-    all.push({ trendId, email:u.email, name:u.name, rating, text, ts: Date.now() });
+    all.push({ trendId, email:'local', name:'나', rating, text, ts: Date.now(), local:true });
     write(K.reviews, all);
     return {ok:true};
   };
@@ -230,13 +225,9 @@
   H.updateThemeBtn = (t)=>{ const b=H.q && H.q('.theme-toggle'); if(b){ b.textContent=(t==='dark')?'☀':'🌙'; b.setAttribute('aria-label',(t==='dark')?'라이트 모드로 전환':'다크 모드로 전환'); } };
   H.theme.apply(H.theme.get());  // 로드 즉시 적용(테마 깜빡임 최소화)
 
-  /* ---------- masthead (auth-aware), injected into [data-mast] ---------- */
+  /* ---------- masthead, injected into [data-mast] ---------- */
   H.renderMast = ()=>{
     const host=H.q('[data-mast]'); if(!host) return;
-    const u=H.user();
-    const right = u
-      ? `<a class="me-link" href="me.html"><span class="avatar">${H.esc(u.name.slice(0,1))}</span>${H.esc(u.name)}</a>`
-      : `<a href="login.html">로그인</a><a class="btn-mini" href="signup.html">가입</a>`;
     host.className='mast';
     host.innerHTML=`<div class="wrap">
       <a class="wordmark" href="index.html">한<b>끗</b></a>
@@ -248,7 +239,7 @@
         <a href="list.html?type=trend">요즘 트렌드</a>
         <a href="dictionary.html">MZ 사전</a>
         <a href="pulse.html">트렌드 펄스</a>
-        ${right}
+        <a class="vault-link" href="me.html">내 보관함</a>
         <button class="theme-toggle" type="button" aria-label="테마 전환">🌙</button>
       </nav>
     </div>`;

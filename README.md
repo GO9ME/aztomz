@@ -1,6 +1,6 @@
 # 한끗 — 트렌드 번역소
 
-> **AZ와 MZ는 한 끗 차이** | 요즘 유행(밈·신조어·음식·디저트·핫플)을 1분에 번역하고, SNS 맛집이 광고인지 실후기인지 분석해주는 의존성 0·빌드 0·외부 폰트 CDN 0 정적 모바일 웹. 개인화는 서버 계정 없이 브라우저 localStorage에만 저장합니다.
+> **AZ와 MZ는 한 끗 차이** | 요즘 유행(밈·신조어·음식·디저트·핫플)을 1분에 번역하고, SNS 맛집이 광고인지 실후기인지 분석해주는 의존성 0·빌드 0·외부 폰트 CDN 0 정적 모바일 웹. 저장·후기·펄스 아이디어는 이 브라우저 localStorage에만 보관합니다.
 
 ## 구조 한눈에
 
@@ -11,9 +11,10 @@
 | `frontend/list.html?type=ad\|trend` | 전체 목록 — 광고분석(10/페이지) 또는 트렌드(12/페이지) + 페이지네이션. `cat=음식`→`맛집`, `cat=핫플`→`카페·핫플` 별칭 매핑 |
 | `frontend/trend.html?id=` | 상세 — 점수(광고의심도/신뢰도)·만족도·판단·추천·출처·후기·공유·같은 카테고리 우선 관련 콘텐츠 |
 | `frontend/dictionary.html` | MZ 사전 — 신조어 카드(뜻·예문·예쁜 우리말·출처) 검색 + 최신 신조어/지난 유행어 분리 |
-| `frontend/login.html`·`signup.html`·`me.html` | 로컬 계정·안전한 `next` 복귀·내 한끗(저장/후기) |
+| `frontend/me.html` | 내 보관함 — 이 브라우저에 저장한 트렌드·후기·펄스 아이디어 |
+| `frontend/login.html`·`signup.html` | 직접 접근 안정성을 위한 noindex 안내 페이지(서비스 내 링크 없음) |
 | `frontend/pulse.html` | 트렌드 펄스 — 이번 주 트렌드 / 트렌드 레이더 / 저장한 아이디어 탭 |
-| `frontend/assets/styles.css`·`app.js`·`pulse.js` | 시스템 폰트 디자인 시스템 / localStorage 스토어와 공통 헬퍼(`H.*`) / 펄스 |
+| `frontend/assets/styles.css`·`app.js`·`pulse.js` | warm paper 기반 Neo Editorial Trend Radar 디자인 시스템 / localStorage 스토어와 공통 헬퍼(`H.*`) / 펄스 |
 | `frontend/data/trends.js`·`pulse.js` | 브라우저가 로드하는 **생성물** — **직접 편집 금지** |
 | `backend/` | 비공개(배포 안 됨) — 데이터 원본 + 빌드 스크립트 |
 | `backend/data/trends.json`·`pulse.json` | ★ **canonical 데이터 원본** (사람·스크립트가 수정) |
@@ -38,6 +39,7 @@ cd frontend && python -m http.server 8000
 
 ### 데이터 갱신 (선택사항)
 ```bash
+node backend/scripts/validate-trends.mjs  # backend/data/trends.json 스키마 점검(권장)
 node backend/scripts/refresh.mjs   # backend/data/trends.json → frontend/data/trends.js 재생성 (레포 루트에서)
 ```
 
@@ -66,7 +68,9 @@ backend/scripts/auto-build.mjs (자동검증 + 썸네일 주입)
     ↓
 검증 통과분만 → backend/data/trends.json (canonical 원본)
     ↓
-backend/scripts/refresh.mjs (validation + 생성)
+backend/scripts/validate-trends.mjs (스키마 점검; auto-build 내부 또는 수동)
+    ↓
+backend/scripts/refresh.mjs (generatedAt 갱신 + 생성)
     ↓
 frontend/data/trends.js (브라우저가 로드 → H.TRENDS)
     ↓
@@ -79,8 +83,9 @@ Vercel 자동 배포 (git push 시)
 - trends.json만 수정. trends.js는 건드리지 말 것.
 - auto-build.mjs가 출처 자동검증(게이트) — 죽음·무관·못읽음 출처만 있으면 자동 보류
 - 자동 게시 항목의 썸네일은 auto-build.mjs가 출처 og:image로 자동 주입 — 모든 아이템이 커버 이미지 보장
-- 로그인/회원가입/저장/후기/펄스 아이디어는 서버에 저장되지 않는 로컬 개인화(localStorage) 기능
+- 저장/후기/펄스 아이디어는 서버에 저장되지 않는 로컬 개인화(localStorage) 기능
 - 다른 브라우저·다른 기기와 동기화되지 않으며, `H.*`는 향후 백엔드가 필요할 때를 위한 추상화 계층으로 유지
+- 디자인 톤은 `frontend/assets/styles.css`의 warm paper 기반 Neo Editorial Trend Radar를 따른다
 
 ---
 
@@ -107,7 +112,7 @@ git push origin main              # → Vercel 자동 재배포
   - [오늘의 한끗(홈)](docs/menus/home.md) / [MZ 사전](docs/menus/dictionary.md)
   - [광고일까 진짜일까](docs/menus/ad-or-real.md) / [요즘 음식](docs/menus/food.md)
   - [요즘 디저트](docs/menus/dessert.md) / [요즘 핫플](docs/menus/hotplace.md)
-  - [검색](docs/menus/search.md) / [공유](docs/menus/share.md) / [내 한끗](docs/menus/mypage.md) / [인증](docs/menus/auth.md)
+  - [검색](docs/menus/search.md) / [공유](docs/menus/share.md) / [내 보관함](docs/menus/mypage.md) / [로그인 안내](docs/menus/auth.md)
 - **[learnings.md](learnings.md)** — 고구미봇이 쌓는 분석 교훈
 - **[CLAUDE.md](CLAUDE.md)** — 개발 철칙·메모
 

@@ -1,43 +1,7 @@
 # 요즘 디저트
-
-## 목적
-바이럴 디저트·음식을 광고의심도·신뢰도로 분석. SNS 기대치 vs 실제 후기 괴리 노출.
-
-## 진입·화면
-- **파일:**
-  - `frontend/index.html` (홈: 트렌드 미리보기 섹션)
-  - `frontend/list.html?type=trend` (마스트헤드 "요즘 트렌드" 메뉴 → 트렌드 전체 목록 + 카테고리 필터)
-  - `frontend/list.html?type=trend&cat=디저트` (디저트 카테고리만 필터, 페이지당 12개)
-  - `frontend/trend.html?id=<디저트id>` (상세 페이지)
-- **마스트헤드 메뉴:** "요즘 트렌드" (list.html?type=trend 직접 연결)
-- **타입:** type=='신뢰분석', cat=='디저트' (또는 유사)
-- **표시:** 카버(cat-dessert 스타일) + 화제성·점수·만족도·한끗 판정 뱃지
-
-## 표시 데이터
-- `t.cat` = "디저트" (또는 "성수 디저트" 등 세부 카테고리)
-- `t.type` = "신뢰분석"
-- `t.buzz` (화제성 레벨, 예: "화제성 매우 높음")
-- `t.ad` (광고 의심도, 0~100)
-- `t.trust` (신뢰도, 0~100)
-- `t.sat` (만족도: pos|neg|mix)
-- `t.label` (판정, 예: "SNS 기대치 조절 필요")
-- `t.excerpt` / `t.verdict` (분석 요약·상세)
-- `t.recs` (추천, 예: ["호기심 체험", "가능", 1])
-- `t.src` (출처 URL 배열)
-- **`t.shops` (선택, "어디서 사 먹지?" 섹션)** — **소문난 맛집 위주** 목록 `[{name, rep?, area?, url?, note?}]`. `rep`은 맛집 평판 한 줄(예:"성수 젤라또 맛집", 상세페이지 초록 배지). 카페·맛집 위주(편의점·마트 제외). auto-build.mjs가 각 url 생존성 검증(404/410/ERR 제거)
-
-## 현재 상태
-구현됨. 두바이 초콜릿(편의점판)·우베 타르트·도넛 계열 항목 3건 이상 존재. 광고/신뢰도 분석·점수 시각화 동작 확인. "어디서 사 먹지?" 섹션(shops) 추가됨 (2026-06-09).
-
-## 관련 코드
-- `frontend/trend.html` : 상세 페이지 (L49~64, scoresBlock() 함수에서 광고도/신뢰도 바 렌더링)
-- `frontend/assets/app.js` : H.bandTxt() (점수→텍스트 변환, L29), H.coverHTML() (L102~109)
-- `backend/data/trends.json` : type=='신뢰분석' & cat=='디저트' 항목들
-
-## 비고
-- **바이럴 vs 신뢰도 분리:** 화제성(buzz) 높아도 신뢰도(trust)는 별개. 점수 이원화 표시
-- **만족도 분석:** 신뢰도 높아도 내용이 부정적(sat==neg)이면 "기대 조절" 권고 (두바이 초콜릿 사례)
-- **출처 신뢰:** 다이닝코드·인스타그램 링크는 본문을 못 읽으므로 tistory·블로그·기사로 교체 (learnings.md 참고)
-- 점수 설명: 0~20=낮음, 21~40=약간, 41~60=보통, 61~80=높음, 81~100=매우 높음
-- **가게 목록(shops):** 상세 페이지 중단부에 "어디서 사 먹지?"로 표시. **맛집 평판 배지(rep)로 식별, 평판 높은 순 정렬**. 인스타/다이닝코드 profile 금지, 실제 검색에 나온 본문이 읽히는 링크만(tistory·블로그·기사·trip.com). auto-build.mjs가 각 url 생존성 검증해 죽은 링크 제거 (이름·평판·지역·메모는 유지)
-- **전체 목록 조회:** list.html?type=trend&cat=디저트 (카테고리 필터로 디저트만 선택)
+- 목적: 바이럴 디저트와 디저트샵 정보를 트렌드 맥락, 광고 의심도, 후기 신뢰도와 함께 보여준다.
+- 진입/화면: `frontend/list.html?type=trend&cat=디저트`, 홈의 요즘 트렌드 섹션, `frontend/trend.html?id=<디저트id>` 상세.
+- 표시 데이터: 정규 카테고리 `cat === '디저트'`. 현재 데이터 기준(2026-07-04) 9건(신뢰분석 2건, 트렌드 7건). 목록은 `title`, `stage`, `label`, `images`, `analyzedAt`, `H.summary()`를 쓰고, 상세는 항목 유형에 따라 `ad`, `trust`, `sat`, `verdict`, `recs`, `shops`, `src`를 표시한다.
+- 현재 상태: 구현됨. 전체 트렌드 목록에서 디저트 카테고리 필터와 페이지네이션이 동작하고 상세의 점수/출처/가게 섹션도 렌더링된다.
+- 관련 코드: `frontend/list.html`의 트렌드 목록 분기, `frontend/assets/app.js`의 `H.trendCardHTML()`/`H.summary()`, `frontend/trend.html`의 `scoresBlock()`, `articleBlock()`, `shopsBlock()`, `backend/data/trends.json`.
+- 비고: 디저트·음료 같은 세분 카테고리를 새로 만들지 않는다. 음료/지역/재료 정보는 `title`, `tags`, `shops.area`, 본문에 둔다.

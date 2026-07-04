@@ -4,56 +4,27 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
-<title>로그인 — 한끗</title>
-<meta name="description" content="이 브라우저에만 저장되는 한끗 로컬 계정으로 저장한 트렌드와 후기를 이어서 봅니다." />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="한끗" />
-<meta property="og:locale" content="ko_KR" />
-<meta property="og:title" content="로그인 — 한끗" />
-<meta property="og:description" content="한끗 로컬 계정으로 저장한 트렌드와 후기를 이 브라우저에서 이어서 보세요." />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="로그인 — 한끗" />
-<meta name="twitter:description" content="한끗 로컬 계정으로 저장한 트렌드와 후기를 이 브라우저에서 이어서 보세요." />
+<meta name="robots" content="noindex,nofollow" />
+<title>로그인 없이 사용 — 한끗</title>
+<meta name="description" content="현재 한끗은 로그인 없이 사용할 수 있습니다. 저장과 후기는 이 브라우저에만 보관됩니다." />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <div data-mast></div>
   <div class="wrap">
-    <div class="auth-card">
-      <span class="kicker">한끗 계정</span>
-      <h1>다시 오셨네요</h1>
-      <p class="sub">저장한 트렌드와 내 후기를 이어서 보려면 로그인하세요.</p>
-      <p class="local-note"><strong>로컬 계정</strong>입니다. 입력한 정보와 저장/후기는 이 브라우저의 localStorage에만 저장되고 서버에 올라가지 않으며, 다른 기기와 동기화되지 않습니다.</p>
-      <form id="loginForm" novalidate>
-        <div class="form-err" id="formErr"></div>
-        <div class="field"><label for="email">이메일</label>
-          <input id="email" type="email" autocomplete="email" placeholder="you@example.com" /></div>
-        <div class="field"><label for="pw">비밀번호</label>
-          <input id="pw" type="password" autocomplete="current-password" placeholder="6자 이상" /></div>
-        <button class="btn primary block" type="submit">로그인</button>
-      </form>
-      <div class="alt">처음이세요? <a id="toSignup" href="signup.html">회원가입</a></div>
+    <div class="auth-card info-card">
+      <span class="kicker">Local first</span>
+      <h1>현재 한끗은 로그인 없이 사용할 수 있어요.</h1>
+      <p class="sub">저장과 후기는 이 브라우저에만 보관됩니다. 서버 계정이나 기기 간 동기화는 제공하지 않습니다.</p>
+      <div class="auth-actions">
+        <a class="btn primary" href="index.html">홈으로 이동</a>
+        <a class="btn" href="me.html">내 보관함 보기</a>
+      </div>
     </div>
   </div>
 
 <script src="assets/app.js"></script>
-<script>
-  H.boot();
-  // 이미 로그인 상태면 바로 이동
-  const next = H.safeNext(H.param('next'), 'index.html');
-  (async ()=>{
-    if(await H.resolve(H.user())){ location.replace(next); }
-  })();
-  H.q('#toSignup').href = H.signupHref(next);
-
-  H.q('#loginForm').addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    const err=H.q('#formErr'); err.classList.remove('show');
-    const res=await H.resolve(H.login({ email:H.q('#email').value, password:H.q('#pw').value }));
-    if(!res.ok){ err.textContent=res.error; err.classList.add('show'); return; }
-    location.href = next;
-  });
-</script>
+<script>H.boot();</script>
 </body>
 </html>
