@@ -2456,7 +2456,7 @@ window.HANGEUT_DATA = {
       "cat": "맛집",
       "coverCat": "cat-food",
       "collectedAt": "2026-06-09",
-      "analyzedAt": "2026-06-27",
+      "analyzedAt": "2026-07-10",
       "buzz": "매우 높음",
       "label": "믿고 가볼 만함",
       "labelCls": "good",
